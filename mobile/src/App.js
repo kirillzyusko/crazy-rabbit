@@ -11,6 +11,7 @@ import {
   Text,
   View
 } from 'react-native';
+import SvgObject from './components/svg-object.native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' +
@@ -24,6 +25,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
+          <SvgObject />
         <Text style={styles.welcome}>
           Welcome to React Native!
         </Text>

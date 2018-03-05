@@ -12,6 +12,7 @@ import Leaderboard from './Leaderboard';
 import { signIn } from 'auth0-web';
 import CannonBall from './CannonBall';
 import Heart from './Heart';
+import Objecta from './sample/Object';
 
 const Canvas = (props) => {
   const gameHeight = 1200;
@@ -26,6 +27,17 @@ const Canvas = (props) => {
     lives.push(<Heart key={i} position={heartPosition}/>);
   }
 
+  const prop = {
+    size: {
+      x: 2,
+      y: 2
+    },
+    align: {
+      w: 1,
+      h: 1
+    }
+  };
+
   return (
     <svg
       id="aliens-go-home-canvas"
@@ -34,7 +46,8 @@ const Canvas = (props) => {
       viewBox={viewBox}
       onClick={props.shoot}
     >
-      <defs>
+      <Objecta size={prop.size} align={prop.align} />
+      {/*<defs>
         <filter id="shadow">
           <feDropShadow dx="1" dy="1" stdDeviation="2" />
         </filter>
@@ -68,7 +81,7 @@ const Canvas = (props) => {
         />
       ))}
 
-      {lives}
+      {lives}*/}
     </svg>
   );
 };
