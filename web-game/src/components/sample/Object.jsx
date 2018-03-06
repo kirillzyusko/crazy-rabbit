@@ -4,7 +4,8 @@ class Objecta extends Component {
   constructor() {
    super();
    this.state = {
-     rotation: 0
+     rotation: 0,
+     isForward: true
    }
   }
 
@@ -13,8 +14,19 @@ class Objecta extends Component {
   }
 
   increaseAngleOfRotation = () => {
-    console.log('rotate');
-    this.setState({ rotation: this.state.rotation + 1 });
+    if (this.state.isForward) {
+      if (this.state.rotation < 400) {
+        this.setState({rotation: this.state.rotation + 3});
+      } else {
+        this.setState({isForward: false});
+      }
+    } else {
+      if (this.state.rotation > 0) {
+        this.setState({rotation: this.state.rotation - 3});
+      } else {
+        this.setState({isForward: true});
+      }
+    }
   };
 
   runAnimation = () => {
@@ -24,7 +36,7 @@ class Objecta extends Component {
   };
 
   render() {
-    const transform = `rotate(${this.state.rotation}, 0, 0)`;
+    const transform = `translate(0, -${this.state.rotation})`;
     const {
       size: {
         x, y
@@ -35,7 +47,7 @@ class Objecta extends Component {
     } = this.props;
 
     return (
-      <g>
+      <g transform={`${transform}`}>
         <defs>
           <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="77.8489" y1="44.6823" x2="131.779" y2="44.6823">
             <stop offset="0" stop-color="#90E1E8"/>

@@ -46,6 +46,8 @@ const Canvas = (props) => {
       viewBox={viewBox}
       onClick={props.shoot}
     >
+      <Sky />
+      <Ground />
       <Objecta size={prop.size} align={prop.align} />
       {/*<defs>
         <filter id="shadow">
