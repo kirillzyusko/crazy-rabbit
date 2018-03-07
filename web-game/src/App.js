@@ -23,6 +23,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.watchersByKeyboard();
     const self = this;
 
     Auth0.handleAuthCallback();
@@ -85,17 +86,39 @@ class App extends Component {
     this.props.shoot(this.canvasMousePosition);
   }
 
+  jump = () => {
+    this.props.jump();
+    setTimeout(() => this.props.clearAction(), 20);
+  };
+
+  handler = (e) => {
+    switch(e.type) {
+      case 'keyup': this.jump();
+    }
+  };
+
+  watchersByKeyboard = () => {
+    const root = document;
+    root.onkeydown = root.onkeyup = root.onkeypress = this.handler;
+  };
+
   render() {
     return (
-      <Canvas
-        angle={this.props.angle}
-        currentPlayer={this.props.currentPlayer}
-        gameState={this.props.gameState}
-        players={this.props.players}
-        startGame={this.props.startGame}
-        trackMouse={event => (this.trackMouse(event))}
-        shoot={this.shoot}
-      />
+      <div>
+        <Canvas
+          action={this.props.action}
+          angle={this.props.angle}
+          currentPlayer={this.props.currentPlayer}
+          gameState={this.props.gameState}
+          players={this.props.players}
+          startGame={this.props.startGame}
+          trackMouse={event => (this.trackMouse(event))}
+          shoot={this.shoot}
+        />
+        <div className='panel'>
+          <button onClick={this.jump}>jump</button>
+        </div>
+      </div>
     );
   }
 }
@@ -131,6 +154,8 @@ App.propTypes = {
     picture: PropTypes.string.isRequired,
   })),
   shoot: PropTypes.func.isRequired,
+  jump: PropTypes.func.isRequired,
+  clearAction: PropTypes.func.isRequired,
 };
 
 App.defaultProps = {

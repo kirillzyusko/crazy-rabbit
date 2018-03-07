@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { JUMP } from '../../actions';
 
 class Objecta extends Component {
   constructor() {
@@ -13,30 +14,43 @@ class Objecta extends Component {
     this.runAnimation();
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.action === JUMP) {
+      console.log(Date.now());
+      this.runAnimation();
+    }
+  }
+
   increaseAngleOfRotation = () => {
     if (this.state.isForward) {
-      if (this.state.rotation < 400) {
-        this.setState({rotation: this.state.rotation + 3});
+      if (this.state.rotation < 200) {
+        this.setState({rotation: this.state.rotation + 15});
       } else {
         this.setState({isForward: false});
       }
     } else {
       if (this.state.rotation > 0) {
-        this.setState({rotation: this.state.rotation - 3});
+        this.setState({rotation: this.state.rotation - 15});
       } else {
-        this.setState({isForward: true});
+        console.log(Date.now());
+        this.setState({isForward: null});
       }
     }
   };
 
   runAnimation = () => {
-    setInterval(() => {
+    setTimeout(() => {
       this.increaseAngleOfRotation();
-    }, 10);
+      if (this.state.isForward !== null) {
+        setTimeout(this.runAnimation, 1)
+      } else {
+        this.setState({isForward: true});
+      }
+    }, 1)
   };
 
   render() {
-    const transform = `translate(0, -${this.state.rotation})`;
+    const transform = `translate(0, -${this.state.rotation+100})`;
     const {
       size: {
         x, y

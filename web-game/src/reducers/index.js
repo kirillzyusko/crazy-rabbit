@@ -1,10 +1,12 @@
 import {
   LEADERBOARD_LOADED, LOGGED_IN,
-  MOVE_OBJECTS, SHOOT, START_GAME
+  MOVE_OBJECTS, SHOOT, START_GAME, JUMP, CLEAR_ACTION
 } from '../actions';
 import moveObjects from './moveObjects';
 import startGame from './startGame';
 import shoot from './shoot';
+import jump from './jump';
+import clearAction from './clearAction';
 
 const initialGameState = {
   started: false,
@@ -18,6 +20,7 @@ const initialGameState = {
 };
 
 const initialState = {
+  action: null,
   angle: 45,
   gameState: initialGameState,
 };
@@ -40,6 +43,10 @@ function reducer(state = initialState, action) {
       return startGame(state, initialGameState);
     case SHOOT:
       return shoot(state, action);
+    case JUMP:
+      return jump(state);
+    case CLEAR_ACTION:
+      return clearAction(state);
     default:
       return state;
   }

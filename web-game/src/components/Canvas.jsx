@@ -13,6 +13,7 @@ import { signIn } from 'auth0-web';
 import CannonBall from './CannonBall';
 import Heart from './Heart';
 import Objecta from './sample/Object';
+import Block from './blocks/Block';
 
 const Canvas = (props) => {
   const gameHeight = 1200;
@@ -48,7 +49,8 @@ const Canvas = (props) => {
     >
       <Sky />
       <Ground />
-      <Objecta size={prop.size} align={prop.align} />
+      <Objecta action={props.action} size={prop.size} align={prop.align} />
+      <Block />
       {/*<defs>
         <filter id="shadow">
           <feDropShadow dx="1" dy="1" stdDeviation="2" />
@@ -110,6 +112,8 @@ Canvas.propTypes = {
     picture: PropTypes.string.isRequired,
   })),
   shoot: PropTypes.func.isRequired,
+  jump: PropTypes.func.isRequired,
+  clearAction: PropTypes.func.isRequired
 };
 
 Canvas.defaultProps = {

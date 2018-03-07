@@ -10,3 +10,9 @@ html, body {
   overflow: hidden;
   height: 100%;
 }
+
+.panel {
+  position: absolute;
+  margin-top: -200px;
+  margin-left: 200px;
+}
