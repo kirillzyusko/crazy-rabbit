@@ -3,15 +3,18 @@ import styled, { keyframes } from 'styled-components';
 
 const moveHorizontally = keyframes`
   0% {
-    transform: translateX(170);
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(370px);
   }
   100% {
-    transform: translateX(370px);
+    transform: translateX(0); 
   }
 `;
 
 const Move = styled.g`
-  animation: ${moveHorizontally} 1s linear;
+  animation: ${moveHorizontally} 2s linear;
 `;
 
 class Block extends Component {
@@ -23,7 +26,7 @@ class Block extends Component {
   render () {
     return (
       <Move>
-      <g transform={'translate(170, -50) scale(0.3, 0.3)'}>
+      <g transform={'translate(40, -50) scale(0.3, 0.3)'}>
         <path d="m1.25,1.25h256v256h-256z" fill="#cd9945" stroke="#6e441b" stroke-width="2.5"/>
         <path d="m33.25,33.25h192v192h-192z" fill="#9a6926"/>
         <path d="m-225.25,33.25h6v192h-6z" fill="#976825" stroke="#6e441b" stroke-width="2.5" transform="matrix(0,-1,1,0,0,0)"/>

@@ -49,8 +49,8 @@ const Canvas = (props) => {
     >
       <Sky />
       <Ground />
-      <Objecta action={props.action} size={prop.size} align={prop.align} />
       <Block />
+      <Objecta action={props.action} size={prop.size} align={prop.align} />
       {/*<defs>
         <filter id="shadow">
           <feDropShadow dx="1" dy="1" stdDeviation="2" />
