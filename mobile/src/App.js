@@ -12,7 +12,9 @@ import {
     View,
     Animated,
     Image,
-    Easing
+    Easing,
+    TouchableHighlight,
+    Button
 } from 'react-native';
 import SvgObject from './components/svg-object.native';
 
@@ -27,7 +29,7 @@ type Props = {};
 export default class App extends Component<Props> {
     constructor () {
         super()
-        this.animatedValue = new Animated.Value(0)
+        this.animatedValue = new Animated.Value(0);
     }
     componentDidMount () {
         this.animate()
@@ -41,8 +43,13 @@ export default class App extends Component<Props> {
                 duration: 2000,
                 easing: Easing.linear()
             }
-        ).start(() => this.animate())
+        ).start()
     }
+
+    onClick = () => {
+        this.animate()
+    };
+
     render () {
         const marginLeft = this.animatedValue.interpolate({
             inputRange: [0, 1],
@@ -65,14 +72,20 @@ export default class App extends Component<Props> {
             outputRange: ['0deg', '180deg', '0deg']
         })
         return (
-            <View style={styles.container}>
-                <Animated.View
-                    style={{
-                        marginLeft: movingMargin,
-                        marginTop: 10}}>
-                    <SvgObject/>
-                </Animated.View>
-            </View>
+
+                <View style={styles.container}>
+                    <Animated.View
+                        style={{marginLeft: movingMargin }}>
+                        <SvgObject/>
+                    </Animated.View>
+
+                    <View style={styles.buttonContainer}>
+                        <Button
+                            onPress={this.onClick}
+                            title="Press Me"
+                        />
+                    </View>
+                </View>
         )
     }
 }
@@ -83,6 +96,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+    },
+    buttonContainer: {
+        margin: 20
     },
     welcome: {
         fontSize: 20,

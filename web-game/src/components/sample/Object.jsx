@@ -7,7 +7,7 @@ const moveVertically = keyframes`
   0% {
     transform: translateY(0);
   }
-  50% {
+  60% {
     transform: translateY(-200px);
   }
   100% {
