@@ -1,4 +1,4 @@
-import { calculateAngle } from '../utils/formulas';
+import { calculateAngle } from '../engine/utils/formulas';
 import createFlyingObjects from './createFlyingObjects';
 import moveBalls from './moveCannonBalls';
 import checkCollisions from './checkCollisions';

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { getCanvasPosition } from './utils/formulas';
+import { getCanvasPosition } from './engine/utils/formulas';
 import Canvas from './components/Canvas';
 import * as Auth0 from 'auth0-web';
 import io from 'socket.io-client';
@@ -22,8 +22,22 @@ class App extends Component {
     this.currentPlayer = null;
   }
 
+  addBlockRandomly = () => {
+    setTimeout(() => {
+      this.buildObject();
+      setTimeout(this.addBlockRandomly, (new Date()).getTime() % 1000);
+    }, 700);
+  };
+
+  buildObject = () => {
+    this.props.addBlock();
+  };
+
   componentDidMount() {
     this.watchersByKeyboard();
+
+    this.addBlockRandomly();
+
     const self = this;
 
     Auth0.handleAuthCallback();
@@ -91,6 +105,10 @@ class App extends Component {
     setTimeout(() => this.props.clearAction(), 20);
   };
 
+  addBlock = () => {
+    this.props.addBlock();
+  }
+
   handler = (e) => {
     switch(e.type) {
       case 'keyup': this.jump();
@@ -117,6 +135,7 @@ class App extends Component {
         />
         <div className='panel'>
           <button onClick={this.jump}>jump</button>
+          <button onClick={this.addBlock}>add block</button>
         </div>
       </div>
     );
@@ -154,6 +173,7 @@ App.propTypes = {
     picture: PropTypes.string.isRequired,
   })),
   shoot: PropTypes.func.isRequired,
+  addBlock: PropTypes.func.isRequired,
   jump: PropTypes.func.isRequired,
   clearAction: PropTypes.func.isRequired,
 };

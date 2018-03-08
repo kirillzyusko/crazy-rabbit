@@ -1,4 +1,4 @@
-import { calculateNextPosition } from '../utils/formulas';
+import { calculateNextPosition } from '../engine/utils/formulas';
 
 const moveBalls = cannonBalls => (
   cannonBalls

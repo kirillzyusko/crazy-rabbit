@@ -4,21 +4,21 @@ import {
 } from '../engine/utils/constants';
 
 export default (state) => {
-  if ( ! state.gameState.started) return state; // game not running
+  //if ( ! state.gameState.started) return state; // game not running
 
-  const now = (new Date()).getTime();
+  /*const now = (new Date()).getTime();
   const { lastObjectCreatedAt, flyingObjects } = state.gameState;
   const createNewObject = (
     now - (lastObjectCreatedAt).getTime() > createInterval &&
     flyingObjects.length < maxFlyingObjects
   );
 
-  if ( ! createNewObject) return state; // no need to create objects now
+  if ( ! createNewObject) return state; // no need to create objects now*/
 
   const id = (new Date()).getTime();
   const predefinedPosition = Math.floor(Math.random() * maxFlyingObjects);
   const flyingObjectPosition = flyingObjectsStarterPositions[predefinedPosition];
-  const newFlyingObject = {
+  const newBlock = {
     position: {
       x: flyingObjectPosition,
       y: flyingObjectsStarterYAxis,
@@ -27,13 +27,15 @@ export default (state) => {
     id,
   };
 
+  const validBlocks = state.gameState.blocks.filter(block => block.createdAt + 1900 > (new Date()).getTime());
+
   return {
     ...state,
     gameState: {
       ...state.gameState,
-      flyingObjects: [
-        ...state.gameState.flyingObjects,
-        newFlyingObject
+      blocks: [
+        ...validBlocks,
+        newBlock
       ],
       lastObjectCreatedAt: new Date(),
     }

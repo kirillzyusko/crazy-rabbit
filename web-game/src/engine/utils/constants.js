@@ -17,3 +17,10 @@ export const flyingObjectsStarterPositions = [
 ];
 
 export const gameHeight = 1200;
+
+
+
+
+
+export const createBlockInterval = 1000;
+export const maxBlockOnMap = 4;

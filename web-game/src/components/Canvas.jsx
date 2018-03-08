@@ -50,7 +50,14 @@ const Canvas = (props) => {
     >
       <Sky />
       <Ground />
-      <Block />
+
+      {props.gameState.blocks.map(block => (
+       <Block
+          key={block.id}
+          position={block.position}
+        />
+      ))}
+
       {/*<Objecta action={props.action} size={prop.size} align={prop.align} />*/}
       <Hero hero={'RABBIT'} action={props.action}/>
       {/*<defs>

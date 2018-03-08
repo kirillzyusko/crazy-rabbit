@@ -1,12 +1,13 @@
 import {
   LEADERBOARD_LOADED, LOGGED_IN,
-  MOVE_OBJECTS, SHOOT, START_GAME, JUMP, CLEAR_ACTION
+  MOVE_OBJECTS, SHOOT, START_GAME, JUMP, CLEAR_ACTION, ADD_BLOCK
 } from '../actions';
 import moveObjects from './moveObjects';
 import startGame from './startGame';
 import shoot from './shoot';
 import jump from './jump';
 import clearAction from './clearAction';
+import addBlock from './createBlock';
 
 const initialGameState = {
   started: false,
@@ -17,6 +18,7 @@ const initialGameState = {
   currentPlayer: null,
   players: null,
   cannonBalls: [],
+  blocks: []
 };
 
 const initialState = {
@@ -47,6 +49,8 @@ function reducer(state = initialState, action) {
       return jump(state);
     case CLEAR_ACTION:
       return clearAction(state);
+    case ADD_BLOCK:
+      return addBlock(state);
     default:
       return state;
   }

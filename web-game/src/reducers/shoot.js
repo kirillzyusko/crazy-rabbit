@@ -1,4 +1,4 @@
-import { calculateAngle } from '../utils/formulas';
+import { calculateAngle } from '../engine/utils/formulas';
 
 function shoot(state, action) {
   if (!state.gameState.started) return state;
