@@ -6,7 +6,7 @@ import Rabbit from './catalog/Rabbit';
 import Bear from './catalog/Bear';
 import Bird from './catalog/Bird';
 import Mouse from './catalog/Mouse';
-import { JUMP } from '../../actions';
+import { JUMP } from '../../../actions/index';
 
 const getHeroByType = (type) => {
   switch(type) {
@@ -17,7 +17,7 @@ const getHeroByType = (type) => {
     case MOUSE:
       return <Mouse/>;
     case BIRD:
-      return <Bird/>
+      return <Bird/>;
     default:
       return <Rabbit/>;
   }
@@ -27,7 +27,7 @@ const moveVertically = keyframes`
   0% {
     transform: translateY(0);
   }
-  60% {
+  35% {
     transform: translateY(-200px);
   }
   100% {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Sky from './Sky';
-import Ground from './Ground';
+import Sky from './models/environment/background/Sky';
+import Ground from './models/environment/background/Ground';
 import CannonBase from './CannonBase';
 import CannonPipe from './CannonPipe';
 import CurrentScore from './CurrentScore'
@@ -13,8 +13,8 @@ import { signIn } from 'auth0-web';
 import CannonBall from './CannonBall';
 import Heart from './Heart';
 import Objecta from './sample/Object';
-import Block from './blocks/Block';
-import Hero from "./heroes/Hero";
+import Block from './models/environment/blocks/Block';
+import Hero from "./models/heroes/Hero";
 
 const Canvas = (props) => {
   const gameHeight = 1200;

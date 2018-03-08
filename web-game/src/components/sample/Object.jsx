@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { JUMP } from '../../actions';
-import Rabbit from "../heroes/catalog/Rabbit";
+import Rabbit from "../models/heroes/catalog/Rabbit";
 
 const moveVertically = keyframes`
   0% {
