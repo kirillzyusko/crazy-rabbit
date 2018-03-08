@@ -40,7 +40,7 @@ export default class App extends Component<Props> {
             this.animatedValue,
             {
                 toValue: 1,
-                duration: 2000,
+                duration: 1000,
                 easing: Easing.linear()
             }
         ).start()

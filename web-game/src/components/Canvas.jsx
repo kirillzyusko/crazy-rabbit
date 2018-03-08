@@ -51,7 +51,7 @@ const Canvas = (props) => {
       <Ground />
       <Block />
       <Objecta action={props.action} size={prop.size} align={prop.align} />
-      {/*<defs>
+      <defs>
         <filter id="shadow">
           <feDropShadow dx="1" dy="1" stdDeviation="2" />
         </filter>
@@ -85,7 +85,7 @@ const Canvas = (props) => {
         />
       ))}
 
-      {lives}*/}
+      {lives}
     </svg>
   );
 };

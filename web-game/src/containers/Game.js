@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(loggedIn(player));
   },
   moveObjects: (mousePosition) => {
-    //dispatch(moveObjects(mousePosition));
+    dispatch(moveObjects(mousePosition));
   },
   startGame: () => {
     dispatch(startGame());
