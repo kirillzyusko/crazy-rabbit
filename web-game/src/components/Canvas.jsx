@@ -14,6 +14,7 @@ import CannonBall from './CannonBall';
 import Heart from './Heart';
 import Objecta from './sample/Object';
 import Block from './blocks/Block';
+import Hero from "./heroes/Hero";
 
 const Canvas = (props) => {
   const gameHeight = 1200;
@@ -50,8 +51,9 @@ const Canvas = (props) => {
       <Sky />
       <Ground />
       <Block />
-      <Objecta action={props.action} size={prop.size} align={prop.align} />
-      <defs>
+      {/*<Objecta action={props.action} size={prop.size} align={prop.align} />*/}
+      <Hero hero={'RABBIT'} action={props.action}/>
+      {/*<defs>
         <filter id="shadow">
           <feDropShadow dx="1" dy="1" stdDeviation="2" />
         </filter>
@@ -85,7 +87,7 @@ const Canvas = (props) => {
         />
       ))}
 
-      {lives}
+      {lives}*/}
     </svg>
   );
 };
