@@ -54,12 +54,14 @@ class Hero extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === JUMP) {
-      this.setState({isJumping: true});
-      setTimeout(() => this.setState({isJumping: false}), 500);
+      this.jump();
     }
   }
 
-  jump = () => {};
+  jump = () => {
+    this.setState({isJumping: true});
+    setTimeout(() => this.setState({isJumping: false}), 500);
+  };
 
   render() {
     const { hero } = this.props;
