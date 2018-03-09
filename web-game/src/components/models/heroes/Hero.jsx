@@ -25,13 +25,13 @@ const getHeroByType = (type) => {
 
 const moveVertically = keyframes`
   0% {
-    transform: translateY(0);
+    transform: translateY(-100px);
   }
   35% {
-    transform: translateY(-300px);
+    transform: translateY(-400px);
   }
   100% {
-    transform: translateY(0); 
+    transform: translateY(-230px); 
   }
 `;
 
@@ -48,8 +48,7 @@ class Hero extends Component {
   }
 
   componentDidMount() {
-    this.setState({isJumping: true});
-    setTimeout(() => this.setState({isJumping: null}), 750);
+    //this.jump();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -59,19 +58,21 @@ class Hero extends Component {
   }
 
   jump = () => {
-    this.setState({isJumping: true});
-    setTimeout(() => this.setState({isJumping: false}), 750);
+    if(!this.state.isJumping) {
+      this.setState({isJumping: true, isJumpingToBox: !this.state.isJumpingToBox});
+      setTimeout(() => this.setState({isJumping: false}), 750);
+    }
   };
 
   render() {
     const { hero } = this.props;
     const character = getHeroByType(hero);
-    const transform = `translate(0, -100)`;
+    const transform = `translate(0, -${this.state.isJumpingToBox ? 230 : 100})`;
 
     return (
       this.state.isJumping ?
         <Move>
-          <g transform={`${transform}`}>
+          <g>
             {character}
           </g>
         </Move>
