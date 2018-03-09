@@ -36,7 +36,7 @@ const moveVertically = keyframes`
 `;
 
 const Move = styled.g`
-  animation: ${moveVertically} 1s linear;
+  animation: ${moveVertically} 0.75s linear;
 `;
 
 class Hero extends Component {
@@ -49,7 +49,7 @@ class Hero extends Component {
 
   componentDidMount() {
     this.setState({isJumping: true});
-    setTimeout(() => this.setState({isJumping: null}), 1000);
+    setTimeout(() => this.setState({isJumping: null}), 750);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -60,7 +60,7 @@ class Hero extends Component {
 
   jump = () => {
     this.setState({isJumping: true});
-    setTimeout(() => this.setState({isJumping: false}), 1000);
+    setTimeout(() => this.setState({isJumping: false}), 750);
   };
 
   render() {

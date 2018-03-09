@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import App from '../App';
 import {
   leaderboardLoaded, loggedIn,
-  moveObjects, startGame, shoot, jump, clearAction, addBlock
+  moveObjects, startGame, shoot, jump, clearAction, addBlock, checkCollisions
 } from '../actions/index';
 
 const mapStateToProps = state => ({
@@ -37,6 +37,9 @@ const mapDispatchToProps = dispatch => ({
   },
   addBlock: () => {
     dispatch(addBlock())
+  },
+  checkCollisions: () => {
+    dispatch(checkCollisions());
   }
 });
 

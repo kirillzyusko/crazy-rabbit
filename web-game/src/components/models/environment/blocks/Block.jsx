@@ -9,7 +9,7 @@ const moveHorizontally = keyframes`
     transform: translateX(-370px); 
   }
   100% {
-    transform: translateX(-670px); 
+    transform: translateX(-740px); 
   }
 `;
 

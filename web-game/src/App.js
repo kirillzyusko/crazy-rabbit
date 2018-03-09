@@ -35,8 +35,8 @@ class App extends Component {
 
   componentDidMount() {
     this.watchersByKeyboard();
-
     this.addBlockRandomly();
+    setInterval(() => this.props.checkCollisions(), 100);
 
     const self = this;
 
@@ -107,7 +107,7 @@ class App extends Component {
 
   addBlock = () => {
     this.props.addBlock();
-  }
+  };
 
   handler = (e) => {
     switch(e.type) {
@@ -173,6 +173,7 @@ App.propTypes = {
     picture: PropTypes.string.isRequired,
   })),
   shoot: PropTypes.func.isRequired,
+  checkCollisions: PropTypes.func.isRequired,
   addBlock: PropTypes.func.isRequired,
   jump: PropTypes.func.isRequired,
   clearAction: PropTypes.func.isRequired,

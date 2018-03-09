@@ -1,6 +1,6 @@
 import {
   LEADERBOARD_LOADED, LOGGED_IN,
-  MOVE_OBJECTS, SHOOT, START_GAME, JUMP, CLEAR_ACTION, ADD_BLOCK
+  MOVE_OBJECTS, SHOOT, START_GAME, JUMP, CLEAR_ACTION, ADD_BLOCK, CHECK_COLLISIONS
 } from '../actions';
 import moveObjects from './moveObjects';
 import startGame from './startGame';
@@ -8,6 +8,7 @@ import shoot from './shoot';
 import jump from './jump';
 import clearAction from './clearAction';
 import addBlock from './createBlock';
+import checkCollisions from './checkCollisions2';
 
 const initialGameState = {
   started: false,
@@ -51,6 +52,8 @@ function reducer(state = initialState, action) {
       return clearAction(state);
     case ADD_BLOCK:
       return addBlock(state);
+    case CHECK_COLLISIONS:
+      return checkCollisions(state);
     default:
       return state;
   }
