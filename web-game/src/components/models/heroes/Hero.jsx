@@ -38,7 +38,7 @@ const moveVertically = keyframes`
 const Move = styled.g`
   animation: ${moveVertically} 0.75s linear;
 `;
-
+// перелёт через блок, прыжок на блок (по высоте), прыжок с блока вниз, сползание с блока
 class Hero extends Component {
   constructor() {
     super();

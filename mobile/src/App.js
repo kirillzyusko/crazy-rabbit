@@ -13,7 +13,7 @@ import {
     Animated,
     Image,
     Easing,
-    TouchableHighlight,
+    TouchableWithoutFeedback,
     Button
 } from 'react-native';
 import SvgObject from './components/svg-object.native';
@@ -74,17 +74,15 @@ export default class App extends Component<Props> {
         return (
 
                 <View style={styles.container}>
-                    <Animated.View
-                        style={{marginLeft: movingMargin }}>
-                        <SvgObject/>
-                    </Animated.View>
+                    <TouchableWithoutFeedback
+                        onPress={this.onClick}
+                    >
+                        <Animated.View
+                            style={{marginLeft: movingMargin }}>
+                            <SvgObject/>
+                        </Animated.View>
 
-                    <View style={styles.buttonContainer}>
-                        <Button
-                            onPress={this.onClick}
-                            title="Press Me"
-                        />
-                    </View>
+                    </TouchableWithoutFeedback>
                 </View>
         )
     }
