@@ -11,7 +11,7 @@ const checkCollisions = (state) => {
     const alignmentOfBlcok = now - block.createdAt;
     const isJumping = state.lastActionAt + 1000 > now;
     if(alignmentOfBlcok < 1200 && alignmentOfBlcok > 800 && !isJumping) {
-      console.log('заяц сдох');
+      //console.log('заяц сдох');
     }
   });
   return state;

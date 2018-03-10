@@ -59,7 +59,7 @@ const Canvas = (props) => {
       ))}
 
       {/*<Objecta action={props.action} size={prop.size} align={prop.align} />*/}
-      <Hero hero={'RABBIT'} action={props.action}/>
+      <Hero hero={'BEAR'} action={props.action} futureHeight={props.gameState.futureHeight} currentHeight={props.gameState.currentHeight}/>
       {/*<defs>
         <filter id="shadow">
           <feDropShadow dx="1" dy="1" stdDeviation="2" />

@@ -24,3 +24,9 @@ export const gameHeight = 1200;
 
 export const createBlockInterval = 1000;
 export const maxBlockOnMap = 4;
+
+
+export const oneBlockHeight = 130;
+export const defaultHeight = 100;
+export const heightOfJump = 300;
+export const timeOfJump = 750; //ms

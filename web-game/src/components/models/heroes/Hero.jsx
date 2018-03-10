@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
+import { isEqual } from 'lodash';
 import { RABBIT, BEAR, BIRD, MOUSE } from './utils/characters';
 import Rabbit from './catalog/Rabbit';
 import Bear from './catalog/Bear';
 import Bird from './catalog/Bird';
 import Mouse from './catalog/Mouse';
 import { JUMP } from '../../../actions/index';
+import { oneBlockHeight, defaultHeight, heightOfJump, timeOfJump } from '../../../engine/utils/constants';
 
 const getHeroByType = (type) => {
   switch(type) {
@@ -23,32 +25,40 @@ const getHeroByType = (type) => {
   }
 };
 
-const moveVertically = keyframes`
+const getPosition = (currentHeight) => {
+  return `translate(0, -${defaultHeight + currentHeight*oneBlockHeight})`;
+};
+
+const getMovement = (currentHeight, futureHeight) => {
+  const moveVertically = keyframes`
   0% {
-    transform: translateY(-100px);
+    transform: translateY(-${defaultHeight + currentHeight*oneBlockHeight}px);
   }
   35% {
-    transform: translateY(-400px);
+    transform: translateY(-${defaultHeight + currentHeight*oneBlockHeight + heightOfJump}px);
   }
   100% {
-    transform: translateY(-230px); 
+    transform: translateY(-${defaultHeight + futureHeight*oneBlockHeight}px); 
   }
 `;
 
-const Move = styled.g`
-  animation: ${moveVertically} 0.75s linear;
+  const move = styled.g`
+  animation: ${moveVertically} ${timeOfJump}ms linear;
 `;
-// перелёт через блок, прыжок на блок (по высоте), прыжок с блока вниз, сползание с блока
+
+  return move;
+};
+
 class Hero extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isJumping: null
-    };
-  }
+  constructor(props) {
+    super(props);
+    const { hero } = props;
 
-  componentDidMount() {
-    //this.jump();
+    this.state = {
+      currentHeight: 0,
+      isJumping: null,
+      character: getHeroByType(hero)
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -57,20 +67,35 @@ class Hero extends Component {
     }
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.wasActionCleared(nextProps)) return false;
+    return !this.isTheSameState(nextProps, nextState);
+  }
+
+  isTheSameState = (nextProps, nextState) => isEqual(nextProps, this.props) && isEqual(nextState, this.state);
+
+  wasActionCleared = (nextProps) => this.props.action !== null && nextProps.action === null;
+
   jump = () => {
     if(!this.state.isJumping) {
-      this.setState({isJumping: true, isJumpingToBox: !this.state.isJumpingToBox});
-      setTimeout(() => this.setState({isJumping: false}), 750);
+      this.setState({isJumping: true});
+      setTimeout(this.jumpDisable, timeOfJump);
     }
   };
 
+  jumpDisable = () => {
+    this.setState({isJumping: false});
+    this.setState({currentHeight: this.props.futureHeight})
+  };
+
   render() {
-    const { hero } = this.props;
-    const character = getHeroByType(hero);
-    const transform = `translate(0, -${this.state.isJumpingToBox ? 230 : 100})`;
+    const { character, isJumping } = this.state;
+    const { currentHeight, futureHeight } = this.props;
+    const transform = getPosition(this.state.currentHeight);
+    const Move = getMovement(currentHeight, futureHeight);
 
     return (
-      this.state.isJumping ?
+      isJumping ?
         <Move>
           <g>
             {character}
@@ -85,6 +110,8 @@ class Hero extends Component {
 }
 
 Hero.propTypes = {
+  currentHeight: PropTypes.number.isRequired,
+  futureHeight: PropTypes.number.isRequired,
   hero: PropTypes.string.isRequired,
   action: PropTypes.string.isRequired
 };

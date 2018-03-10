@@ -14,6 +14,8 @@ const initialGameState = {
   started: false,
   kills: 0,
   lives: 3,
+  currentHeight: -1,
+  futureHeight: 0,
   flyingObjects: [],
   lastObjectCreatedAt: new Date(),
   currentPlayer: null,
