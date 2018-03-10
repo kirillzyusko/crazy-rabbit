@@ -5,6 +5,7 @@
  */
 
 import React, {Component} from 'react';
+import Svg, {G} from 'react-native-svg';
 import {
     Platform,
     StyleSheet,
@@ -77,11 +78,14 @@ export default class App extends Component<Props> {
                     <TouchableWithoutFeedback
                         onPress={this.onClick}
                     >
-                        <Animated.View
-                            style={{marginLeft: movingMargin }}>
-                            <SvgObject/>
-                        </Animated.View>
-
+                        <View>
+                            <Animated.View
+                                style={{marginTop: movingMargin}}>
+                                <View>
+                                    <SvgObject/>
+                                </View>
+                            </Animated.View>
+                        </View>
                     </TouchableWithoutFeedback>
                 </View>
         )
@@ -94,6 +98,9 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#F5FCFF',
+    },
+    hero: {
+        position: 'absolute'
     },
     buttonContainer: {
         margin: 20
