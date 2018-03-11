@@ -17,7 +17,10 @@ import {
     TouchableWithoutFeedback,
     Button
 } from 'react-native';
-import SvgObject from './components/svg-object.native';
+import Block from "./components/models/environment/blocks/block.native";
+import Canvas from "./containers/canvas.native";
+
+const AnimatedG = Animated.createAnimatedComponent(G);
 
 const instructions = Platform.select({
     ios: 'Press Cmd+R to reload,\n' +
@@ -62,7 +65,7 @@ export default class App extends Component<Props> {
         })
         const movingMargin = this.animatedValue.interpolate({
             inputRange: [0, 0.5, 1],
-            outputRange: [0, 300, 0]
+            outputRange: [0, 300, 100]
         })
         const textSize = this.animatedValue.interpolate({
             inputRange: [0, 0.5, 1],
@@ -78,14 +81,17 @@ export default class App extends Component<Props> {
                     <TouchableWithoutFeedback
                         onPress={this.onClick}
                     >
-                        <View>
-                            <Animated.View
-                                style={{marginTop: movingMargin}}>
-                                <View>
-                                    <SvgObject/>
-                                </View>
-                            </Animated.View>
-                        </View>
+                        <Canvas/>
+                        {/*<View>
+                            <Svg height={200} width={300}>
+                                <Animated.View style={{marginBottom: movingMargin}}>
+
+                                        <SvgObject />
+
+                                </Animated.View>
+                            </Svg>
+                            <Block/>
+                        </View>*/}
                     </TouchableWithoutFeedback>
                 </View>
         )
