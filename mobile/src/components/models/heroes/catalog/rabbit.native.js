@@ -10,10 +10,14 @@ import {
     Ellipse,
     Rect
 } from 'react-native-svg';
+import {
+    height,
+    distanceWithRespectToGround
+} from '../../../../engine/constants';
 
 const Rabbit = () => {
     return (
-        <G>
+        <G y={height - distanceWithRespectToGround}>
             <Defs>
                 <LinearGradient id="id0" gradientUnits="userSpaceOnUse" x1="77.8489" y1="44.6823" x2="131.779" y2="44.6823">
                     <Stop offset="0" stopColor="#90E1E8"/>

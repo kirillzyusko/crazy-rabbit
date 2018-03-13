@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import {
-    Animated as RNAnimated,
+    Animated,
     Easing
 } from 'react-native';
-import { G } from 'react-native-svg';
+import { Animate } from './../../../engine/animation/index';
 import Rabbit from "./catalog/rabbit.native";
-import {defaultAlignmentY} from "../../../engine/constants";
-
-const Animated = {
-    ...RNAnimated,
-    G: RNAnimated.createAnimatedComponent(G)
-};
+import Bear from "./catalog/bear.native";
+import {heightOfJump} from "../../../engine/constants";
 
 class Hero extends Component {
     constructor() {
@@ -19,12 +15,16 @@ class Hero extends Component {
             isForward: true,
             rotation: 200
         };
-        this.animatedValue = new RNAnimated.Value(0);
+        this.animatedValue = new Animated.Value(0);
+
+        this.animatedValue.addListener( (circleRadius) => {
+            this._animatedGroup.setNativeProps({ matrix: [1, 0, 0, 1, 0, -circleRadius.value*heightOfJump - heightOfJump] });
+        });
     }
 
     componentDidMount() {
-        //this.animate();
-        setInterval(this.jump, 1)
+        this.animate();
+        //setInterval(this.jump, 1)
         //this.jump();
     }
 
@@ -58,15 +58,11 @@ class Hero extends Component {
     }
 
     render() {
-        const movingMargin = this.animatedValue.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, 300, 100]
-        });
-
-        return (
-            <Animated.G y={defaultAlignmentY + this.state.rotation} style={{marginBottom: movingMargin}}>
+       return (
+            <Animate.G ref={ ref => this._animatedGroup = ref }>
                <Rabbit/>
-            </Animated.G>
+                {/*<Bear/>*/}
+            </Animate.G>
         )
     }
 }

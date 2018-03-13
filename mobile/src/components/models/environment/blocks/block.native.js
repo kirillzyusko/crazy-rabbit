@@ -1,12 +1,19 @@
 import React from 'react';
-import Svg, {
+import {
     G,
     Path
 } from 'react-native-svg';
+import {
+    height,
+    width,
+    distanceWithRespectToGround,
+    blockScalability,
+    heightOfOneBlock
+} from '../../../../engine/constants';
 
 const Block = () => {
     return (
-            <G x={0} y={0} transform={{scale:'0.25'}}>
+            <G x={width - heightOfOneBlock} y={height - distanceWithRespectToGround} transform={{scale: blockScalability}}>
                 <Path d="m1.25,1.25h256v256h-256z" fill="#cd9945" stroke="#6e441b" strokeWidth="2.5"/>
                 <Path d="m33.25,33.25h192v192h-192z" fill="#9a6926"/>
                 <Path d="m-225.25,33.25h6v192h-6z" fill="#976825" stroke="#6e441b" strokeWidth="2.5" transform="matrix(0,-1,1,0,0,0)"/>
