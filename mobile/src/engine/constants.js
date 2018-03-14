@@ -10,3 +10,7 @@ export const groundHeight = height * 0.75;
 
 //characteristics of hero
 export const heightOfJump = heightOfOneBlock * 1.7;
+export const timeOfJump = 750; // ms
+
+// characteristics of environment
+export const timeOfBlockMovement = 2000; //ms
