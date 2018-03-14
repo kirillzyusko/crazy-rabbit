@@ -25,6 +25,7 @@ class Block extends Component {
             this._hero.setNativeProps({ matrix: [blockScalability, 0, 0, blockScalability, (1 - horizontalMoving.value) * width - heightOfOneBlock, height - distanceWithRespectToGround] });
         });
         this.animate();
+        setInterval(() => this.animate(), 2000);
     }
 
     animate() {

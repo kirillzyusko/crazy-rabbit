@@ -19,6 +19,7 @@ import {
 } from 'react-native';
 import Block from "./components/models/environment/blocks/block.native";
 import Canvas from "./containers/canvas.native";
+import {JUMP} from "./actions";
 
 const AnimatedG = Animated.createAnimatedComponent(G);
 
@@ -32,56 +33,23 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
     constructor () {
-        super()
-        this.animatedValue = new Animated.Value(0);
-    }
-    componentDidMount () {
-        this.animate()
-    }
-    animate () {
-        this.animatedValue.setValue(0)
-        Animated.timing(
-            this.animatedValue,
-            {
-                toValue: 1,
-                duration: 1000,
-                easing: Easing.linear()
-            }
-        ).start()
+        super();
+        this.state = {
+            action: null
+        }
     }
 
     onClick = () => {
-        this.animate()
+        console.log('click');
+        this.setState({action: JUMP});
+        setTimeout(() => this.setState({action: null}), 100);
     };
 
     render () {
-        const marginLeft = this.animatedValue.interpolate({
-            inputRange: [0, 1],
-            outputRange: [0, 300]
-        })
-        const opacity = this.animatedValue.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, 1, 0]
-        })
-        const movingMargin = this.animatedValue.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [0, 300, 100]
-        })
-        const textSize = this.animatedValue.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: [18, 32, 18]
-        })
-        const rotateX = this.animatedValue.interpolate({
-            inputRange: [0, 0.5, 1],
-            outputRange: ['0deg', '180deg', '0deg']
-        })
         return (
-
                 <View style={styles.container}>
-                    <TouchableWithoutFeedback
-                        onPress={this.onClick}
-                    >
-                        <Canvas/>
+                    <TouchableWithoutFeedback onPress={this.onClick}>
+                        <Canvas action={this.state.action}/>
                         {/*<View>
                             <Svg height={200} width={300}>
                                 <Animated.View style={{marginBottom: movingMargin}}>

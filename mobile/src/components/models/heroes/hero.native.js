@@ -1,12 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
     Animated,
     Easing
 } from 'react-native';
-import { Animate } from './../../../engine/animation/index';
+import { Animate } from './../../../engine/animation';
 import Rabbit from "./catalog/rabbit.native";
 import Bear from "./catalog/bear.native";
 import { heightOfJump, timeOfJump } from "../../../engine/constants";
+import {JUMP} from "../../../actions";
 
 class Hero extends Component {
     constructor() {
@@ -14,11 +15,20 @@ class Hero extends Component {
         this.animatedValue = new Animated.Value(0);
     }
 
+    componentWillReceiveProps(nextProps) {
+        console.log(nextProps);
+        if (nextProps.action === JUMP) {
+            this.animate();
+            console.log('run animation');
+        }
+    }
+
     componentDidMount() {
         this.animatedValue.addListener((height) => {
             this._hero.setNativeProps({ matrix: [1, 0, 0, 1, 0, -height.value * heightOfJump - heightOfJump] });
         });
         this.animate();
+        setInterval(() => this.animate(), 2000);
     }
 
     animate() {
@@ -30,7 +40,7 @@ class Hero extends Component {
                 duration: timeOfJump,
                 easing: Easing.linear()
             }
-        ).start(() => this.animate)
+        ).start()
     }
 
     render() {
@@ -42,5 +52,9 @@ class Hero extends Component {
         )
     }
 }
+
+Hero.propTypes = {
+  //action: PropTypes.string.isRequired
+};
 
 export default Hero;
