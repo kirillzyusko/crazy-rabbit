@@ -29,15 +29,19 @@ class Hero extends Component {
     }
 
     animate() {
-        this.animatedValue.setValue(0)
-        Animated.timing(
-            this.animatedValue,
-            {
+        this.animatedValue.setValue(0);
+        Animated.sequence([
+            Animated.timing(this.animatedValue, {
                 toValue: 1,
                 duration: timeOfJump,
                 easing: Easing.linear()
-            }
-        ).start()
+            }),
+            Animated.timing(this.animatedValue, {
+                toValue: 0,
+                duration: timeOfJump,
+                easing: Easing.linear()
+            })
+        ]).start()
     }
 
     render() {
