@@ -17,6 +17,20 @@ class App extends Component<Props> {
         }
     }
 
+    componentDidMount() {
+        this.addBlock();
+    }
+
+    /**
+     * Randomly adding block to the game
+     * */
+    addBlock = () => {
+        setTimeout(() => {
+            this.props.addBlock();
+            setTimeout(this.addBlock, 100);
+        }, 100);
+    };
+
     onClick = () => {
         this.props.jump();
         setTimeout(() => this.props.clearAction(), 100);
@@ -27,7 +41,7 @@ class App extends Component<Props> {
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
                     <View>
-                        <Canvas action={this.props.hero.action} />
+                        <Canvas action={this.props.hero.action} blocks={this.props.ambient.blocks} />
                     </View>
                 </TouchableWithoutFeedback>
             </View>

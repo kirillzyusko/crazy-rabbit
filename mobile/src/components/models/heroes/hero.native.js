@@ -25,7 +25,6 @@ class Hero extends Component {
         this.animatedValue.addListener((height) => {
             this._hero.setNativeProps({ matrix: [1, 0, 0, 1, 0, -height.value * heightOfJump - heightOfJump] });
         });
-        this.animate();
     }
 
     animate() {

@@ -1,22 +1,17 @@
 import React from 'react';
 import { AppRegistry } from 'react-native';
-import { createStore, applyMiddleware, combineReducers, compose} from 'redux';
+import { createStore, applyMiddleware, compose} from 'redux';
 import { Provider } from 'react-redux'
 import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger';
 import Application from './src/App';
 import reducer from './src/reducers'
 
-const initialGameState = {
-    currentHeight: -1,
-    futureHeight: 0,
-    lastObjectCreatedAt: new Date(),
-    blocks: []
-};
-
 const initialState = {
-    action: null,
-    gameState: initialGameState,
+    hero: {},
+    ambient: {
+        blocks: []
+    },
 };
 
 // middleware that logs actions
@@ -32,12 +27,7 @@ const configureStore = (initialState) => {
     return createStore(reducer, initialState, enhancer);
 };
 
-const store = configureStore({});
-
-store.dispatch({
-    type: 'JUMP',
-    payload: {}
-});
+const store = configureStore(initialState);
 
 const App = () => {
     return (

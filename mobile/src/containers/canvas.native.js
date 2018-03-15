@@ -7,11 +7,12 @@ import {height, width} from "../engine/constants";
 import Block from "../components/models/environment/blocks/block.native";
 
 const Canvas = (props) => {
+    console.log('rerender canvas', props.blocks.length);
     return (
         <Svg width={width} height={height}>
             <Sky />
             <Ground />
-            <Block />
+            {props.blocks.map(() => <Block />)}
             <Hero action={props.action} />
         </Svg>
     )
