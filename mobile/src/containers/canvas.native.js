@@ -7,13 +7,12 @@ import {height, width} from "../engine/constants";
 import Block from "../components/models/environment/blocks/block.native";
 
 const Canvas = (props) => {
-    console.log('rerender canvas', props.blocks.length);
     return (
         <Svg width={width} height={height}>
             <Sky />
             <Ground />
             {props.blocks.map((block) => {
-                return <Block key={block.createdAt} a={block.createdAt}/>
+                return <Block key={block.createdAt} />
             })}
             <Hero action={props.action} />
         </Svg>

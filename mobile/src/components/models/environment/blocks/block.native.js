@@ -28,7 +28,6 @@ class Block extends Component {
     }
 
     animate() {
-        console.log('animation is running, ', this.props.a);
         this.animatedValue.setValue(0)
         Animated.timing(
             this.animatedValue,
