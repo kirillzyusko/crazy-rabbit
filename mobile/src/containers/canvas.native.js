@@ -12,7 +12,9 @@ const Canvas = (props) => {
         <Svg width={width} height={height}>
             <Sky />
             <Ground />
-            {props.blocks.map(() => <Block />)}
+            {props.blocks.map((block) => {
+                return <Block key={block.createdAt} a={block.createdAt}/>
+            })}
             <Hero action={props.action} />
         </Svg>
     )

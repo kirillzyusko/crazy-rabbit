@@ -27,8 +27,8 @@ class App extends Component<Props> {
     addBlock = () => {
         setTimeout(() => {
             this.props.addBlock();
-            setTimeout(this.addBlock, 100);
-        }, 100);
+            setTimeout(this.addBlock, 700);
+        }, 700);
     };
 
     onClick = () => {
@@ -36,7 +36,7 @@ class App extends Component<Props> {
         setTimeout(() => this.props.clearAction(), 100);
     };
 
-    render () {
+    render() {
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>

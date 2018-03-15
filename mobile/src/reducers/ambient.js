@@ -6,7 +6,7 @@ const ambient = (state = {}, action) => {
     switch (type) {
         case ADD_BLOCK: {
             const now = (new Date()).getTime();
-            const validBlocks = state.blocks.filter(block => block.createdAt + timeOfBlockMovement - 100 > now);
+            const validBlocks = state.blocks.filter(block => block.createdAt + timeOfBlockMovement > now);
             const newBlock = {
                 createdAt: now
             };

@@ -45,7 +45,7 @@ class Hero extends Component {
 
     render() {
        return (
-            <Animate.G ref={ref => this._hero = ref}>
+            <Animate.G ref={ref => this._hero = ref} y={-heightOfJump}>
                <Rabbit/>
                 {/*<Bear/>*/}
             </Animate.G>
