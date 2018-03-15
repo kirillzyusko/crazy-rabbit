@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux';
-import jump from './jump';
+import hero from './hero';
+import ambient from './ambient';
 
 export default combineReducers({
-    jump
+    hero, ambient
 });

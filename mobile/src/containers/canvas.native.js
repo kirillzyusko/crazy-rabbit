@@ -11,8 +11,8 @@ const Canvas = (props) => {
         <Svg width={width} height={height}>
             <Sky />
             <Ground />
-            <Hero action={props.action} />
             <Block />
+            <Hero action={props.action} />
         </Svg>
     )
 };

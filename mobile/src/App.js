@@ -1,20 +1,15 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
 import {
     StyleSheet,
     View,
     TouchableWithoutFeedback
 } from 'react-native';
+import { connect } from 'react-redux';
 import Canvas from './containers/canvas.native';
-import { JUMP } from './actions';
+import {ADD_BLOCK, CLEAR_ACTION, JUMP} from './actions';
 
 type Props = {};
-export default class App extends Component<Props> {
+class App extends Component<Props> {
     constructor() {
         super();
         this.state = {
@@ -23,8 +18,8 @@ export default class App extends Component<Props> {
     }
 
     onClick = () => {
-        this.setState({ action: JUMP });
-        setTimeout(() => this.setState({ action: null }), 100);
+        this.props.jump();
+        setTimeout(() => this.props.clearAction(), 100);
     };
 
     render () {
@@ -32,7 +27,7 @@ export default class App extends Component<Props> {
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
                     <View>
-                        <Canvas action={this.state.action}/>
+                        <Canvas action={this.props.hero.action} />
                     </View>
                 </TouchableWithoutFeedback>
             </View>
@@ -48,3 +43,25 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     }
 });
+
+const mapStateToProps = state => ({
+    hero: state.hero,
+    ambient: state.ambient
+});
+
+const mapDispatchToProps = dispatch => ({
+    jump: () => {
+        dispatch({type: JUMP})
+    },
+    clearAction: () => {
+        dispatch({type: CLEAR_ACTION})
+    },
+    addBlock: () => {
+        dispatch({type: ADD_BLOCK})
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+
+
+
