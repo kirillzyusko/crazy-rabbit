@@ -27,7 +27,7 @@ class App extends Component<Props> {
     addBlock = () => {
         setTimeout(() => {
             this.props.addBlock();
-            setTimeout(this.addBlock, 700);
+            setTimeout(this.addBlock, (new Date()).getTime() % 1000);
         }, 700);
     };
 
