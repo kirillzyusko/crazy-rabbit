@@ -7,7 +7,7 @@ import { Animate } from './../../../engine/animation';
 import Rabbit from "./catalog/rabbit.native";
 import Bear from "./catalog/bear.native";
 import { heightOfJump, timeOfJump } from "../../../engine/constants";
-import {JUMP} from "../../../actions";
+import { JUMP } from "../../../actions";
 
 class Hero extends Component {
     constructor() {
@@ -16,10 +16,8 @@ class Hero extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps);
         if (nextProps.action === JUMP) {
             this.animate();
-            console.log('run animation');
         }
     }
 
@@ -28,7 +26,6 @@ class Hero extends Component {
             this._hero.setNativeProps({ matrix: [1, 0, 0, 1, 0, -height.value * heightOfJump - heightOfJump] });
         });
         this.animate();
-        setInterval(() => this.animate(), 2000);
     }
 
     animate() {
