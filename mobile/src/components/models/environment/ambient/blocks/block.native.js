@@ -27,8 +27,11 @@ class Block extends Component {
         this.animate();
     }
 
+    shouldComponentUpdate() {
+        return false;
+    }
+
     animate() {
-        this.animatedValue.setValue(0)
         Animated.timing(
             this.animatedValue,
             {
@@ -40,6 +43,7 @@ class Block extends Component {
     }
 
     render() {
+        console.log('render block');
         return (
             <Animate.G ref={ref => this._block = ref} x={width} y={height - distanceWithRespectToGround}
                transform={{scale: blockScalability}}>

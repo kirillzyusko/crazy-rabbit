@@ -9,7 +9,7 @@ export const wasCollision = (blocks, lastActionAt) => {
         const isJumping = lastActionAt + timeOfJump > now;
 
         if (alignmentOfBlock < timeOfBlockMovement + inaccuraciesTimeForCollision && alignmentOfBlock > timeOfBlockMovement - inaccuraciesTimeForCollision && !isJumping) {
-            console.log(block.createdAt, alignmentOfBlock, timeOfBlockMovement + inaccuraciesTimeForCollision, timeOfBlockMovement - inaccuraciesTimeForCollision);
+            //console.log(block.createdAt, alignmentOfBlock, timeOfBlockMovement + inaccuraciesTimeForCollision, timeOfBlockMovement - inaccuraciesTimeForCollision);
             wasCollision = true;
         }
     });

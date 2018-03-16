@@ -32,6 +32,10 @@ class Hero extends Component {
         });
     }
 
+    shouldComponentUpdate(){
+        return false;
+    }
+
     animate() {
         if(this.animatedValue._value === 0) {
             Animated.sequence([
@@ -50,6 +54,7 @@ class Hero extends Component {
     }
 
     render() {
+        console.log('rerender hero', Date.now());
        return (
             <Animate.G ref={ref => this._hero = ref} y={-heightOfJump}>
                <Rabbit/>
