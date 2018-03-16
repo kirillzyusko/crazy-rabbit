@@ -1,9 +1,10 @@
 {
   "name": "crazy-rabbit",
-  "version": "0.3.15c",
+  "version": "0.3.16b",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
+    "build": "cd android && gradlew build",
     "test": "jest"
   },
   "dependencies": {
