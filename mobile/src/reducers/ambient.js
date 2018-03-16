@@ -1,5 +1,6 @@
-import {ADD_BLOCK} from '../actions';
+import {ADD_BLOCK, CHECK_COLLISIONS} from '../actions';
 import {inaccuraciesTime, timeOfBlockMovement} from "../engine/constants";
+import {checkCollisions} from "../engine/handler/check-collision.native";
 
 const ambient = (state = {}, action) => {
     const { type } = action;
@@ -19,6 +20,9 @@ const ambient = (state = {}, action) => {
                 ],
                 lastObjectCreatedAt: new Date(),
             }
+        }
+        case CHECK_COLLISIONS: {
+            return checkCollisions(state);
         }
         default: return state;
     }

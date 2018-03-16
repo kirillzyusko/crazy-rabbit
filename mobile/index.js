@@ -12,6 +12,12 @@ const initialState = {
     ambient: {
         blocks: []
     },
+    game: {
+        lives: 3,
+        deaths: 0,
+        kills: 0,
+        score: 0
+    }
 };
 
 // middleware that logs actions

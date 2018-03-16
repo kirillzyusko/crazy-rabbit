@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Canvas from './containers/canvas.native';
-import {ADD_BLOCK, CLEAR_ACTION, JUMP} from './actions';
+import {ADD_BLOCK, CLEAR_ACTION, JUMP, CHECK_COLLISIONS} from './actions';
 
 type Props = {};
 class App extends Component<Props> {
@@ -19,6 +19,7 @@ class App extends Component<Props> {
 
     componentDidMount() {
         this.addBlock();
+        setInterval(() => this.props.checkCollisions(), 100);
     }
 
     /**
@@ -36,12 +37,14 @@ class App extends Component<Props> {
         setTimeout(() => this.props.clearAction(), 100);
     };
 
+    canPlay = () => this.props.game.lives > 0;
+
     render() {
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
                     <View>
-                        <Canvas action={this.props.hero.action} blocks={this.props.ambient.blocks} />
+                        <Canvas canPlay={this.canPlay} action={this.props.hero.action} blocks={this.props.ambient.blocks} />
                     </View>
                 </TouchableWithoutFeedback>
             </View>
@@ -60,7 +63,8 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = state => ({
     hero: state.hero,
-    ambient: state.ambient
+    ambient: state.ambient,
+    game: state.game
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -72,6 +76,9 @@ const mapDispatchToProps = dispatch => ({
     },
     addBlock: () => {
         dispatch({type: ADD_BLOCK})
+    },
+    checkCollisions: () => {
+        dispatch({type: CHECK_COLLISIONS})
     }
 });
 
