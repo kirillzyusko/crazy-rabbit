@@ -4,10 +4,15 @@ import {
     Easing
 } from 'react-native';
 import { Animate } from './../../../engine/animation';
-import Rabbit from "./catalog/rabbit.native";
+import Rabbit from './catalog/rabbit.native';
 import Bear from "./catalog/bear.native";
-import { heightOfJump, timeOfJump } from "../../../engine/constants";
-import { JUMP } from "../../../actions";
+import {
+    downJump,
+    heightOfJump,
+    timeOfJump,
+    upperJump
+} from '../../../engine/constants';
+import { JUMP } from '../../../actions';
 
 class Hero extends Component {
     constructor() {
@@ -28,19 +33,20 @@ class Hero extends Component {
     }
 
     animate() {
-        this.animatedValue.setValue(0);
-        Animated.sequence([
-            Animated.timing(this.animatedValue, {
-                toValue: 1,
-                duration: timeOfJump,
-                easing: Easing.linear()
-            }),
-            Animated.timing(this.animatedValue, {
-                toValue: 0,
-                duration: timeOfJump,
-                easing: Easing.linear()
-            })
-        ]).start()
+        if(this.animatedValue._value === 0) {
+            Animated.sequence([
+                Animated.timing(this.animatedValue, {
+                    toValue: 1,
+                    duration: timeOfJump * upperJump,
+                    easing: Easing.linear()
+                }),
+                Animated.timing(this.animatedValue, {
+                    toValue: 0,
+                    duration: timeOfJump * downJump,
+                    easing: Easing.linear()
+                })
+            ]).start()
+        }
     }
 
     render() {

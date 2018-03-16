@@ -1,12 +1,12 @@
 import {ADD_BLOCK} from '../actions';
-import {timeOfBlockMovement} from "../engine/constants";
+import {inaccuraciesTime, timeOfBlockMovement} from "../engine/constants";
 
 const ambient = (state = {}, action) => {
     const { type } = action;
     switch (type) {
         case ADD_BLOCK: {
             const now = (new Date()).getTime();
-            const validBlocks = state.blocks.filter(block => block.createdAt + timeOfBlockMovement > now);
+            const validBlocks = state.blocks.filter(block => block.createdAt + timeOfBlockMovement + inaccuraciesTime > now);
             const newBlock = {
                 createdAt: now
             };

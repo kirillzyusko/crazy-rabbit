@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rect } from 'react-native-svg';
-import { height, width } from "../../../../engine/constants";
+import { height, width } from "../../../../../engine/constants";
 
 const Sky = () => {
   return (

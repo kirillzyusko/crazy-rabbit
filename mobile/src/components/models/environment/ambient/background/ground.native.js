@@ -1,6 +1,6 @@
 import React from 'react';
 import { Rect, Line, G } from 'react-native-svg';
-import {groundHeight, height, width} from "../../../../engine/constants";
+import {groundHeight, height, width} from "../../../../../engine/constants";
 
 const Ground = () => {
     return (
@@ -11,7 +11,7 @@ const Ground = () => {
         x={0}
         y={groundHeight}
         width={width}
-        height={100}
+        height={height - groundHeight}
         fill={'#59a941'}
       />
       <Line

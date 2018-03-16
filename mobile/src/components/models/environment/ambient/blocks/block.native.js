@@ -11,8 +11,8 @@ import {
     blockScalability,
     heightOfOneBlock,
     timeOfBlockMovement
-} from '../../../../engine/constants';
-import { Animate } from './../../../../engine/animation/index';
+} from '../../../../../engine/constants';
+import { Animate } from '../../../../../engine/animation/index';
 
 class Block extends Component {
     constructor() {
@@ -22,7 +22,7 @@ class Block extends Component {
 
     componentDidMount() {
         this.animatedValue.addListener((horizontalMoving) => {
-            this._hero.setNativeProps({ matrix: [blockScalability, 0, 0, blockScalability, (1 - horizontalMoving.value) * (width + heightOfOneBlock) - heightOfOneBlock, height - distanceWithRespectToGround] });
+            this._block.setNativeProps({ matrix: [blockScalability, 0, 0, blockScalability, (1 - horizontalMoving.value) * (width + heightOfOneBlock) - heightOfOneBlock, height - distanceWithRespectToGround] });
         });
         this.animate();
     }
@@ -41,7 +41,7 @@ class Block extends Component {
 
     render() {
         return (
-            <Animate.G ref={ref => this._hero = ref} x={width} y={height - distanceWithRespectToGround}
+            <Animate.G ref={ref => this._block = ref} x={width} y={height - distanceWithRespectToGround}
                transform={{scale: blockScalability}}>
                 <Path d="m1.25,1.25h256v256h-256z" fill="#cd9945" stroke="#6e441b" strokeWidth="2.5"/>
                 <Path d="m33.25,33.25h192v192h-192z" fill="#9a6926"/>
