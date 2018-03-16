@@ -11,18 +11,15 @@ import EndGame from "../components/models/environment/game/end-game.native";
 const Canvas = (props) => {
     return (
         <Svg width={width} height={height}>
-            {props.canPlay ?
-                <G>
-                    <Sky/>
-                    < Ground />
-                    {props.blocks.map((block) => {
-                        return <Block key={block.createdAt}/>
-                    })}
-                    <Hero action={props.action} />
-                </G>
-                :
-                <EndGame/>
-            }
+            <G>
+                <Sky/>
+                < Ground />
+                {props.blocks.map((block) => {
+                    return <Block key={block.createdAt}/>
+                })}
+                <Hero action={props.action} />
+                {!props.canPlay && <EndGame/>}
+            </G>
         </Svg>
     )
 };

@@ -37,14 +37,17 @@ class App extends Component<Props> {
         setTimeout(() => this.props.clearAction(), 100);
     };
 
-    canPlay = () => this.props.game.lives > 0;
+    canPlay = () => {
+        console.log('lives', this.props.ambient.lives);
+        return this.props.ambient.lives > 0;
+    };
 
     render() {
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
                     <View>
-                        <Canvas canPlay={this.canPlay} action={this.props.hero.action} blocks={this.props.ambient.blocks} />
+                        <Canvas canPlay={this.props.game.lives > 0} action={this.props.hero.action} blocks={this.props.ambient.blocks} />
                     </View>
                 </TouchableWithoutFeedback>
             </View>

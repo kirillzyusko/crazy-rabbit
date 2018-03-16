@@ -1,6 +1,6 @@
 import {ADD_BLOCK, CHECK_COLLISIONS} from '../actions';
 import {inaccuraciesTime, timeOfBlockMovement} from "../engine/constants";
-import {checkCollisions} from "../engine/handler/check-collision.native";
+import {wasCollision} from "../engine/handler/check-collision.native";
 
 const ambient = (state = {}, action) => {
     const { type } = action;
@@ -13,7 +13,7 @@ const ambient = (state = {}, action) => {
             };
 
             return {
-                ...state.ambient,
+                ...state,
                 blocks: [
                     ...validBlocks,
                     newBlock
@@ -22,7 +22,15 @@ const ambient = (state = {}, action) => {
             }
         }
         case CHECK_COLLISIONS: {
-            return checkCollisions(state);
+            console.log('check colisions');
+            if(wasCollision(state)) {
+              return {
+                  ...state,
+                  lives: 0
+              }
+            } else {
+                return state;
+            }
         }
         default: return state;
     }

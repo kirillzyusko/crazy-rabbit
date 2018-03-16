@@ -1,15 +1,18 @@
 import {inaccuraciesTimeForCollision, timeOfBlockMovement, timeOfJump} from '../constants';
 
-export const checkCollisions = (state) => {
+export const wasCollision = (blocks, lastActionAt) => {
     const now = Date.now();
-    const { blocks } = state;
-    let newState = {...state};
+    let wasCollision = false;
+
     blocks.forEach((block) => {
         const alignmentOfBlock = now - block.createdAt;
-        const isJumping = state.lastActionAt + timeOfJump > now;
+        const isJumping = lastActionAt + timeOfJump > now;
+
         if (alignmentOfBlock < timeOfBlockMovement + inaccuraciesTimeForCollision && alignmentOfBlock > timeOfBlockMovement - inaccuraciesTimeForCollision && !isJumping) {
-            newState.lives = 0;
+            console.log(block.createdAt, alignmentOfBlock, timeOfBlockMovement + inaccuraciesTimeForCollision, timeOfBlockMovement - inaccuraciesTimeForCollision);
+            wasCollision = true;
         }
     });
-    return newState;
+
+    return wasCollision;
 };
