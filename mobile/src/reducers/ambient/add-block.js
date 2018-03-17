@@ -10,6 +10,7 @@ export const addBlock = (state) => {
     return {
         ...state,
         ambient: {
+            ...state.ambient,
             blocks: [
                 ...validBlocks,
                 newBlock

@@ -11,6 +11,8 @@ const initialState = {
     },
     ambient: {
         blocks: [],
+        collidedAt: [],
+        lastObjectCreatedAt: null
     },
     game: {
         lives: 3,

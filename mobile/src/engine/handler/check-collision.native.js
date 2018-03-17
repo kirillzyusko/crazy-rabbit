@@ -1,18 +1,24 @@
-import {inaccuraciesTimeForCollision, timeOfBlockMovement, timeOfJump} from '../constants';
+import {
+    inaccuraciesTimeForCollision,
+    timeOfBlockMovement,
+    timeOfJump
+} from '../constants';
 
-export const wasCollision = (blocks, lastActionAt) => {
+export const getCollision = (blocks, lastActionAt, collidedAt) => {
     const now = Date.now();
-    let wasCollision = false;
+    let collisionAt = null;
 
     blocks.forEach((block) => {
         const alignmentOfBlock = now - block.createdAt;
         const isJumping = lastActionAt + timeOfJump > now;
+        const isAlreadyCollided = collidedAt.some((timestamp) => timestamp === block.createdAt);
+        const isHitFront = alignmentOfBlock < timeOfBlockMovement + inaccuraciesTimeForCollision;
+        const isHitBack = alignmentOfBlock > timeOfBlockMovement - inaccuraciesTimeForCollision;
 
-        if (alignmentOfBlock < timeOfBlockMovement + inaccuraciesTimeForCollision && alignmentOfBlock > timeOfBlockMovement - inaccuraciesTimeForCollision && !isJumping) {
-            //console.log(block.createdAt, alignmentOfBlock, timeOfBlockMovement + inaccuraciesTimeForCollision, timeOfBlockMovement - inaccuraciesTimeForCollision);
-            wasCollision = true;
+        if (isHitFront && isHitBack && !isJumping && !isAlreadyCollided) {
+            collisionAt = block.createdAt;
         }
     });
 
-    return wasCollision;
+    return collisionAt;
 };

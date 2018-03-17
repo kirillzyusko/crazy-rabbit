@@ -19,7 +19,7 @@ class App extends Component<Props> {
 
     componentDidMount() {
         this.addBlock();
-        setInterval(() => this.props.checkCollisions(), 100);
+        setInterval(() => this.props.checkCollisions(), 20);
     }
 
     /**
