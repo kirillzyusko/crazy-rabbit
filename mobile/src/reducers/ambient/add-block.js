@@ -1,4 +1,7 @@
-import {inaccuraciesTime, timeOfBlockMovement} from "../../engine/constants";
+import {
+    inaccuraciesTime,
+    timeOfBlockMovement
+} from "../../engine/constants";
 
 export const addBlock = (state) => {
     const now = (new Date()).getTime();
@@ -6,6 +9,8 @@ export const addBlock = (state) => {
     const newBlock = {
         createdAt: now
     };
+
+    const pointsForJumpingTheBlock = state.ambient.blocks.length - validBlocks.length;
 
     return {
         ...state,
@@ -16,6 +21,10 @@ export const addBlock = (state) => {
                 newBlock
             ],
             lastObjectCreatedAt: new Date(),
+        },
+        game: {
+            ...state.game,
+            score: state.game.score + pointsForJumpingTheBlock
         }
     }
 };

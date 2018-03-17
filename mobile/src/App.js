@@ -47,7 +47,12 @@ class App extends Component<Props> {
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
                     <View>
-                        <Canvas canPlay={this.props.game.lives > 0} action={this.props.hero.action} blocks={this.props.ambient.blocks} />
+                        <Canvas
+                            canPlay={this.props.game.lives > 0}
+                            action={this.props.hero.action}
+                            blocks={this.props.ambient.blocks}
+                            score={this.props.game.score}
+                        />
                     </View>
                 </TouchableWithoutFeedback>
             </View>

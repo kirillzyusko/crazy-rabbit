@@ -8,6 +8,7 @@ import Ground from "../components/models/environment/ambient/background/ground.n
 import {height, width} from "../engine/constants";
 import Block from "../components/models/environment/ambient/blocks/block.native";
 import EndGame from "../components/models/environment/game/end-game.native";
+import Score from "../components/models/environment/game/score.native";
 
 class Canvas extends PureComponent {
     shouldComponentUpdate(nextProps, nextState) {
@@ -35,6 +36,7 @@ class Canvas extends PureComponent {
                     })}
                     <Hero action={this.props.action} />
                     {!this.props.canPlay && <EndGame/>}
+                    <Score score={this.props.score}/>
                 </G>
             </Svg>
         )
@@ -42,7 +44,8 @@ class Canvas extends PureComponent {
 }
 
 Canvas.propTypes = {
-  action: PropTypes.string.isRequired
+  action: PropTypes.string.isRequired,
+    score: PropTypes.number.isRequired
 };
 
 export default Canvas;

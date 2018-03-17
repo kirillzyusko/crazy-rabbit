@@ -43,6 +43,7 @@ class Block extends Component {
     }
 
     render() {
+        console.log('block: ', this.props.id);
         return (
             <Animate.G ref={ref => this._block = ref} x={width} y={height - distanceWithRespectToGround}
                transform={{scale: blockScalability}}>

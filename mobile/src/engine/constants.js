@@ -7,6 +7,8 @@ export const blockScalability = 0.25;
 export const heightOfOneBlock = defaultBlockHeight * blockScalability;
 export const groundHeight = height * 0.75;
 export const distanceWithRespectToGround = groundHeight / 2.4;
+export const fontSize = Math.floor(width/20);
+export const margin = Math.floor(width/25);
 
 //characteristics of hero
 export const heightOfJump = heightOfOneBlock * 1.7;
