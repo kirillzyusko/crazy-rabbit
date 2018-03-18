@@ -1,6 +1,6 @@
 {
   "name": "crazy-rabbit",
-  "version": "0.3.17-RELEASE",
+  "version": "0.3.18b",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",

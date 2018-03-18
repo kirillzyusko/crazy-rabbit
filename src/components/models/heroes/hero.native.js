@@ -13,7 +13,7 @@ import {
     upperJump
 } from '../../../engine/constants';
 import { JUMP } from '../../../actions';
-
+//todo: currentHeight && futureHeight и логику с их автозамещением ставить в state компонента hero
 class Hero extends Component {
     constructor() {
         super();
