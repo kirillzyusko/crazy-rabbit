@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Svg, { G } from 'react-native-svg';
 import { isEqual } from 'lodash';
@@ -10,7 +10,7 @@ import Block from "../components/models/environment/ambient/blocks/block.native"
 import EndGame from "../components/models/environment/game/end-game.native";
 import Score from "../components/models/environment/game/score.native";
 
-class Canvas extends PureComponent {
+class Canvas extends Component {
     shouldComponentUpdate(nextProps, nextState) {
         if (this.wasActionCleared(nextProps)) return false;
         if (this.isTheSameProps(nextProps)) return false;
@@ -44,7 +44,7 @@ class Canvas extends PureComponent {
 }
 
 Canvas.propTypes = {
-  action: PropTypes.string.isRequired,
+    action: PropTypes.string,
     score: PropTypes.number.isRequired
 };
 

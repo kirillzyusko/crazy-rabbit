@@ -22,7 +22,7 @@ class Block extends Component {
 
     componentDidMount() {
         this.animatedValue.addListener((horizontalMoving) => {
-            this._block.setNativeProps({ matrix: [blockScalability, 0, 0, blockScalability, (1 - horizontalMoving.value) * (width + heightOfOneBlock) - heightOfOneBlock, height - distanceWithRespectToGround] });
+            this._block.setNativeProps({ matrix: [blockScalability, 0, 0, blockScalability, (1 - horizontalMoving.value) * (width*2) - 0.5*width, height - distanceWithRespectToGround] });
         });
         this.animate();
     }

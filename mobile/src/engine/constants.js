@@ -17,6 +17,6 @@ export const upperJump = 0.35;
 export const downJump = 0.65;
 
 // characteristics of environment
-export const timeOfBlockMovement = 2000; //ms
+export const timeOfBlockMovement = 3000; //ms
 export const inaccuraciesTime = 500; // latency before removing of block from redux state
 export const inaccuraciesTimeForCollision = 50;
