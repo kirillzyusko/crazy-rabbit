@@ -55,8 +55,8 @@ class App extends Component<Props> {
                             blocks={this.props.ambient.blocks}
                             score={this.props.game.score}
                         />*/}
-                        {/*<Menu/>*/}
-                        <Gallery/>
+                        <Menu/>
+                        {/*<Gallery/>*/}
                    {/* </View>
                 </TouchableWithoutFeedback>*/}
             </View>

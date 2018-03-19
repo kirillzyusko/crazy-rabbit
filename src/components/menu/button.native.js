@@ -1,7 +1,17 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import { G, Text } from 'react-native-svg';
-import {fontSize, height, width} from "../../engine/constants";
+import Svg, {
+    G,
+    Text,
+    Rect
+} from 'react-native-svg';
+import {
+    buttonHeight,
+    buttonWidth,
+    fontSize,
+    height, spaceBetweenButtons,
+    width
+} from "../../engine/constants";
 
 const textStyle = {
     fontFamily: '"Joti One", cursive',
@@ -12,16 +22,37 @@ const textStyle = {
 
 class Button extends PureComponent {
     render() {
+        const { id, startPosition } = this.props;
         return (
-            <G onPress={()=>{console.log("i'm touched")}}>
-                <Text filter="url(#shadow)" style={textStyle} x={width/2} y={height/2 + fontSize * this.props.id} onLongPress={() => alert('Press on Circle')}>{this.props.title}</Text>
+            <G>
+                <Rect
+                    onPress={() => this.props.onClick(id)}
+                    x={(width - buttonWidth)/2}
+                    y={startPosition + spaceBetweenButtons*id + buttonHeight*id}
+                    rx="5"
+                    ry="5"
+                    width={buttonWidth}
+                    height={buttonHeight}
+                    stroke="blue"
+                    fill="none"
+                    strokeWidth="5"
+                />
+                <Text
+                    x={(width)/2}
+                    y={startPosition + buttonHeight/2 + spaceBetweenButtons * id + buttonHeight*id}
+                    alignmentBaseline="middle"
+                    textAnchor="middle"
+                >
+                    {this.props.title}
+                </Text>
             </G>
         )
     }
 }
 
 Button.propTypes = {
-    id: PropTypes.number.isRequired ,
+    id: PropTypes.number,
+    startPosition: PropTypes.number,
     title: PropTypes.string.isRequired,
     onClick: PropTypes.func.isRequired
 };
