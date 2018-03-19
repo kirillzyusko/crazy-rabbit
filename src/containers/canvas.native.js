@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Svg, { G } from 'react-native-svg';
 import { isEqual } from 'lodash';
+import { generate as UID } from 'shortid';
 import Hero from "../components/models/heroes/hero.native";
 import Sky from "../components/models/environment/ambient/background/sky.native";
 import Ground from "../components/models/environment/ambient/background/ground.native";
@@ -32,7 +33,7 @@ class Canvas extends Component {
                     <Sky/>
                     <Ground />
                     {this.props.blocks.map((block) => {
-                        return <Block id={block.createdAt} key={block.createdAt}/>
+                        return <Block id={block.createdAt} key={UID()}/>
                     })}
                     <Hero action={this.props.action} />
                     {!this.props.canPlay && <EndGame/>}
