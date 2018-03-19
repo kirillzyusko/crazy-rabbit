@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import Menu from './containers/menu.native';
+import Gallery from './containers/gallery.native';
 import Canvas from './containers/canvas.native';
 import {ADD_BLOCK, CLEAR_ACTION, JUMP, CHECK_COLLISIONS} from './actions';
 
@@ -46,17 +47,18 @@ class App extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableWithoutFeedback onPress={this.onClick}>
-                    <View>
+                {/*<TouchableWithoutFeedback onPress={this.onClick}>
+                    <View>*/}
                         {/*<Canvas
                             canPlay={this.props.game.lives > 0}
                             action={this.props.hero.action}
                             blocks={this.props.ambient.blocks}
                             score={this.props.game.score}
                         />*/}
-                        <Menu/>
-                    </View>
-                </TouchableWithoutFeedback>
+                        {/*<Menu/>*/}
+                        <Gallery/>
+                   {/* </View>
+                </TouchableWithoutFeedback>*/}
             </View>
         )
     }
