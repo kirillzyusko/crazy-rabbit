@@ -22,11 +22,11 @@ const textStyle = {
 
 class Button extends PureComponent {
     render() {
-        const { id, startPosition } = this.props;
+        const { id, startPosition, identifier } = this.props;
         return (
             <G>
                 <Rect
-                    onPress={() => this.props.onClick(id)}
+                    onPress={() => this.props.onClick(identifier)}
                     x={(width - buttonWidth)/2}
                     y={startPosition + spaceBetweenButtons*id + buttonHeight*id}
                     rx="5"
@@ -54,7 +54,8 @@ Button.propTypes = {
     id: PropTypes.number,
     startPosition: PropTypes.number,
     title: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    identifier: PropTypes.string.isRequired
 };
 
 export default Button;

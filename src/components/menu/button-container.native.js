@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { generate as UID } from 'shortid';
 import {buttonHeight, height} from "../../engine/constants";
 
 class ButtonContainer extends PureComponent {
@@ -7,7 +8,7 @@ class ButtonContainer extends PureComponent {
         const startPositionByHeight = height/countOfChildren - buttonHeight/2;
         return (
             this.props.children.map((child, index) => {
-                return React.cloneElement(child, { key: index, id: index, startPosition: startPositionByHeight });
+                return React.cloneElement(child, { key: UID(), id: index, startPosition: startPositionByHeight });
             })
         )
     }
