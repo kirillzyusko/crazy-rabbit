@@ -36,9 +36,9 @@ class Gallery extends PureComponent {
             <Svg height={height} width={width}>
                 <G>
                     <Arrow onClick={this.onClickHandler} isLeft={true}/>
-                    {
-                        getHeroByType(listOfHero[this.state.index])
-                    }
+                    <G x={width/2} y={height/2}>
+                        {getHeroByType(listOfHero[this.state.index])}
+                    </G>
                     <Arrow onClick={this.onClickHandler} />
                 </G>
             </Svg>
