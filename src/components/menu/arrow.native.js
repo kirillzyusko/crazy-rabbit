@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types'
 import { G, Path } from 'react-native-svg';
-import {blockScalability} from "../../engine/constants";
+import {blockScalability} from "../../engine/constants/engine";
 
 class Arrow extends PureComponent {
     render() {

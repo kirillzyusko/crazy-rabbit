@@ -11,7 +11,7 @@ import {
     fontSize,
     height, spaceBetweenButtons,
     width
-} from "../../engine/constants";
+} from "../../engine/constants/engine";
 
 const textStyle = {
     fontFamily: '"Joti One", cursive',

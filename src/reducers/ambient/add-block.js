@@ -1,7 +1,7 @@
 import {
     inaccuraciesTime,
     timeOfBlockMovement
-} from "../../engine/constants";
+} from "../../engine/constants/engine";
 
 export const addBlock = (state) => {
     const now = (new Date()).getTime();

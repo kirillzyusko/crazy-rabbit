@@ -3,7 +3,7 @@ import {
     G,
     Text
 } from 'react-native-svg';
-import {height, width} from "../../../../engine/constants";
+import {height, width} from "../../../../engine/constants/engine";
 
 const EndGame = () => {
     return (

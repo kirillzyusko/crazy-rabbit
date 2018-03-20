@@ -11,7 +11,7 @@ import {
     blockScalability,
     heightOfOneBlock,
     timeOfBlockMovement
-} from '../../../../../engine/constants';
+} from '../../../../../engine/constants/engine';
 import { Animate } from '../../../../../engine/animation/index';
 
 class Block extends Component {

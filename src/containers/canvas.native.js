@@ -6,7 +6,7 @@ import { generate as UID } from 'shortid';
 import Hero from "../components/models/heroes/hero.native";
 import Sky from "../components/models/environment/ambient/background/sky.native";
 import Ground from "../components/models/environment/ambient/background/ground.native";
-import {height, width} from "../engine/constants";
+import {height, width} from "../engine/constants/engine";
 import Block from "../components/models/environment/ambient/blocks/block.native";
 import EndGame from "../components/models/environment/game/end-game.native";
 import Score from "../components/models/environment/game/score.native";
@@ -33,7 +33,7 @@ class Canvas extends Component {
                     <Sky/>
                     <Ground />
                     {this.props.blocks.map((block) => {
-                        return <Block id={block.createdAt} key={UID()}/>
+                        return <Block id={block.createdAt} key={block.createdAt}/>
                     })}
                     <Hero action={this.props.action} />
                     {!this.props.canPlay && <EndGame/>}

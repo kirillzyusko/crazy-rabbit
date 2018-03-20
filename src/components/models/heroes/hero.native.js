@@ -11,7 +11,7 @@ import {
     heightOfJump,
     timeOfJump,
     upperJump
-} from '../../../engine/constants';
+} from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
 //todo: currentHeight && futureHeight и логику с их автозамещением ставить в state компонента hero
 class Hero extends Component {

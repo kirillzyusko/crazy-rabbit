@@ -5,7 +5,7 @@ import {
     width,
     fontSize,
     margin
-} from "../../../../engine/constants";
+} from "../../../../engine/constants/engine";
 
 class Score extends PureComponent {
     render() {

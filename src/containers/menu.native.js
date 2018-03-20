@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import Svg, { G } from 'react-native-svg';
 import Button from './../components/menu/button.native';
 import ButtonContainer from './../components/menu/button-container.native';
-import {height, width} from "../engine/constants";
+import {height, width} from "../engine/constants/engine";
 
 class Menu extends PureComponent {
     onClickHandler = (identifier) => {

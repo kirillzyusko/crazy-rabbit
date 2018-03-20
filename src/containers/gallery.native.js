@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Arrow from './../components/menu/arrow.native';
 import Svg, {G} from 'react-native-svg';
 import Hero from "../components/models/heroes/hero.native";
-import {height, width} from "../engine/constants";
+import {height, width} from "../engine/constants/engine";
 
 class Gallery extends PureComponent {
     onClickHandler = (isLeft) => {

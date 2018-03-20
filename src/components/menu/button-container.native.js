@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { generate as UID } from 'shortid';
-import {buttonHeight, height} from "../../engine/constants";
+import {buttonHeight, height} from "../../engine/constants/engine";
 
 class ButtonContainer extends PureComponent {
     render() {

@@ -13,7 +13,7 @@ import {
 import {
     height,
     distanceWithRespectToGround
-} from '../../../../engine/constants';
+} from '../../../../engine/constants/engine';
 
 const Rabbit = () => {
     return (

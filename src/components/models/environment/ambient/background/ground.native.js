@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import { Rect, Line, G } from 'react-native-svg';
-import {groundHeight, height, width} from "../../../../../engine/constants";
+import {groundHeight, height, width} from "../../../../../engine/constants/engine";
 
 class Ground extends PureComponent {
     render() {

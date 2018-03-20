@@ -2,7 +2,7 @@ import {
     inaccuraciesTimeForCollision,
     timeOfBlockMovement,
     timeOfJump
-} from '../constants';
+} from '../constants/engine';
 
 export const getCollision = (blocks, lastActionAt, collidedAt) => {
     const now = Date.now();
