@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import PropTypes from 'prop-types';
 import Svg, { G, Image } from 'react-native-svg';
 import { isEqual } from 'lodash';
@@ -29,27 +30,29 @@ class Canvas extends Component {
     render() {
         console.log('rerender canvas');
         return (
-            <Svg width={width} height={height}>
-                <G>
-                    <Image
-                        x="0%"
-                        y="0%"
-                        width={width}
-                        height={height}
-                        preserveAspectRatio="xMidYMid slice"
-                        opacity="1"
-                        href={require('../components/models/environment/ambient/background/components/forest.jpg')}
-                    />
-                    {/*<Sky/>
-                    <Ground />*/}
-                    {this.props.blocks.map((block) => {
-                        return <Block id={block.createdAt} key={block.createdAt}/>
-                    })}
-                    <Hero type={this.props.heroType} action={this.props.action} />
-                    {!this.props.canPlay && <EndGame/>}
-                    <Score score={this.props.score}/>
-                </G>
-            </Svg>
+            <View>
+                <Svg width={width} height={height}>
+                    <G>
+                        <Image
+                            x="0%"
+                            y="0%"
+                            width={width}
+                            height={height}
+                            preserveAspectRatio="xMidYMid slice"
+                            opacity="1"
+                            href={require('../components/models/environment/ambient/background/components/forest.jpg')}
+                        />
+                        {/*<Sky/>
+                        <Ground />*/}
+                        {this.props.blocks.map((block) => {
+                            return <Block id={block.createdAt} key={block.createdAt}/>
+                        })}
+                        {!this.props.canPlay && <EndGame/>}
+                        <Score score={this.props.score}/>
+                    </G>
+                </Svg>
+                <Hero type={this.props.heroType} action={this.props.action} />
+            </View>
         )
     }
 }
