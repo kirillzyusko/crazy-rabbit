@@ -17,8 +17,8 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        /*this.addBlock();
-        setInterval(() => {
+        this.addBlock();
+        /*setInterval(() => {
             const start = Date.now();
             this.props.checkCollisions();
             const end = Date.now();

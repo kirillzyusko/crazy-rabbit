@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import Svg from 'react-native-svg';
 import PropTypes from 'prop-types';
+import {isEqual} from 'lodash';
 import {
   distanceWithRespectToGround,
   height,
@@ -16,6 +17,7 @@ import {
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
+
 // todo: currentHeight && futureHeight и логику с их автозамещением ставить в state компонента hero
 class Hero extends Component {
   constructor() {
@@ -29,9 +31,14 @@ class Hero extends Component {
     }
   }
 
-  shouldComponentUpdate() {
-    return true;
-  }
+	shouldComponentUpdate(nextProps, nextState) {
+		if (this.wasActionCleared(nextProps)) return false;
+		return !this.isTheSameProps(nextProps);
+	}
+
+	isTheSameProps = (nextProps) => isEqual(nextProps, this.props);
+
+	wasActionCleared = (nextProps) => this.props.action !== null && nextProps.action === null;
 
   animate() {
     if (this.animatedValue._value === 0) {

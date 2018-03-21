@@ -14,18 +14,11 @@ import Score from "../components/models/environment/game/score.native";
 
 class Canvas extends Component {
     shouldComponentUpdate(nextProps, nextState) {
-        if (this.wasActionCleared(nextProps)) return false;
         if (this.isTheSameProps(nextProps)) return false;
-        //console.log(this.props, nextProps);
         return true;
-        //return !this.isTheSameState(nextProps, nextState);
     }
 
     isTheSameProps = (nextProps) => isEqual(nextProps, this.props);
-
-    isTheSameState = (nextProps, nextState) => isEqual(nextProps, this.props) && isEqual(nextState, this.state);
-
-    wasActionCleared = (nextProps) => this.props.action !== null && nextProps.action === null;
 
     render() {
         console.log('rerender canvas');
@@ -48,10 +41,12 @@ class Canvas extends Component {
                             return <Block id={block.createdAt} key={block.createdAt}/>
                         })}
                         {!this.props.canPlay && <EndGame/>}
-                        <Score score={this.props.score}/>
+
                     </G>
                 </Svg>
                 <Hero type={this.props.heroType} action={this.props.action} />
+
+				<Score score={this.props.score}/>
             </View>
         )
     }
