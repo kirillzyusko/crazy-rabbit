@@ -9,8 +9,8 @@ const EndGame = () => {
     return (
         <G>
             <Text
-                fill="black"
-                stroke="black"
+                fill="white"
+                stroke="white"
                 fontSize="38"
                 fontWeight="bold"
                 x={width/2}

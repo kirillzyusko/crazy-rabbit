@@ -25,14 +25,14 @@ const style = {
 
 const styleLeftArrow = {
     ...style,
-    top: (height)/2,
+    top: (height - heightOfArrow/2)/2,
     right: (width) / 1.3
 };
 
 const styleRightArrow = {
     ...style,
-    top: (height)/2,
-    left: (width-widthOfHero)/2
+    top: (height - heightOfArrow/2)/2,
+    left: (width)/2
 };
 //todo: make as common component
 class Gallery extends PureComponent {

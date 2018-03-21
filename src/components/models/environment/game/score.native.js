@@ -13,8 +13,8 @@ class Score extends PureComponent {
         return (
             <G>
                 <Text
-                    fill="gray"
-                    stroke="gray"
+                    fill="white"
+                    stroke="white"
                     fontSize={fontSize}
                     fontWeight="bold"
                     x={width - 2*margin}
