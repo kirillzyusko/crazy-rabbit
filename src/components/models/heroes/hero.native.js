@@ -48,6 +48,7 @@ class Hero extends Component {
   }
 
   render() {
+    console.log('rerender hero');
     const movingMargin = this.animatedValue.interpolate({
       inputRange: [0, upperJump, 1],
       outputRange: [0, -heightOfJump, 0]
