@@ -13,7 +13,7 @@ screens[GAME_SCREEN] = Game;
 screens[GALLERY_SCREEN] = Gallery;
 
 const config = {
-    initialRouteName: MENU_SCREEN,
+    initialRouteName: GALLERY_SCREEN,
     headerMode: 'none',
 };
 

@@ -6,7 +6,8 @@ const defaultBlockHeight = 258.5;
 export const blockScalability = 0.25;
 export const heightOfHero = 191;
 export const widthOfHero = 161;
-export const heightOfArrow = 115;
+export const heightOfArrow = 234;
+export const widthOfArrow = heightOfArrow;
 
 //alignment of environment
 export const heightOfOneBlock = defaultBlockHeight * blockScalability;

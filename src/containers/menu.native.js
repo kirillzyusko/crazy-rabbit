@@ -6,7 +6,7 @@ import {
 import Button from './../components/menu/button.native';
 import ButtonContainer from './../components/menu/button-container.native';
 import {GALLERY_SCREEN, GAME_SCREEN} from "../router/navigation";
-import BackgroundBasic from '../components/models/environment/ambient/background/background-forest.native';
+import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
 
 //todo: add support not only for android
 class Menu extends PureComponent {
@@ -29,7 +29,7 @@ class Menu extends PureComponent {
     render() {
         return (
             <View>
-                <BackgroundBasic />
+                <BackgroundForest />
                 <ButtonContainer>
                     <Button onClick={this.onClickHandler} identifier={'start'} title={'Start'} />
                     <Button onClick={this.onClickHandler} identifier={'select'} title={'Choose a hero'} />
