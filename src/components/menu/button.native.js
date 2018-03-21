@@ -40,7 +40,7 @@ class Button extends PureComponent {
                             width={buttonWidth}
                             height={buttonHeight}
                             stroke="blue"
-                            fill="none"
+                            fill="#299616"
                             strokeWidth="5"
                         />
                         <Text

@@ -1,6 +1,6 @@
 import React, {PureComponent} from 'react';
 import { Rect } from 'react-native-svg';
-import { height, width } from "../../../../../engine/constants/engine";
+import { height, width } from "../../../../../../engine/constants/engine";
 
 class Sky extends PureComponent {
   render() {

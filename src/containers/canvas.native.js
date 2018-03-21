@@ -4,8 +4,8 @@ import Svg, { G, Image } from 'react-native-svg';
 import { isEqual } from 'lodash';
 import { generate as UID } from 'shortid';
 import Hero from "../components/models/heroes/hero.native";
-import Sky from "../components/models/environment/ambient/background/sky.native";
-import Ground from "../components/models/environment/ambient/background/ground.native";
+import Sky from "../components/models/environment/ambient/background/components/sky.native";
+import Ground from "../components/models/environment/ambient/background/components/ground.native";
 import {height, width} from "../engine/constants/engine";
 import Block from "../components/models/environment/ambient/blocks/block.native";
 import EndGame from "../components/models/environment/game/end-game.native";
@@ -38,7 +38,7 @@ class Canvas extends Component {
                         height={height}
                         preserveAspectRatio="xMidYMid slice"
                         opacity="1"
-                        href={require('../components/models/environment/ambient/background/forest.jpg')}
+                        href={require('../components/models/environment/ambient/background/components/forest.jpg')}
                     />
                     {/*<Sky/>
                     <Ground />*/}
