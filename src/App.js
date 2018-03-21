@@ -13,9 +13,9 @@ class App extends Component<Props> {
     render() {
         return (
             <View style={styles.container}>
-                        {/*<Game/>*/}
+                        <Game/>
                         {/*<Menu/>*/}
-                        <Gallery/>
+                        {/*<Gallery/>*/}
             </View>
         )
     }

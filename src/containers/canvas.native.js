@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Svg, { G } from 'react-native-svg';
+import Svg, { G, Image } from 'react-native-svg';
 import { isEqual } from 'lodash';
 import { generate as UID } from 'shortid';
 import Hero from "../components/models/heroes/hero.native";
@@ -30,8 +30,17 @@ class Canvas extends Component {
         return (
             <Svg width={width} height={height}>
                 <G>
-                    <Sky/>
-                    <Ground />
+                    <Image
+                        x="0%"
+                        y="0%"
+                        width={width}
+                        height={height}
+                        preserveAspectRatio="xMidYMid slice"
+                        opacity="1"
+                        href={require('../components/models/environment/ambient/background/forest.jpg')}
+                    />
+                    {/*<Sky/>
+                    <Ground />*/}
                     {this.props.blocks.map((block) => {
                         return <Block id={block.createdAt} key={block.createdAt}/>
                     })}
