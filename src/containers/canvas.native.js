@@ -27,6 +27,7 @@ class Canvas extends Component {
     wasActionCleared = (nextProps) => this.props.action !== null && nextProps.action === null;
 
     render() {
+        console.log('rerender canvas');
         return (
             <Svg width={width} height={height}>
                 <G>

@@ -10,7 +10,11 @@ const initialState = {
         lastActionAt: Date.now()
     },
     ambient: {
-        blocks: [],
+        blocks: [
+            {
+                createdAt: Date.now()
+            }
+        ],
         collidedAt: [],
         lastObjectCreatedAt: null
     },

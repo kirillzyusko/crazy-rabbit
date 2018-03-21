@@ -18,17 +18,22 @@ class Game extends Component {
 
     componentDidMount() {
         this.addBlock();
-        setInterval(() => this.props.checkCollisions(), 20);
+        /*setInterval(() => {
+            const start = Date.now();
+            this.props.checkCollisions();
+            const end = Date.now();
+            console.log('collisions check about: %s ms', end-start);
+        }, 20);*/
     }
 
     /**
      * Randomly adding block to the game
      * */
     addBlock = () => {
-        setTimeout(() => {
+        /*setTimeout(() => {
             this.props.addBlock();
             setTimeout(this.addBlock, (new Date()).getTime() % 1000);
-        }, 700);
+        }, 700);*/
     };
 
     onClick = () => {
