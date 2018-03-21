@@ -1,76 +1,76 @@
 import React, { Component } from 'react';
 import {
-    Animated,
-    Easing
+  Animated,
+  Easing
 } from 'react-native';
 import Svg from 'react-native-svg';
 import PropTypes from 'prop-types';
 import {
-    distanceWithRespectToGround,
-    height,
-    heightOfHero,
-    heightOfJump,
-    timeOfJump,
-    upperJump,
-    widthOfHero
+  distanceWithRespectToGround,
+  height,
+  heightOfHero,
+  heightOfJump,
+  timeOfJump,
+  upperJump,
+  widthOfHero
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
-import { getHeroByType } from "../../../utils/hero.native";
-//todo: currentHeight && futureHeight и логику с их автозамещением ставить в state компонента hero
+import { getHeroByType } from '../../../utils/hero.native';
+// todo: currentHeight && futureHeight и логику с их автозамещением ставить в state компонента hero
 class Hero extends Component {
-    constructor() {
-        super();
-        this.animatedValue = new Animated.Value(0);
-    }
+  constructor() {
+    super();
+    this.animatedValue = new Animated.Value(0);
+  }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.action === JUMP) {
-            this.animate();
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.action === JUMP) {
+      this.animate();
+    }
+  }
+
+  shouldComponentUpdate() {
+    return true;
+  }
+
+  animate() {
+    if (this.animatedValue._value === 0) {
+      this.animatedValue.setValue(0);
+      Animated.timing(
+        this.animatedValue,
+        {
+          toValue: 1,
+          duration: timeOfJump,
+          easing: Easing.linear
         }
+      ).start(() => this.animatedValue.setValue(0));
     }
+  }
 
-    shouldComponentUpdate(){
-        return true;
-    }
+  render() {
+    const movingMargin = this.animatedValue.interpolate({
+      inputRange: [0, upperJump, 1],
+      outputRange: [0, -heightOfJump, 0]
+    });
 
-    animate() {
-        if (this.animatedValue._value === 0) {
-            this.animatedValue.setValue(0);
-            Animated.timing(
-                this.animatedValue,
-                {
-                    toValue: 1,
-                    duration: timeOfJump,
-                    easing: Easing.linear
-                }
-            ).start(() => this.animatedValue.setValue(0))
-        }
-    }
-
-    render() {
-        const movingMargin = this.animatedValue.interpolate({
-            inputRange: [0, upperJump, 1],
-            outputRange: [0, -heightOfJump, 0]
-        });
-
-       return (
-           <Animated.View style={{...style, marginTop: movingMargin}}>
-                <Svg width={widthOfHero} height={heightOfHero}>
-                    {getHeroByType(this.props.type)}
-                </Svg>
-           </Animated.View>
-        )
-    }
+    return (
+      <Animated.View style={{ ...style, marginTop: movingMargin }}>
+        <Svg width={widthOfHero} height={heightOfHero}>
+          {getHeroByType(this.props.type)}
+        </Svg>
+      </Animated.View>
+    );
+  }
 }
 
 const style = {
-    position: 'absolute',
-    top: height - distanceWithRespectToGround - heightOfJump
+  position: 'absolute',
+  top: height - distanceWithRespectToGround - heightOfJump
 };
 
 Hero.propTypes = {
-    action: PropTypes.string,
-    type: PropTypes.string.isRequired
+  action: PropTypes.string,
+  type: PropTypes.string.isRequired
 };
 
 export default Hero;
