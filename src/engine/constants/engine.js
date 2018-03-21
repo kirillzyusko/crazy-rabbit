@@ -1,9 +1,14 @@
 import Dimensions from 'Dimensions';
 export const { width, height } = Dimensions.get('window');
 
-//alignment of environment
+//svg size
 const defaultBlockHeight = 258.5;
 export const blockScalability = 0.25;
+export const heightOfHero = 191;
+export const widthOfHero = 161;
+export const heightOfArrow = 115;
+
+//alignment of environment
 export const heightOfOneBlock = defaultBlockHeight * blockScalability;
 export const groundHeight = height * 0.75;
 export const distanceWithRespectToGround = groundHeight / 2.4;

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Arrow from './../components/menu/arrow.native';
 import Svg, {G} from 'react-native-svg';
 import Hero from "../components/models/heroes/hero.native";
-import {height, width} from "../engine/constants/engine";
+import {height, heightOfHero, width, widthOfHero} from "../engine/constants/engine";
 import {listOfHero} from "../engine/constants/hero";
 import {getHeroByType} from "../utils/hero.native";
 
@@ -36,7 +36,7 @@ class Gallery extends PureComponent {
             <Svg height={height} width={width}>
                 <G>
                     <Arrow onClick={this.onClickHandler} isLeft={true}/>
-                    <G x={width/2} y={height/2}>
+                    <G x={(width-widthOfHero)/2} y={(height-heightOfHero)/2}>
                         {getHeroByType(listOfHero[this.state.index])}
                     </G>
                     <Arrow onClick={this.onClickHandler} />

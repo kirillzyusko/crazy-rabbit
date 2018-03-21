@@ -3,11 +3,13 @@ import {
     Animated,
     Easing
 } from 'react-native';
+import { G } from 'react-native-svg';
 import { Animate } from './../../../engine/animation';
 import Rabbit from './catalog/rabbit.native';
 import Bear from "./catalog/bear.native";
 import {
-    downJump,
+    distanceWithRespectToGround,
+    downJump, height,
     heightOfJump,
     timeOfJump,
     upperJump
@@ -57,7 +59,9 @@ class Hero extends Component {
         console.log('rerender hero', Date.now());
        return (
             <Animate.G ref={ref => this._hero = ref} y={-heightOfJump}>
-               <Rabbit/>
+                <G y={height - distanceWithRespectToGround}>
+                    <Rabbit/>
+                </G>
                 {/*<Bear/>*/}
             </Animate.G>
         )
