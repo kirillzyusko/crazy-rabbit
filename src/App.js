@@ -3,20 +3,23 @@ import {
     StyleSheet,
     View
 } from 'react-native';
-import Menu from './containers/menu.native';
-import Gallery from './containers/gallery.native';
-import Canvas from './containers/canvas.native';
-import Game from './containers/game.native';
+import { StackNavigator } from 'react-navigation';
+import {config, screens} from "./router/router.native";
+
+const RootStack = StackNavigator(
+    {
+        ...screens
+    },
+    {
+        ...config
+    }
+);
 
 type Props = {};
 class App extends Component<Props> {
     render() {
         return (
-            <View style={styles.container}>
-                        <Game/>
-                        {/*<Menu/>*/}
-                        {/*<Gallery/>*/}
-            </View>
+            <RootStack/>
         )
     }
 }

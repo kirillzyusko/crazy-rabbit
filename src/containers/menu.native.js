@@ -1,23 +1,38 @@
 import React, { PureComponent } from 'react';
-import Svg, { G } from 'react-native-svg';
+import {
+    View,
+    BackAndroid
+} from 'react-native';
 import Button from './../components/menu/button.native';
 import ButtonContainer from './../components/menu/button-container.native';
-import {height, width} from "../engine/constants/engine";
+import {GALLERY_SCREEN, GAME_SCREEN} from "../router/navigation";
 
 class Menu extends PureComponent {
     onClickHandler = (identifier) => {
-        console.log(identifier);
+        switch(identifier) {
+            case 'start':
+                this.props.navigation.navigate(GAME_SCREEN);
+                break;
+            case 'select':
+                this.props.navigation.navigate(GALLERY_SCREEN);
+                break;
+            case 'exit':
+                BackAndroid.exitApp();
+                break;
+            default:
+                break;
+        }
     };
 
     render() {
         return (
-            <Svg height={height} width={width}>
+            <View>
                 <ButtonContainer>
                     <Button onClick={this.onClickHandler} identifier={'start'} title={'Start'} />
                     <Button onClick={this.onClickHandler} identifier={'select'} title={'Choose a hero'} />
                     <Button onClick={this.onClickHandler} identifier={'exit'} title={'Exit'} />
                 </ButtonContainer>
-            </Svg>
+            </View>
         )
     }
 }
