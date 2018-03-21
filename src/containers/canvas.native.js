@@ -45,7 +45,7 @@ class Canvas extends Component {
                     {this.props.blocks.map((block) => {
                         return <Block id={block.createdAt} key={block.createdAt}/>
                     })}
-                    <Hero action={this.props.action} />
+                    <Hero type={this.props.heroType} action={this.props.action} />
                     {!this.props.canPlay && <EndGame/>}
                     <Score score={this.props.score}/>
                 </G>
@@ -56,7 +56,8 @@ class Canvas extends Component {
 
 Canvas.propTypes = {
     action: PropTypes.string,
-    score: PropTypes.number.isRequired
+    score: PropTypes.number.isRequired,
+    heroType: PropTypes.string.isRequired
 };
 
 export default Canvas;

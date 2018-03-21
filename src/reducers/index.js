@@ -2,12 +2,15 @@ import { addBlock } from './ambient/add-block';
 import { checkCollisions } from './game/check-collisions';
 import { jump } from './hero/jump';
 import { clearAction } from './hero/clear-action';
-import {ADD_BLOCK, CHECK_COLLISIONS, CLEAR_ACTION, JUMP} from "../actions/index";
+import {ADD_BLOCK, CHECK_COLLISIONS, CHOOSE_HERO, CLEAR_ACTION, JUMP} from "../actions/index";
+import {RABBIT} from "../engine/constants/hero";
+import {chooseHero} from "./hero/choose-hero";
 
 const initialState = {
     hero: {
         action: null,
-        lastActionAt: Date.now()
+        lastActionAt: Date.now(),
+        type: RABBIT
     },
     ambient: {
         blocks: [
@@ -42,7 +45,11 @@ function reducer(state = initialState, action) {
         case CHECK_COLLISIONS: {
             return checkCollisions(state);
         }
-        default: return state;
+        case CHOOSE_HERO: {
+            return chooseHero(state, payload);
+        }
+        default:
+            return state;
     }
 }
 

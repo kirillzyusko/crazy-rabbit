@@ -37,6 +37,7 @@ class Game extends Component {
     };
 
     onClick = () => {
+        console.log(this.props.hero.type)
         this.props.jump();
         setTimeout(() => this.props.clearAction(), 100);
     };
@@ -47,11 +48,13 @@ class Game extends Component {
     };
 
     render() {
+        console.log(432432543, this.props.hero.type)
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
                     <View>
                         <Canvas
+                            heroType={this.props.hero.type}
                             canPlay={this.props.game.lives > 0}
                             action={this.props.hero.action}
                             blocks={this.props.ambient.blocks}

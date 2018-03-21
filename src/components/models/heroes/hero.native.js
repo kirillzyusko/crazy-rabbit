@@ -1,9 +1,10 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
     Animated,
     Easing
 } from 'react-native';
 import { G } from 'react-native-svg';
+import PropTypes from 'prop-types';
 import { Animate } from './../../../engine/animation';
 import Rabbit from './catalog/rabbit.native';
 import Bear from "./catalog/bear.native";
@@ -15,6 +16,7 @@ import {
     upperJump
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
+import {getHeroByType} from "../../../utils/hero.native";
 //todo: currentHeight && futureHeight и логику с их автозамещением ставить в state компонента hero
 class Hero extends Component {
     constructor() {
@@ -60,7 +62,7 @@ class Hero extends Component {
        return (
             <Animate.G ref={ref => this._hero = ref} y={-heightOfJump}>
                 <G y={height - distanceWithRespectToGround}>
-                    <Rabbit/>
+                    {getHeroByType(this.props.type)}
                 </G>
                 {/*<Bear/>*/}
             </Animate.G>
@@ -69,7 +71,8 @@ class Hero extends Component {
 }
 
 Hero.propTypes = {
-  //action: PropTypes.string.isRequired
+    action: PropTypes.string,
+    type: PropTypes.string.isRequired
 };
 
 export default Hero;
