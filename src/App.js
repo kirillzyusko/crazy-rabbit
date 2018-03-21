@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet,
-    View
+    StyleSheet
 } from 'react-native';
 import { StackNavigator } from 'react-navigation';
-import {config, screens} from "./router/router.native";
+import {config, screens} from './router/router.native';
 
 const RootStack = StackNavigator(
     {
@@ -18,9 +17,7 @@ const RootStack = StackNavigator(
 type Props = {};
 class App extends Component<Props> {
     render() {
-        return (
-            <RootStack/>
-        )
+        return <RootStack/>;
     }
 }
 

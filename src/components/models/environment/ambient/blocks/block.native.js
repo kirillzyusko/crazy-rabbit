@@ -13,7 +13,6 @@ import {
   heightOfOneBlock,
   timeOfBlockMovement
 } from '../../../../../engine/constants/engine';
-import { Animate } from '../../../../../engine/animation/index';
 
 const style = {
   position: 'absolute',
@@ -54,7 +53,7 @@ class Block extends Component {
     });
 
     return (
-      <Animate.View style={{ ...style, marginRight: margin }}>
+      <Animated.View style={{ ...style, marginRight: margin }}>
         <Svg width={heightOfOneBlock} height={heightOfOneBlock}>
           <G transform={{ scale: blockScalability }}>
             <Path d="m1.25,1.25h256v256h-256z" fill="#cd9945" stroke="#6e441b" strokeWidth="2.5" />
@@ -97,7 +96,7 @@ class Block extends Component {
             <Path d="m33.25,33.25h192v192h-192z" fill="none" stroke="#6e441b" strokeWidth="2.5" />
           </G>
         </Svg>
-      </Animate.View>
+      </Animated.View>
     );
   }
 }

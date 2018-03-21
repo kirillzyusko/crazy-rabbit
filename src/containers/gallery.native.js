@@ -45,7 +45,6 @@ class Gallery extends PureComponent {
     }
 
     onClickHandler = (isLeft) => {
-        console.log();
         console.log(isLeft);
         const { index } = this.state;
         const newIndex = isLeft ?

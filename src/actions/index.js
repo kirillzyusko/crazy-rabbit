@@ -5,11 +5,11 @@ export const CHECK_COLLISIONS = 'CHECK_COLLISIONS';
 export const CHOOSE_HERO = 'CHOOSE_HERO';
 
 export const jump = () => ({
-  type: JUMP,
+  type: JUMP
 });
 
 export const clearAction = () => ({
-  type: CLEAR_ACTION,
+  type: CLEAR_ACTION
 });
 
 export const addBlock = () => ({
