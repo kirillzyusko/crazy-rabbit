@@ -31,14 +31,14 @@ class Hero extends Component {
     }
   }
 
-	shouldComponentUpdate(nextProps, nextState) {
-		if (this.wasActionCleared(nextProps)) return false;
-		return !this.isTheSameProps(nextProps);
-	}
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.wasActionCleared(nextProps)) return false;
+    return !this.isTheSameProps(nextProps);
+  }
 
-	isTheSameProps = (nextProps) => isEqual(nextProps, this.props);
+  isTheSameProps = (nextProps) => isEqual(nextProps, this.props);
 
-	wasActionCleared = (nextProps) => this.props.action !== null && nextProps.action === null;
+  wasActionCleared = (nextProps) => this.props.action !== null && nextProps.action === null;
 
   animate() {
     if (this.animatedValue._value === 0) {
