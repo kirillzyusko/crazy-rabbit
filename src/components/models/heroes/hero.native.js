@@ -82,7 +82,7 @@ class Hero extends Component {
 
 const style = {
   position: 'absolute',
-  top: height - distanceWithRespectToGround - heightOfJump
+  top: height - distanceWithRespectToGround - heightOfHero
 };
 
 Hero.propTypes = {

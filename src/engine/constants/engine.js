@@ -3,7 +3,10 @@ export const { width, height } = Dimensions.get('window');
 
 // svg size
 const defaultBlockHeight = 258.5;
-export const blockScalability = 0.25;
+const blockRelativeScalability = 0.1;
+const heroRelativeScalability = 0.2;
+export const blockScalability = (height * blockRelativeScalability) / defaultBlockHeight;
+// todo: add scalability to hero
 export const heightOfHero = 191;
 export const widthOfHero = 161;
 export const heightOfArrow = 234;
@@ -13,7 +16,7 @@ export const widthOfArrow = heightOfArrow;
 export const heightOfOneBlock = defaultBlockHeight * blockScalability;
 export const groundHeight = height * 0.75;
 export const distanceWithRespectToGround = height * 0.2;
-//todo: не ориентироваться от высоты блока (прыжок да и вообще всё остальное), т. к. на больших экранах всё едет
+// todo: не ориентироваться от высоты блока (прыжок да и вообще всё остальное), т. к. на больших экранах всё едет
 // characteristics of hero
 export const heightOfJump = heightOfOneBlock * 1.7;
 export const timeOfJump = 750; // ms
