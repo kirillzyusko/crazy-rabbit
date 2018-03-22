@@ -42,7 +42,7 @@ class Canvas extends Component {
 					<Score score={this.props.score}/>
                 </Svg>
 				{this.props.blocks.map((block) => {
-					return <Block id={block.createdAt} appearanceAt={block.appearance} key={block.createdAt}/>
+					return <Block appearanceAt={block.appearance} key={block.id}/>
 				})}
                 <Hero type={this.props.heroType} action={this.props.action} />
 

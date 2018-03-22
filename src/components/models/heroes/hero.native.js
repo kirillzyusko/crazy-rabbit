@@ -25,6 +25,7 @@ class Hero extends Component {
     this.animatedValue = new Animated.Value(0);
   }
 
+  // todo: replace it to getDerivedStateFromProps
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === JUMP) {
       this.animate();

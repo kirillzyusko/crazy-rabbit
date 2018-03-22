@@ -11,6 +11,7 @@ import {
 } from '../actions/index';
 import { RABBIT } from '../engine/constants/hero';
 import { chooseHero } from './hero/choose-hero';
+import { level1 } from './../engine/levels/level1';
 
 const initialState = {
   hero: {
@@ -20,30 +21,7 @@ const initialState = {
   },
   ambient: {
     blocks: [
-        {
-          createdAt: Date.now(),
-          appearance: 7000,
-        },
-        {
-          createdAt: Date.now() + 9000,
-          appearance: 6000,
-        },
-        {
-          createdAt: Date.now() + 7000,
-          appearance: 5000,
-        },
-        {
-          createdAt: Date.now() + 6000,
-          appearance: 4000,
-        },
-        {
-          createdAt: Date.now() + 4000,
-          appearance: 3000,
-        },
-        {
-          createdAt: Date.now() + 2000,
-          appearance: 2000,
-        }
+        ...level1.blocks
     ],
     collidedAt: [],
     lastObjectCreatedAt: null
@@ -53,7 +31,8 @@ const initialState = {
     deaths: 0,
     kills: 0,
     score: 0,
-    speed: 1
+    speed: 1,
+    level: 1
   }
 };
 

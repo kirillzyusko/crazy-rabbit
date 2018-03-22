@@ -41,7 +41,7 @@ class Block extends Component {
   }
 
   render() {
-    console.log('block: ', this.props.id, this.props.appearanceAt);
+    console.log('block: ', this.props.appearanceAt);
     const style = {
         position: 'absolute',
         top: height - distanceWithRespectToGround,
@@ -109,7 +109,6 @@ class Block extends Component {
 }
 
 Block.propTypes = {
-  id: PropTypes.number.isRequired,
   appearanceAt: PropTypes.number.isRequired
 };
 
