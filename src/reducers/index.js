@@ -20,9 +20,30 @@ const initialState = {
   },
   ambient: {
     blocks: [
-      {
-        createdAt: Date.now()
-      }
+        {
+          createdAt: Date.now(),
+          appearance: 7000,
+        },
+        {
+          createdAt: Date.now() + 9000,
+          appearance: 6000,
+        },
+        {
+          createdAt: Date.now() + 7000,
+          appearance: 5000,
+        },
+        {
+          createdAt: Date.now() + 6000,
+          appearance: 4000,
+        },
+        {
+          createdAt: Date.now() + 4000,
+          appearance: 3000,
+        },
+        {
+          createdAt: Date.now() + 2000,
+          appearance: 2000,
+        }
     ],
     collidedAt: [],
     lastObjectCreatedAt: null

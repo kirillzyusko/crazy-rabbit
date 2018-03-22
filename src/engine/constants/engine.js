@@ -12,8 +12,8 @@ export const widthOfArrow = heightOfArrow;
 // alignment of environment
 export const heightOfOneBlock = defaultBlockHeight * blockScalability;
 export const groundHeight = height * 0.75;
-export const distanceWithRespectToGround = groundHeight / 2.4;
-
+export const distanceWithRespectToGround = height * 0.2;
+//todo: не ориентироваться от высоты блока (прыжок да и вообще всё остальное), т. к. на больших экранах всё едет
 // characteristics of hero
 export const heightOfJump = heightOfOneBlock * 1.7;
 export const timeOfJump = 750; // ms
@@ -21,7 +21,7 @@ export const upperJump = 0.35;
 export const downJump = 0.65;
 
 // characteristics of environment
-export const timeOfBlockMovement = 3000; // ms
+export const timeOfBlockMovement = 1500; // ms
 export const inaccuraciesTime = 500; // latency before removing of block from redux state
 export const inaccuraciesTimeForCollision = 50;
 

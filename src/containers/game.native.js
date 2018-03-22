@@ -17,13 +17,13 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        this.addBlock();
+        /*this.addBlock();
         setInterval(() => {
             const start = Date.now();
             this.props.checkCollisions();
             const end = Date.now();
             console.log('collisions check about: %s ms', end-start);
-        }, 100);
+        }, 100);*/
     }
 
     /**
@@ -48,7 +48,8 @@ class Game extends Component {
     };
 
     render() {
-        console.log(432432543, this.props.hero.type)
+        console.log('rerender game container');
+        console.log('blocks');
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>

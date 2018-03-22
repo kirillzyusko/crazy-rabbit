@@ -4,7 +4,6 @@ import Rabbit from './../components/models/heroes/catalog/rabbit.native';
 import Bear from './../components/models/heroes/catalog/bear.native';
 
 const getHeroByType = (type) => {
-  console.log(type);
   switch (type) {
     case RABBIT:
       return <Rabbit />;

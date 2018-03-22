@@ -1,0 +1,28 @@
+{
+  "blocks": [
+    {
+      "appearance": 2000,
+      "height": 1
+    },
+    {
+      "appearance": 3000,
+      "height": 2
+    },
+    {
+      "appearance": 4000,
+      "height": 1
+    },
+    {
+      "appearance": 5000,
+      "height": 1
+    },
+    {
+      "appearance": 6000,
+      "height": 2
+    },
+    {
+      "appearance": 7000,
+      "height": 1
+    }
+  ]
+}

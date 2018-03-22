@@ -14,12 +14,6 @@ import {
   timeOfBlockMovement
 } from '../../../../../engine/constants/engine';
 
-const style = {
-  position: 'absolute',
-  top: height - distanceWithRespectToGround,
-  right: -heightOfOneBlock
-};
-
 class Block extends Component {
   constructor() {
     super();
@@ -39,17 +33,23 @@ class Block extends Component {
       this.animatedValue,
       {
         toValue: 1,
-        duration: timeOfBlockMovement,
+        duration: timeOfBlockMovement * (this.props.appearanceAt/width), //speed
         easing: Easing.linear()
       }
     ).start();
   }
 
   render() {
-    console.log('block: ', this.props.id);
+    console.log('block: ', this.props.id, this.props.appearanceAt);
+    const style = {
+        position: 'absolute',
+        top: height - distanceWithRespectToGround,
+        right: -heightOfOneBlock - this.props.appearanceAt
+    };
+
     const margin = this.animatedValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [0, width + heightOfOneBlock]
+      outputRange: [0, width + heightOfOneBlock + this.props.appearanceAt]
     });
 
     return (
@@ -102,7 +102,8 @@ class Block extends Component {
 }
 
 Block.propTypes = {
-  id: PropTypes.number.isRequired
+  id: PropTypes.number.isRequired,
+  appearanceAt: PropTypes.number.isRequired
 };
 
 export default Block;
