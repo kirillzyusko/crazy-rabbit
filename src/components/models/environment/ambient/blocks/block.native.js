@@ -34,7 +34,8 @@ class Block extends Component {
       {
         toValue: 1,
         duration: timeOfBlockMovement * (this.props.appearanceAt/width), //speed
-        easing: Easing.linear()
+        easing: Easing.linear(),
+        useNativeDriver: true
       }
     ).start();
   }
@@ -47,13 +48,19 @@ class Block extends Component {
         right: -heightOfOneBlock - this.props.appearanceAt
     };
 
-    const margin = this.animatedValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: [0, width + heightOfOneBlock + this.props.appearanceAt]
-    });
+    const right = {
+        transform: [
+            {
+                translateX: this.animatedValue.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [0, -(width + heightOfOneBlock + this.props.appearanceAt)]
+                })
+            }
+        ]
+    };
 
     return (
-      <Animated.View style={{ ...style, marginRight: margin }}>
+      <Animated.View style={[ style, right ]}>
         <Svg width={heightOfOneBlock} height={heightOfOneBlock}>
           <G transform={{ scale: blockScalability }}>
             <Path d="m1.25,1.25h256v256h-256z" fill="#cd9945" stroke="#6e441b" strokeWidth="2.5" />

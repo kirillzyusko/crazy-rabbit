@@ -48,7 +48,8 @@ class Hero extends Component {
         {
           toValue: 1,
           duration: timeOfJump,
-          easing: Easing.linear
+          easing: Easing.linear,
+          useNativeDriver: true
         }
       ).start(() => this.animatedValue.setValue(0));
     }
@@ -56,13 +57,20 @@ class Hero extends Component {
 
   render() {
     console.log('rerender hero');
-    const movingMargin = this.animatedValue.interpolate({
-      inputRange: [0, upperJump, 1],
-      outputRange: [0, -heightOfJump, 0]
-    });
+
+    const top = {
+        transform: [
+            {
+                translateY: this.animatedValue.interpolate({
+                    inputRange: [0, upperJump, 1],
+                    outputRange: [0, -heightOfJump, 0]
+                })
+            }
+        ]
+    };
 
     return (
-      <Animated.View style={{ ...style, marginTop: movingMargin }}>
+      <Animated.View style={[ style, top ]}>
         <Svg width={widthOfHero} height={heightOfHero}>
           {getHeroByType(this.props.type)}
         </Svg>

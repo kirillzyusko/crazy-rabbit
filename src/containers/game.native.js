@@ -23,7 +23,7 @@ class Game extends Component {
             this.props.checkCollisions();
             const end = Date.now();
             console.log('collisions check about: %s ms', end-start);
-        }, 100);*/
+        }, 5);*/
     }
 
     /**
@@ -49,7 +49,6 @@ class Game extends Component {
 
     render() {
         console.log('rerender game container');
-        console.log('blocks');
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
