@@ -3,17 +3,18 @@ import {
   Animated,
   Easing
 } from 'react-native';
-import Svg from 'react-native-svg';
+import Svg, { G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import {isEqual} from 'lodash';
 import {
-  distanceWithRespectToGround,
-  height,
-  heightOfHero,
-  heightOfJump,
-  timeOfJump,
-  upperJump,
-  widthOfHero
+	blockScalability,
+	distanceWithRespectToGround,
+	height,
+	heightOfHero,
+	heightOfJump, heroScalability,
+	timeOfJump,
+	upperJump,
+	widthOfHero
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
@@ -73,7 +74,9 @@ class Hero extends Component {
     return (
       <Animated.View style={[ style, top ]}>
         <Svg width={widthOfHero} height={heightOfHero}>
-          {getHeroByType(this.props.type)}
+			<G transform={{ scale: heroScalability }}>
+          		{getHeroByType(this.props.type)}
+			</G>
         </Svg>
       </Animated.View>
     );
@@ -82,8 +85,10 @@ class Hero extends Component {
 
 const style = {
   position: 'absolute',
-  top: height - distanceWithRespectToGround - heightOfHero
+  top: height - distanceWithRespectToGround
 };
+
+console.log(height, distanceWithRespectToGround, heightOfHero, heroScalability);
 
 Hero.propTypes = {
   action: PropTypes.string,

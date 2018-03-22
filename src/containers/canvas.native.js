@@ -11,6 +11,7 @@ import {height, width} from "../engine/constants/engine";
 import Block from "../components/models/environment/ambient/blocks/block.native";
 import EndGame from "../components/models/environment/game/end-game.native";
 import Score from "../components/models/environment/game/score.native";
+import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
 
 class Canvas extends Component {
     shouldComponentUpdate(nextProps, nextState) {
@@ -23,21 +24,9 @@ class Canvas extends Component {
         console.log('rerender canvas');
         return (
             <View>
+				<BackgroundForest/>
                 <Svg width={width} height={height}>
-                    <G>
-                        <Image
-                            x="0%"
-                            y="0%"
-                            width={width}
-                            height={height}
-                            preserveAspectRatio="xMidYMid slice"
-                            opacity="1"
-                            href={require('../components/models/environment/ambient/background/components/forest.jpg')}
-                        />
-                        {/*<Sky/>
-                        <Ground />*/}
 
-                    </G>
 					{!this.props.canPlay && <EndGame/>}
 					<Score score={this.props.score}/>
                 </Svg>

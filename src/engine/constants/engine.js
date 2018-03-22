@@ -6,11 +6,11 @@ const defaultBlockHeight = 258.5;
 const blockRelativeScalability = 0.1;
 const heroRelativeScalability = 0.2;
 export const blockScalability = (height * blockRelativeScalability) / defaultBlockHeight;
-// todo: add scalability to hero
 export const heightOfHero = 191;
 export const widthOfHero = 161;
 export const heightOfArrow = 234;
 export const widthOfArrow = heightOfArrow;
+export const heroScalability = (height * heroRelativeScalability) / heightOfHero;
 
 // alignment of environment
 export const heightOfOneBlock = defaultBlockHeight * blockScalability;
@@ -24,6 +24,7 @@ export const upperJump = 0.35;
 export const downJump = 0.65;
 
 // characteristics of environment
+export const timeOfBackgroundMovement = 4000;
 export const timeOfBlockMovement = 1500; // ms
 export const inaccuraciesTime = 500; // latency before removing of block from redux state
 export const inaccuraciesTimeForCollision = 50;
