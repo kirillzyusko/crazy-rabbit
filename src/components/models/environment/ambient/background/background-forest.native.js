@@ -40,7 +40,7 @@ class BackgroundForest extends PureComponent {
 			  {
 				  translateX: this.animatedValue.interpolate({
 					  inputRange: [0, 1],
-					  outputRange: [0, -0.88*width]
+					  outputRange: [0, -0.874*width]
 				  })
 			  }
 		  ]
