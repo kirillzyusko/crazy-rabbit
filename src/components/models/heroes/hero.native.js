@@ -7,6 +7,7 @@ import Svg, { G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import {isEqual} from 'lodash';
 import {
+    width,
 	blockScalability,
 	distanceWithRespectToGround,
 	height,
@@ -73,7 +74,7 @@ class Hero extends Component {
 
     return (
       <Animated.View style={[ style, top ]}>
-        <Svg width={widthOfHero} height={heightOfHero}>
+        <Svg width={widthOfHero * heroScalability} height={heightOfHero * heroScalability}>
 			<G transform={{ scale: heroScalability }}>
           		{getHeroByType(this.props.type)}
 			</G>
@@ -85,10 +86,10 @@ class Hero extends Component {
 
 const style = {
   position: 'absolute',
-  top: height - distanceWithRespectToGround
+  top: height - 1.5 * distanceWithRespectToGround
 };
 
-console.log(height, distanceWithRespectToGround, heightOfHero, heroScalability);
+console.log(width, height, distanceWithRespectToGround, heightOfHero, heroScalability);
 
 Hero.propTypes = {
   action: PropTypes.string,

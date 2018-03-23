@@ -31,26 +31,26 @@ class BackgroundForest extends PureComponent {
 				easing: Easing.linear,
 				useNativeDriver: true
 			}
-		).start();
+		).start(() => this.animate());
     };
 
   render() {
-	  const top = {
+	  const moving = {
 		  transform: [
 			  {
 				  translateX: this.animatedValue.interpolate({
-					  inputRange: [0, 0.5, 1],
-					  outputRange: [0, -100, -200]
+					  inputRange: [0, 1],
+					  outputRange: [0, -0.88*width]
 				  })
 			  }
 		  ]
 	  };
 
     return (
-        <Animated.View style={[ style, top ]}>
+        <Animated.View style={[ style, moving ]}>
 			<Image
 				style={{width: width*3, height: height, resizeMode: 'contain'}}
-				source={require('./components/forest-full-light.png')}
+				source={require('./components/forest-full-light-2.png')}
 			/>
           {/*<Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <Image
