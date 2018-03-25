@@ -36,3 +36,7 @@ export const buttonHeight = Math.floor(height / 10);
 export const buttonWidth = Math.floor(width / 3);
 export const spaceBetweenButtons = Math.floor(height / 15);
 export const levelButtonHeight = Math.floor(height / 5);
+export const levelPerRow = 5;
+export const starHeight = 20;
+export const levelBlockHeight = levelButtonHeight + starHeight;
+export const levelBlockWidth = levelButtonHeight;
