@@ -17,8 +17,9 @@ class LevelMap extends PureComponent {
       this.props.levels.map((child, index) =>
         (
           <Level
+            onClick={this.props.onLevelClick}
             key={index}
-            id={index}
+            id={index + 1} /* todo: replace it when it will be necessary */
             startPosition={startPositionByHeight}
             row={Math.floor(index / levelColumnPerPage)}
             column={index % levelColumnPerPage}
@@ -31,8 +32,9 @@ class LevelMap extends PureComponent {
   }
 }
 
-LevelMap.propTpes = {
-  levels: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+LevelMap.propTypes = {
+  levels: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  onLevelClick: PropTypes.func.isRequired
 };
 
 LevelMap.defaultProps = {

@@ -1,17 +1,21 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
-import Level from '../components/levels/level.native';
 import LevelMap from '../components/levels/level-map.native';
+import { levels as LEVELS } from './../engine/levels';
 
 const levels = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 class Levels extends Component {
+	onLevelClick = (index) => {
+		console.log(index);
+	}
+
   render() {
     return (
       <View>
         <BackgroundForest />
-        <LevelMap levels={levels} />
+        <LevelMap onLevelClick={this.onLevelClick} levels={levels} />
       </View>
     );
   }
