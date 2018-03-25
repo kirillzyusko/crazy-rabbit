@@ -1,10 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Svg, {
-  Path,
   G,
-  Rect
+  Rect,
+  Text
 } from 'react-native-svg';
-import {levelBlockWidth, levelButtonHeight} from '../../engine/constants/engine';
+import {
+  fontSize,
+  levelBlockWidth,
+  levelButtonHeight
+} from '../../engine/constants/engine';
+import Star from './star.native';
 
 const Level = () => (
   <Svg width={levelBlockWidth} height={levelButtonHeight}>
@@ -19,8 +25,27 @@ const Level = () => (
         fill="#cae781"
         fillOpacity={0.9}
       />
+      <Text
+        x={levelButtonHeight / 2}
+        y={levelButtonHeight / 2}
+        alignmentBaseline="middle"
+        textAnchor="middle"
+        fontSize={fontSize / 2}
+      >
+        {this.props.title}
+      </Text>
+      <Star isAchieved />
+      <Star isAchieved />
+      <Star isAchieved={false} />
     </G>
   </Svg>
 );
+
+Level.propTypes = {
+  assessment: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
+  isAllowed: PropTypes.bool.isRequired
+};
 
 export default Level;
