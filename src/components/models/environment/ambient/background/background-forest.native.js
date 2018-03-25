@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import {Animated, Easing, Image} from 'react-native';/*
 import Svg, { Image } from 'react-native-svg';*/
 import {
-	height, heightOfJump, timeOfBackgroundMovement, timeOfJump, upperJump,
+	height, heightOfJump, oneBackgroundFrameWidth, timeOfBackgroundMovement, timeOfJump, upperJump,
 	width
 } from '../../../../../engine/constants/engine';
 
@@ -40,11 +40,13 @@ class BackgroundForest extends PureComponent {
 			  {
 				  translateX: this.animatedValue.interpolate({
 					  inputRange: [0, 1],
-					  outputRange: [0, -0.9*width]
+					  outputRange: [0, -oneBackgroundFrameWidth]
 				  })
 			  }
 		  ]
 	  };
+
+	  console.log('width of one screen: ' , 0.9*width);
 
     return (
         <Animated.View style={[ style, moving ]}>
