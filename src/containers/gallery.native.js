@@ -7,7 +7,6 @@ import Svg, {G} from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Arrow from './../components/menu/arrow.native';
-import Hero from "../components/models/heroes/hero.native";
 import {
     height, heightOfArrow,
     heightOfHero,
@@ -68,9 +67,7 @@ class Gallery extends PureComponent {
         console.log(listOfHero[this.state.index], listOfHero, this.state.index);
         return (
             <View>
-                <View style={style}>
-                    <BackgroundForest />
-                </View>
+                <BackgroundForest />
                 <View style={style}>
                     <Svg height={height} width={width}>
                         <G x={(width-widthOfHero)/2} y={(height-heightOfHero)/2}>

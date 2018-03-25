@@ -35,3 +35,4 @@ export const margin = Math.floor(width / 25);
 export const buttonHeight = Math.floor(height / 10);
 export const buttonWidth = Math.floor(width / 3);
 export const spaceBetweenButtons = Math.floor(height / 15);
+export const levelButtonHeight = Math.floor(height / 5);
