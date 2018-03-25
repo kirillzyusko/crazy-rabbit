@@ -20,8 +20,10 @@ class LevelMap extends PureComponent {
             key={index}
             id={index}
             startPosition={startPositionByHeight}
-            row={index / levelColumnPerPage}
+            row={Math.floor(index / levelColumnPerPage)}
             column={index % levelColumnPerPage}
+            title={index + 1}
+            assessment={2} /* n of 3 */
           />
         )
       )

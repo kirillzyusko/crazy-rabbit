@@ -17,6 +17,8 @@ import {
 } from '../../engine/constants/engine';
 
 class Button extends PureComponent {
+  onClick = (identifier) = () => this.props.onClick(identifier);
+
   render() {
     const { id, startPosition, identifier } = this.props;
     const style = {

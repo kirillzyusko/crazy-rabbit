@@ -4,14 +4,14 @@ import BackgroundForest from '../components/models/environment/ambient/backgroun
 import Level from '../components/levels/level.native';
 import LevelMap from '../components/levels/level-map.native';
 
-const levels = [{}, {}, {}];
+const levels = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 class Levels extends Component {
   render() {
     return (
       <View>
         <BackgroundForest />
-        <LevelMap/>
+        <LevelMap levels={levels} />
       </View>
     );
   }

@@ -15,7 +15,7 @@ screens[GALLERY_SCREEN] = Gallery;
 screens[LEVEL_SCREEN] = Levels;
 
 const config = {
-  initialRouteName: MENU_SCREEN,
+  initialRouteName: LEVEL_SCREEN,
   headerMode: 'none'
 };
 
