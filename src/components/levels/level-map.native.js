@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Level from './level.native';
 import {
   height,
   levelBlockHeight,
   levelColumnPerPage,
   levelRowPerPage
 } from '../../engine/constants/engine';
+import LevelTouchable from './level-touchable.native';
 
 class LevelMap extends PureComponent {
   render() {
@@ -16,7 +16,7 @@ class LevelMap extends PureComponent {
     return (
       this.props.levels.map((child, index) =>
         (
-          <Level
+          <LevelTouchable
             onClick={this.props.onLevelClick}
             key={index}
             id={index + 1} /* todo: replace it when it will be necessary */
@@ -24,6 +24,7 @@ class LevelMap extends PureComponent {
             row={Math.floor(index / levelColumnPerPage)}
             column={index % levelColumnPerPage}
             title={index + 1}
+            isAllowed={index % 2 === 0}
             assessment={2} /* n of 3 */
           />
         )
