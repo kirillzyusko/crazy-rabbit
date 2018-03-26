@@ -11,7 +11,7 @@ import {
 } from '../actions/index';
 import { RABBIT } from '../engine/constants/hero';
 import { chooseHero } from './hero/choose-hero';
-import { level1 } from './../engine/levels/level1';
+import level1 from './../engine/levels/level1';
 
 const initialState = {
   hero: {
@@ -21,7 +21,7 @@ const initialState = {
   },
   ambient: {
     blocks: [
-        ...level1.blocks
+      ...level1.blocks
     ],
     collidedAt: [],
     lastObjectCreatedAt: null

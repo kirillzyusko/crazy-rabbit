@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
 import LevelMap from '../components/levels/level-map.native';
-import { levels as LEVELS } from './../engine/levels';
+import LEVELS from './../engine/levels';
 
-const levels = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+const levels = LEVELS;
 
 class Levels extends Component {
   onLevelClick = (index) => {

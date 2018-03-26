@@ -1,6 +1,6 @@
 import { generate as UID } from 'shortid';
 
-const level1 = {
+const level2 = {
   blocks: [
     {
       id: UID(),
@@ -35,4 +35,4 @@ const level1 = {
   ]
 };
 
-export default level1;
+export default level2;
