@@ -1,34 +1,25 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import Svg, {
-	G,
-	Rect,
-	Text
-} from 'react-native-svg';
 import { TouchableOpacity, View } from 'react-native';
 import {
-	fontSize, leftMarginLevelButton,
+	leftMarginLevelButton,
 	levelButtonMarginUpside,
 	levelBlockWidth,
-	levelButtonHeight, levelButtonMarginSide, starHeight, topMarginLevelButton, levelBlockHeight
+	levelButtonMarginSide,
+	topMarginLevelButton,
+	levelBlockHeight
 } from '../../engine/constants/engine';
-import Star from './star.native';
 import Level from './level.native';
-
-const SMOOTH = 10;
 
 class LevelTouchable extends PureComponent {
 	onClick = () => this.props.onClick(this.props.id);
 
 	render() {
 		const { row, column, isAllowed } = this.props;
-
-		console.log(topMarginLevelButton + (levelBlockHeight + levelButtonMarginUpside) * row);
-
 		const style = {
 			position: 'absolute',
 			left: leftMarginLevelButton + (levelBlockWidth + levelButtonMarginSide) * column,
-			top: topMarginLevelButton + (levelBlockHeight + levelButtonMarginUpside) * row
+			top: topMarginLevelButton + levelBlockHeight * row + levelButtonMarginUpside * (row - 1 >= 0 ? row : 0)
 		};
 
 		return (

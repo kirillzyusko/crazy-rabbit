@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import {Animated, Easing, Image} from 'react-native';/*
-import Svg, { Image } from 'react-native-svg';*/
+import {Animated, Easing, Image} from 'react-native';
 import {
-	height, heightOfJump, oneBackgroundFrameWidth, timeOfBackgroundMovement, timeOfJump, upperJump,
+	height,
+	oneBackgroundFrameWidth,
+	timeOfBackgroundMovement,
 	width
 } from '../../../../../engine/constants/engine';
 
@@ -46,25 +47,12 @@ class BackgroundForest extends PureComponent {
 		  ]
 	  };
 
-	  console.log('width of one screen: ' , 0.9*width);
-
     return (
         <Animated.View style={[ style, moving ]}>
 			<Image
 				style={{left: width/2, width: width*3, height: height, resizeMode: 'contain'}}
 				source={require('./components/forest-light-new.png')}
 			/>
-          {/*<Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
-            <Image
-              x="0%"
-              y="0%"
-              width={width}
-              height={height}
-              preserveAspectRatio="xMidYMid slice"
-              opacity="1"
-              href={require('./components/forest-full-light.png')}
-            />
-          </Svg>*/}
         </Animated.View>
     );
   }

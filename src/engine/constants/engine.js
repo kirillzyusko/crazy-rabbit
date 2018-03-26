@@ -46,9 +46,10 @@ export const starScalability = (height * starRelativeScalability) / defaultStarH
 export const starHeight = defaultStarHeight * starScalability;
 export const levelBlockHeight = levelButtonHeight + starHeight;
 export const levelBlockWidth = levelBlockHeight;
+export const borderBlockWidth = 3;
+const heightBlockWithBorder = levelBlockHeight + borderBlockWidth * 2;
 console.log('574', levelBlockWidth, levelBlockHeight);
 export const levelButtonMarginSide = Math.floor(levelButtonHeight / 1.5);
 export const levelButtonMarginUpside = Math.floor(levelButtonHeight / 3);
 export const leftMarginLevelButton = (width - (levelBlockWidth * levelColumnPerPage + levelButtonMarginSide * (levelColumnPerPage - 1))) / 2;
-export const topMarginLevelButton = (height - (levelBlockHeight * levelRowPerPage + levelButtonMarginUpside * (levelRowPerPage - 1))) / 2;
-console.log('important332432', height, levelBlockHeight, levelButtonMarginUpside, (levelBlockHeight * levelRowPerPage + levelButtonMarginUpside * (levelRowPerPage - 1)));
+export const topMarginLevelButton = (height - (heightBlockWithBorder * levelRowPerPage + levelButtonMarginUpside * (levelRowPerPage - 1))) / 2;

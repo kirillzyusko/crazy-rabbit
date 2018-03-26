@@ -4,12 +4,12 @@ import BackgroundForest from '../components/models/environment/ambient/backgroun
 import LevelMap from '../components/levels/level-map.native';
 import { levels as LEVELS } from './../engine/levels';
 
-const levels = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
+const levels = [{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}];
 
 class Levels extends Component {
-	onLevelClick = (index) => {
-		console.log(index);
-	}
+  onLevelClick = (index) => {
+  	console.log(index);
+  };
 
   render() {
     return (

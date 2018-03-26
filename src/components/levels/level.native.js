@@ -7,12 +7,10 @@ import Svg, {
 } from 'react-native-svg';
 import {
   fontSize,
-  levelButtonMarginUpside,
   levelBlockWidth,
   levelButtonHeight,
   starHeight,
-  topMarginLevelButton,
-  levelBlockHeight
+  borderBlockWidth
 } from '../../engine/constants/engine';
 import Star from './star.native';
 
@@ -20,9 +18,7 @@ const SMOOTH = 10;
 
 class Level extends PureComponent {
   render() {
-    const { row, isAllowed } = this.props;
-
-    console.log(topMarginLevelButton + (levelBlockHeight + levelButtonMarginUpside) * row);
+    const { isAllowed } = this.props;
 
     return (
       <Svg width={levelBlockWidth} height={levelButtonHeight + starHeight}>
@@ -33,7 +29,7 @@ class Level extends PureComponent {
             width={levelBlockWidth}
             height={starHeight + SMOOTH}
             stroke="#c9b614"
-            strokeWidth="3"
+            strokeWidth={borderBlockWidth}
             fill="black"
             fillOpacity={0.3}
           />
@@ -45,7 +41,7 @@ class Level extends PureComponent {
             width={levelBlockWidth}
             height={levelButtonHeight}
             stroke="#c9b614"
-            strokeWidth="3"
+            strokeWidth={borderBlockWidth}
             fill={isAllowed ? '#cae781' : '#afafaf'}
             fillOpacity={1}
           />
@@ -78,14 +74,9 @@ class Level extends PureComponent {
 }
 
 Level.propTypes = {
-  id: PropTypes.number.isRequired,
-  startPosition: PropTypes.number.isRequired,
   assessment: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  onClick: PropTypes.func.isRequired,
-  isAllowed: PropTypes.bool.isRequired,
-  row: PropTypes.number.isRequired,
-  column: PropTypes.number.isRequired
+  isAllowed: PropTypes.bool.isRequired
 };
 
 Level.defaultProps = {
