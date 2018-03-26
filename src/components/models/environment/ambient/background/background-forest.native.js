@@ -52,7 +52,7 @@ class BackgroundForest extends PureComponent {
         <Animated.View style={[ style, moving ]}>
 			<Image
 				style={{left: width/2, width: width*3, height: height, resizeMode: 'contain'}}
-				source={require('./components/forest-full-light-2.png')}
+				source={require('./components/forest-light-new.png')}
 			/>
           {/*<Svg width={width} height={height} viewBox={`0 0 ${width} ${height}`}>
             <Image
