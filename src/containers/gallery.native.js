@@ -44,16 +44,8 @@ class Gallery extends PureComponent {
     }
 
     onClickHandler = (isLeft) => {
-        console.log(isLeft);
         const { index } = this.state;
-        const newIndex = isLeft ?
-            index === 0 ?
-                0 :
-                index - 1
-            :
-            index === listOfHero.length ?
-                listOfHero.length :
-                index + 1;
+        const newIndex = isLeft ? index - 1 : index + 1;
 
         this.setState({index: newIndex});
         this.props.setHeroType(listOfHero[newIndex]);
@@ -63,8 +55,11 @@ class Gallery extends PureComponent {
 
     onClickNext = () => this.onClickHandler(false);
 
+    isLast = () => this.state.index + 1 === listOfHero.length;
+
+    isFirst = () => this.state.index === 0;
+
     render() {
-        console.log(listOfHero[this.state.index], listOfHero, this.state.index);
         return (
             <View>
                 <BackgroundForest />
@@ -76,14 +71,28 @@ class Gallery extends PureComponent {
                     </Svg>
                 </View>
                 <View style={styleLeftArrow}>
-                    <TouchableOpacity onPress={this.onClickBack}>
-                        <Arrow isLeft={true}/>
-                    </TouchableOpacity>
+                    {
+                        this.isFirst() ?
+                            <View>
+								<Arrow isLeft={true}/>
+                            </View>
+                            :
+							<TouchableOpacity onPress={this.onClickBack}>
+								<Arrow isLeft={true}/>
+							</TouchableOpacity>
+                    }
                 </View>
                 <View style={styleRightArrow}>
-                    <TouchableOpacity onPress={this.onClickNext}>
-                        <Arrow />
-                    </TouchableOpacity>
+                    {
+                        this.isLast() ?
+                            <View>
+								<Arrow />
+                            </View>
+                            :
+							<TouchableOpacity onPress={this.onClickNext}>
+								<Arrow />
+							</TouchableOpacity>
+                    }
                 </View>
             </View>
         )
