@@ -1,7 +1,8 @@
 import {
-	MENU_SCREEN,
-	GAME_SCREEN,
-	GALLERY_SCREEN, LEVEL_SCREEN
+  MENU_SCREEN,
+  GAME_SCREEN,
+  GALLERY_SCREEN,
+  LEVEL_SCREEN
 } from './navigation';
 import Menu from './../containers/menu.native';
 import Game from './../containers/game.native';
