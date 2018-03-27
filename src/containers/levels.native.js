@@ -4,25 +4,31 @@ import BackgroundForest from '../components/models/environment/ambient/backgroun
 import LevelMap from '../components/levels/level-map.native';
 import LEVELS from './../engine/levels';
 import Spinner from '../components/common/spinner.native';
+import GameService from '../service/state.service.native';
 
 const levels = LEVELS;
 
 class Levels extends Component {
-    constructor() {
-        super();
-        this.state = {
-            isLoading: false
-        };
-    }
+  constructor() {
+    super();
+    this.state = {
+      isLoading: false
+    };
+  }
+
   onLevelClick = (index) => {
-        this.setState({isLoading: true});
+    this.setState({isLoading: true});
+    GameService.getUserData().then((data) => {
+        console.log(data);
+        this.setState({isLoading: false});
+    });
   	console.log(index);
   };
 
   render() {
     return (
       <View>
-        {/*<BackgroundForest />*/}
+        <BackgroundForest />
         <Spinner isLoading={this.state.isLoading}/>
         <LevelMap onLevelClick={this.onLevelClick} levels={levels} />
       </View>
