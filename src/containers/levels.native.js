@@ -7,31 +7,53 @@ import LevelMap from '../components/levels/level-map.native';
 import LEVELS from './../engine/levels';
 import Spinner from '../components/common/spinner.native';
 import GameService from '../service/state.service.native';
-import {GAME_SCREEN} from '../router/navigation';
-import {SELECT_LEVEL} from '../actions';
+import { GAME_SCREEN, MENU_SCREEN } from '../router/navigation';
+import { SELECT_LEVEL } from '../actions';
 
-const levels = LEVELS;
+const createEmptyArray = (length) => {
+    const array = [];
+    for(let i = 0; i < length; i++) {
+        array.push({});
+    }
+    return array;
+};
 
 class Levels extends Component {
   constructor() {
     super();
     this.state = {
-      isLoading: false
+      isLoading: false,
+      levels: createEmptyArray(LEVELS.length)
     };
   }
 
   componentDidMount() {
-
+	  this.loadGameState();
   }
 
+  // todo: refactor to functional style (fill doesn't work - the same reference to one object)
+  loadGameState = () => {
+	  this.setState({isLoading: true});
+	  GameService.getUserData()
+        .then((data) => {
+	      const { levels } = data;
+	      const levelsMap = createEmptyArray(LEVELS.length);
+
+		  levels.forEach((item, index) => {
+			  levelsMap[index].assessment = item;
+			  levelsMap[index].isAllowed = true;
+          });
+
+          this.setState({levels: levelsMap, isLoading: false});
+	    });
+  };
+
   onLevelClick = (index) => {
-    this.setState({isLoading: true});
-    GameService.getUserData().then((data) => {
-        console.log(data);
-        this.setState({isLoading: false});
-        this.props.selectLevel(index);
-		this.props.navigation.navigate(GAME_SCREEN);
-    });
+    this.props.selectLevel(index);
+
+    // todo: really? twice calling? investigate API of navigation!
+    this.props.navigation.navigate(MENU_SCREEN);
+	this.props.navigation.navigate(GAME_SCREEN);
   };
 
   render() {
@@ -39,7 +61,7 @@ class Levels extends Component {
       <View>
         <BackgroundForest />
         <Spinner isLoading={this.state.isLoading}/>
-        <LevelMap onLevelClick={this.onLevelClick} levels={levels} />
+        <LevelMap onLevelClick={this.onLevelClick} levels={this.state.levels} />
       </View>
     );
   }

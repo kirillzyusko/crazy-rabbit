@@ -50,7 +50,8 @@ LevelTouchable.propTypes = {
 };
 
 LevelTouchable.defaultProps = {
-	isAllowed: false
+	isAllowed: false,
+	assessment: 0
 };
 
 export default LevelTouchable;

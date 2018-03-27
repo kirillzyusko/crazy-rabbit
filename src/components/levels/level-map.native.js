@@ -24,8 +24,8 @@ class LevelMap extends PureComponent {
             row={Math.floor(index / levelColumnPerPage)}
             column={index % levelColumnPerPage}
             title={index + 1}
-            isAllowed
-            assessment={2} /* n of 3 */
+            isAllowed={child.isAllowed}
+            assessment={child.assessment} /* n of 3 */
           />
         )
       )

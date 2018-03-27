@@ -18,7 +18,7 @@ const SMOOTH = 10;
 
 class Level extends PureComponent {
   render() {
-    const { isAllowed } = this.props;
+    const { isAllowed, assessment } = this.props;
 
     return (
       <Svg width={levelBlockWidth} height={levelButtonHeight + starHeight}>
@@ -58,15 +58,24 @@ class Level extends PureComponent {
             {this.props.title}
           </Text>
 
-          <G x={SMOOTH} y={levelButtonHeight}>
-            <Star isAchieved />
-          </G>
-          <G x={(levelBlockWidth - starHeight) / 2} y={levelButtonHeight}>
-            <Star isAchieved />
-          </G>
-          <G x={levelBlockWidth - starHeight - SMOOTH} y={levelButtonHeight}>
-            <Star isAchieved={false} />
-          </G>
+          {
+            assessment >= 1 &&
+            <G x={SMOOTH} y={levelButtonHeight}>
+              <Star isAchieved />
+            </G>
+          }
+          {
+            assessment >= 2 &&
+            <G x={(levelBlockWidth - starHeight) / 2} y={levelButtonHeight}>
+              <Star isAchieved />
+            </G>
+          }
+          {
+            assessment >= 3 &&
+            <G x={levelBlockWidth - starHeight - SMOOTH} y={levelButtonHeight}>
+              <Star isAchieved={false} />
+            </G>
+          }
         </G>
       </Svg>
     );
@@ -80,7 +89,8 @@ Level.propTypes = {
 };
 
 Level.defaultProps = {
-  isAllowed: false
+  isAllowed: false,
+  assessment: 0
 };
 
 export default Level;

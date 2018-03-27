@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 
 const KEY = 'STATE';
-const TIMEOUT = 1500;
+const TIMEOUT = 400;
 
 class GameService {
 	static timeout = () =>  new Promise(resolve => setTimeout(resolve, TIMEOUT));
