@@ -7,11 +7,13 @@ import {
   CHECK_COLLISIONS,
   CHOOSE_HERO,
   CLEAR_ACTION,
-  JUMP
-} from '../actions/index';
+  JUMP,
+  SELECT_LEVEL
+} from '../actions';
 import { RABBIT } from '../engine/constants/hero';
 import { chooseHero } from './hero/choose-hero';
 import level1 from './../engine/levels/level1';
+import { selectLevel } from './game/select-level';
 
 const initialState = {
   hero: {
@@ -53,6 +55,10 @@ function reducer(state = initialState, action) {
     }
     case CHOOSE_HERO: {
       return chooseHero(state, payload);
+    }
+    case SELECT_LEVEL: {
+      console.log(state);
+      return selectLevel(state, payload);
     }
     default:
       return state;

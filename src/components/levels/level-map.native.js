@@ -19,12 +19,12 @@ class LevelMap extends PureComponent {
           <LevelTouchable
             onClick={this.props.onLevelClick}
             key={index}
-            id={index + 1} /* todo: replace it when it will be necessary */
+            id={index} /* todo: replace it when it will be necessary */
             startPosition={startPositionByHeight}
             row={Math.floor(index / levelColumnPerPage)}
             column={index % levelColumnPerPage}
             title={index + 1}
-            isAllowed={index % 2 === 0}
+            isAllowed
             assessment={2} /* n of 3 */
           />
         )

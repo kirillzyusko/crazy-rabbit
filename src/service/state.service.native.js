@@ -1,13 +1,14 @@
 import { AsyncStorage } from 'react-native';
 
 const KEY = 'STATE';
+const TIMEOUT = 1500;
 
 class GameService {
-	static timeout = (ms) =>  new Promise(resolve => setTimeout(resolve, ms));
+	static timeout = () =>  new Promise(resolve => setTimeout(resolve, TIMEOUT));
 
 	static getUserData = async () => {
 		try {
-			await GameService.timeout(3000);
+			await GameService.timeout();
 			const value = await AsyncStorage.getItem(KEY);
 			if (value !== null) {
 				return JSON.parse(value);
@@ -17,13 +18,14 @@ class GameService {
 		}
 	};
 
-	static saveUserData = async (data) => {
+	static saveUserData = async (newData) => {
 		try {
-			const newData = {
-				...GameService.getUserData(),
-				...data
+			const oldData = await GameService.getUserData();
+			const data = {
+				...oldData,
+				...newData
 			};
-			await AsyncStorage.setItem(KEY, JSON.stringify(newData));
+			await AsyncStorage.setItem(KEY, JSON.stringify(data));
 		} catch (error) {
 			console.log(error);
 		}

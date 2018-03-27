@@ -4,32 +4,32 @@ const level3 = {
   blocks: [
     {
       id: UID(),
-      appearance: 2000,
+      appearance: 100,
       height: 1
     },
     {
       id: UID(),
-      appearance: 3000,
+      appearance: 200,
       height: 2
     },
     {
       id: UID(),
-      appearance: 4000,
+      appearance: 300,
       height: 1
     },
     {
       id: UID(),
-      appearance: 5000,
+      appearance: 400,
       height: 1
     },
     {
       id: UID(),
-      appearance: 6000,
+      appearance: 500,
       height: 2
     },
     {
       id: UID(),
-      appearance: 7000,
+      appearance: 600,
       height: 1
     }
   ]

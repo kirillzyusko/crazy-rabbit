@@ -49,6 +49,7 @@ class Game extends Component {
 
     render() {
         console.log('rerender game container');
+        console.log(this.props.ambient.blocks);
         return (
             <View style={styles.container}>
                 <TouchableWithoutFeedback onPress={this.onClick}>
