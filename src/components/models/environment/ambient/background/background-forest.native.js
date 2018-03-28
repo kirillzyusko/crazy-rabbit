@@ -28,7 +28,7 @@ class BackgroundForest extends PureComponent {
 			this.animatedValue,
 			{
 				toValue: 1,
-				duration: timeOfBackgroundMovement*4,
+				duration: timeOfBackgroundMovement * 4,
 				easing: Easing.linear,
 				useNativeDriver: true
 			}
@@ -52,7 +52,7 @@ class BackgroundForest extends PureComponent {
         <Animated.View style={[ style, moving ]}>
 			<Image
 				style={{left: width/2, width: width*3, height: height, resizeMode: 'contain'}}
-				source={require('./components/forest-full-light-2.png')}
+				source={require('./components/forest-light-new-2.png')}
 			/>
         </Animated.View>
     );
