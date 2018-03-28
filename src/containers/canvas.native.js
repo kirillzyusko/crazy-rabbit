@@ -26,7 +26,6 @@ class Canvas extends Component {
             <View>
 				<BackgroundForest/>
                 <Svg width={width} height={height}>
-
 					{!this.props.canPlay && <EndGame/>}
 					<Score score={this.props.score}/>
                 </Svg>
@@ -34,7 +33,6 @@ class Canvas extends Component {
 					return <Block appearanceAt={block.appearance} key={block.id}/>
 				})}
                 <Hero type={this.props.heroType} action={this.props.action} />
-
             </View>
         )
     }

@@ -33,7 +33,7 @@ class Block extends Component {
       this.animatedValue,
       {
         toValue: 1,
-        duration: timeOfBlockMovement * (this.props.appearanceAt/width), //speed
+        duration: timeOfBlockMovement * (this.props.appearanceAt / width), // speed
         easing: Easing.linear(),
         useNativeDriver: true
       }
@@ -43,24 +43,24 @@ class Block extends Component {
   render() {
     console.log('block: ', this.props.appearanceAt);
     const style = {
-        position: 'absolute',
-        top: height - distanceWithRespectToGround,
-        right: -heightOfOneBlock - this.props.appearanceAt
+      position: 'absolute',
+      top: height - distanceWithRespectToGround,
+      right: -heightOfOneBlock - this.props.appearanceAt
     };
 
     const right = {
-        transform: [
-            {
-                translateX: this.animatedValue.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: [0, -(width + heightOfOneBlock + this.props.appearanceAt)]
-                })
-            }
-        ]
+      transform: [
+        {
+          translateX: this.animatedValue.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, -(width + heightOfOneBlock + this.props.appearanceAt)]
+          })
+        }
+      ]
     };
 
     return (
-      <Animated.View style={[ style, right ]}>
+      <Animated.View style={[style, right]}>
         <Svg width={heightOfOneBlock} height={heightOfOneBlock}>
           <G transform={{ scale: blockScalability }}>
             <Path d="m1.25,1.25h256v256h-256z" fill="#cd9945" stroke="#6e441b" strokeWidth="2.5" />

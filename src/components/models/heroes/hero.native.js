@@ -5,17 +5,14 @@ import {
 } from 'react-native';
 import Svg, { G } from 'react-native-svg';
 import PropTypes from 'prop-types';
-import {isEqual} from 'lodash';
 import {
-    width,
-	blockScalability,
-	distanceWithRespectToGround,
-	height,
-	heightOfHero,
-	heightOfJump, heroScalability,
-	timeOfJump,
-	upperJump,
-	widthOfHero
+  distanceWithRespectToGround,
+  height,
+  heightOfHero,
+  heightOfJump, heroScalability,
+  timeOfJump,
+  upperJump,
+  widthOfHero
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
@@ -35,13 +32,8 @@ class Hero extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    if (this.wasActionCleared(nextProps)) return false;
-    return !this.isTheSameProps(nextProps);
+    return false;
   }
-
-  isTheSameProps = (nextProps) => isEqual(nextProps, this.props);
-
-  wasActionCleared = (nextProps) => this.props.action !== null && nextProps.action === null;
 
   animate() {
     if (this.animatedValue._value === 0) {
@@ -62,22 +54,22 @@ class Hero extends Component {
     console.log('rerender hero');
 
     const top = {
-        transform: [
-            {
-                translateY: this.animatedValue.interpolate({
-                    inputRange: [0, upperJump, 1],
-                    outputRange: [0, -heightOfJump, 0]
-                })
-            }
-        ]
+      transform: [
+        {
+          translateY: this.animatedValue.interpolate({
+            inputRange: [0, upperJump, 1],
+            outputRange: [0, -heightOfJump, 0]
+          })
+        }
+      ]
     };
 
     return (
-      <Animated.View style={[ style, top ]}>
+      <Animated.View style={[style, top]}>
         <Svg width={widthOfHero * heroScalability} height={heightOfHero * heroScalability}>
-			<G transform={{ scale: heroScalability }}>
-          		{getHeroByType(this.props.type)}
-			</G>
+          <G transform={{ scale: heroScalability }}>
+            {getHeroByType(this.props.type)}
+          </G>
         </Svg>
       </Animated.View>
     );
@@ -88,8 +80,6 @@ const style = {
   position: 'absolute',
   top: height - 1.5 * distanceWithRespectToGround
 };
-
-console.log(width, height, distanceWithRespectToGround, heightOfHero, heroScalability);
 
 Hero.propTypes = {
   action: PropTypes.string,

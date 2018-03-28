@@ -36,6 +36,7 @@ class BackgroundForest extends PureComponent {
     };
 
   render() {
+  	console.log('rerender background');
 	  const moving = {
 		  transform: [
 			  {
