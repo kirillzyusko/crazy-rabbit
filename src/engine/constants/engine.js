@@ -17,6 +17,12 @@ export const heroScalability = (height * heroRelativeScalability) / heightOfHero
 export const heightOfOneBlock = defaultBlockHeight * blockScalability;
 export const groundHeight = height * 0.75;
 export const distanceWithRespectToGround = height * 0.2;
+const healthWidth = 645;
+const healthHeight = 585;
+export const healthRelativeScalability = 0.05;
+export const healthScalability = (width * healthRelativeScalability) / healthWidth;
+export const healthHeightScalability = healthScalability * healthHeight;
+export const healthWidthScalability = healthScalability * healthWidth;
 // todo: не ориентироваться от высоты блока (прыжок да и вообще всё остальное), т. к. на больших экранах всё едет
 // characteristics of hero
 export const heightOfJump = heightOfOneBlock * 1.7;

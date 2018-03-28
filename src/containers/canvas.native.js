@@ -7,11 +7,12 @@ import { generate as UID } from 'shortid';
 import Hero from "../components/models/heroes/hero.native";
 import Sky from "../components/models/environment/ambient/background/components/sky.native";
 import Ground from "../components/models/environment/ambient/background/components/ground.native";
-import {height, width} from "../engine/constants/engine";
+import { height, width } from '../engine/constants/engine';
 import Block from "../components/models/environment/ambient/blocks/block.native";
 import EndGame from "../components/models/environment/game/end-game.native";
 import Score from "../components/models/environment/game/score.native";
 import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
+import Lives from '../components/models/environment/game/lives.native';
 
 class Canvas extends Component {
     shouldComponentUpdate(nextProps, nextState) {
@@ -22,17 +23,19 @@ class Canvas extends Component {
 
     render() {
         console.log('rerender canvas');
+        const {score, canPlay, heroType, action, blocks, lives} = this.props;
         return (
             <View>
 				<BackgroundForest/>
+                <Lives lives={lives}/>
                 <Svg width={width} height={height}>
-					{!this.props.canPlay && <EndGame/>}
-					<Score score={this.props.score}/>
+					{!canPlay && <EndGame/>}
+					<Score score={score}/>
                 </Svg>
-				{this.props.blocks.map((block) => {
+				{blocks.map((block) => {
 					return <Block appearanceAt={block.appearance} key={block.id}/>
 				})}
-                <Hero type={this.props.heroType} action={this.props.action} />
+                <Hero type={heroType} action={action} />
             </View>
         )
     }
@@ -41,7 +44,8 @@ class Canvas extends Component {
 Canvas.propTypes = {
     action: PropTypes.string,
     score: PropTypes.number.isRequired,
-    heroType: PropTypes.string.isRequired
+    heroType: PropTypes.string.isRequired,
+    lives: PropTypes.number.isRequired
 };
 
 export default Canvas;

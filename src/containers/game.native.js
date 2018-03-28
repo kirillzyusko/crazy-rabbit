@@ -59,6 +59,7 @@ class Game extends Component {
                             action={this.props.hero.action}
                             blocks={this.props.ambient.blocks}
                             score={this.props.game.score}
+                            lives={this.props.game.lives}
                         />
                     </View>
                 </TouchableWithoutFeedback>
