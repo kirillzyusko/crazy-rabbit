@@ -34,7 +34,7 @@ class Block extends Component {
       {
         toValue: 1,
         duration: timeOfBlockMovement * (this.props.appearanceAt / width), // speed
-        easing: Easing.linear(),
+        easing: Easing.linear,
         useNativeDriver: true
       }
     ).start();
