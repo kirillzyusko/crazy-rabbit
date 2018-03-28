@@ -22,12 +22,17 @@ class Hero extends Component {
   constructor() {
     super();
     this.animatedValue = new Animated.Value(0);
+    this.opacity = new Animated.Value(1);
+  }
+
+  componentDidMount() {
+    this.animateBump();
   }
 
   // todo: replace it to getDerivedStateFromProps
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === JUMP) {
-      this.animate();
+      this.animateJump();
     }
   }
 
@@ -35,7 +40,24 @@ class Hero extends Component {
     return false;
   }
 
-  animate() {
+  animateBump() {
+    Animated.sequence([
+      Animated.timing(this.opacity, {
+        toValue: 0.5,
+        duration: 100,
+        useNativeDriver: true
+      }),
+      Animated.timing(this.opacity, {
+        toValue: 1,
+        duration: 100,
+        useNativeDriver: true
+      })
+    ]).start(() => {
+	  this.animateBump();
+    });
+  }
+
+  animateJump() {
     if (this.animatedValue._value === 0) {
       this.animatedValue.setValue(0);
       Animated.timing(
@@ -64,8 +86,15 @@ class Hero extends Component {
       ]
     };
 
+    const opacity = {
+      opacity: this.opacity.interpolate({
+        inputRange: [0, 1],
+        outputRange: [0, 1]
+      })
+    };
+
     return (
-      <Animated.View style={[style, top]}>
+      <Animated.View style={[style, top, opacity]}>
         <Svg width={widthOfHero * heroScalability} height={heightOfHero * heroScalability}>
           <G transform={{ scale: heroScalability }}>
             {getHeroByType(this.props.type)}
