@@ -53,7 +53,7 @@ class Hero extends Component {
         useNativeDriver: true
       })
     ]).start(() => {
-	  this.animateBump();
+      this.animateBump();
     });
   }
 

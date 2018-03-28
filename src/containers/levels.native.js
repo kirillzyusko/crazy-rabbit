@@ -11,11 +11,11 @@ import { GAME_SCREEN, MENU_SCREEN } from '../router/navigation';
 import { SELECT_LEVEL } from '../actions';
 
 const createEmptyArray = (length) => {
-    const array = [];
-    for(let i = 0; i < length; i++) {
-        array.push({});
-    }
-    return array;
+  const array = [];
+  for (let i = 0; i < length; i++) {
+    array.push({});
+  }
+  return array;
 };
 
 class Levels extends Component {
@@ -28,39 +28,40 @@ class Levels extends Component {
   }
 
   componentDidMount() {
-	  this.loadGameState();
+    this.loadGameState();
   }
 
-  // todo: refactor to functional style (fill doesn't work - the same reference to one object)
-  loadGameState = () => {
-	  this.setState({isLoading: true});
-	  GameService.getUserData()
-        .then((data) => {
-	      const { levels } = data;
-	      const levelsMap = createEmptyArray(LEVELS.length);
-
-		  levels.forEach((item, index) => {
-			  levelsMap[index].assessment = item;
-			  levelsMap[index].isAllowed = true;
-          });
-
-          this.setState({levels: levelsMap, isLoading: false});
-	    });
-  };
 
   onLevelClick = (index) => {
     this.props.selectLevel(index);
 
     // todo: really? twice calling? investigate API of navigation!
     this.props.navigation.navigate(MENU_SCREEN);
-	this.props.navigation.navigate(GAME_SCREEN);
+    this.props.navigation.navigate(GAME_SCREEN);
+  };
+
+  // todo: refactor to functional style (fill doesn't work - the same reference to one object)
+  loadGameState = () => {
+    this.setState({ isLoading: true });
+    GameService.getUserData()
+      .then((data) => {
+        const { levels } = data;
+        const levelsMap = createEmptyArray(LEVELS.length);
+
+        levels.forEach((item, index) => {
+          levelsMap[index].assessment = item;
+          levelsMap[index].isAllowed = true;
+        });
+
+        this.setState({ levels: levelsMap, isLoading: false });
+      });
   };
 
   render() {
     return (
       <View>
         <BackgroundForest />
-        <Spinner isLoading={this.state.isLoading}/>
+        <Spinner isLoading={this.state.isLoading} />
         <LevelMap onLevelClick={this.onLevelClick} levels={this.state.levels} />
       </View>
     );
@@ -73,7 +74,7 @@ Levels.propTypes = {
 
 const mapDispatchToProps = dispatch => ({
   selectLevel: (levelIndex) => {
-    dispatch({type: SELECT_LEVEL, payload: levelIndex})
+    dispatch({ type: SELECT_LEVEL, payload: levelIndex });
   }
 });
 
