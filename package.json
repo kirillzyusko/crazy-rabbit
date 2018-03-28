@@ -1,6 +1,6 @@
 {
   "name": "crazy-rabbit",
-  "version": "0.3.25a",
+  "version": "0.3.28b",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -22,12 +22,13 @@
   },
   "devDependencies": {
     "babel-jest": "22.4.1",
+    "babel-plugin-transform-decorators": "^6.24.1",
     "babel-preset-react-native": "4.0.0",
     "eslint": "^4.19.0",
-    "eslint-plugin-react": "^7.7.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^7.7.0",
     "jest": "22.4.2",
     "react-test-renderer": "16.3.0-alpha.1"
   },
