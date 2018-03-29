@@ -18,35 +18,37 @@ import {
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
-import {LONG_JUMP, SHORT_JUMP} from "../../../engine/constants/hero";
+import { LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
 
 /**
  * @param isJump - boolean
+ * @param jumpHeight - number (count of block)
  * @param blockCountRelativeCurrentPosition - number
  * @return Object (contains information about path of movement)
- * */
-//todo: для -1, true не работает
-    //высота подъёма должна задавать не как следующая позиция (blockCount...), а как отдельный параметр
-const getMatrixForJump = (blockCountRelativeCurrentPosition, isJump, jumpBlockHeight) => {
-    console.log('matrix for: ', blockCountRelativeCurrentPosition);
-    return isJump ?
-        {
-            inputRange: [0, upperJump, 1],
-            outputRange: [0, blockCountRelativeCurrentPosition === 0 ? -heightOfJump : -heightOfJump * Math.abs(blockCountRelativeCurrentPosition), blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
-        }
-        :
-        {
-            inputRange: [0, 1],
-            outputRange: [0, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
-        }
-  };
+ **/
+const getMatrixForJump = (blockCountRelativeCurrentPosition, jumpHeight, isJump) => {
+  console.log('matrix for: ', blockCountRelativeCurrentPosition, jumpHeight);
+  return isJump ?
+    {
+      inputRange: [0, upperJump, 1],
+      outputRange: [0, -heightOfJump * jumpHeight, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
+    }
+    :
+    {
+      inputRange: [0, 1],
+      outputRange: [0, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
+    };
+};
+
+const getJumpHeight = type => (type === LONG_JUMP ? 2 : 1);
 
 class Hero extends Component {
   constructor() {
     super();
 
     this.state = {
-      currentPosition: 0
+      currentPosition: 0,
+      jumpHeight: 1
     };
     this.animatedValue = new Animated.Value(0);
     this.opacity = new Animated.Value(1);
@@ -60,17 +62,18 @@ class Hero extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === LONG_JUMP) {
       console.log('long');
-      this.setState({type: LONG_JUMP});
+      this.setState({ jumpHeight: getJumpHeight(LONG_JUMP) });
       this.animateJump(nextProps.nextPosition);
     } else if (nextProps.action === SHORT_JUMP) {
       console.log('short');
-      this.setState({type: SHORT_JUMP});
+      this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP) });
       this.animateJump(nextProps.nextPosition);
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return nextState.currentPosition !== this.state.currentPosition;
+    const { currentPosition, jumpHeight } = this.state;
+    return nextState.currentPosition !== currentPosition || nextState.jumpHeight !== jumpHeight;
   }
 
   animateBump() {
@@ -103,13 +106,13 @@ class Hero extends Component {
         }
       ).start(() => {
         this.animatedValue.setValue(0);
-        this.setState({ currentPosition: nextPosition });
+        this.setState({ currentPosition: this.state.currentPosition+nextPosition }); // todo: реальные позиции задаются через redux - это только для лесенки нужно
       });
     }
   }
 
   render() {
-    console.log('rerender hero');
+    console.log('rerender hero', this.props.nextPosition, this.state.jumpHeight);
 
     const { currentPosition } = this.state;
     const style = {
@@ -119,7 +122,7 @@ class Hero extends Component {
     const top = {
       transform: [
         {
-          translateY: this.animatedValue.interpolate(getMatrixForJump(-2, true))
+          translateY: this.animatedValue.interpolate(getMatrixForJump(this.props.nextPosition, this.state.jumpHeight, true))
         }
       ]
     };
