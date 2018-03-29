@@ -24,7 +24,7 @@ Arrow.defaultProps = {
 
 Arrow.propTypes = {
   isLeft: PropTypes.bool,
-  onClick: PropTypes.func
+  onClick: PropTypes.func.isRequired
 };
 
 export default Arrow;

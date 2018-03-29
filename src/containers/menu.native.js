@@ -3,6 +3,7 @@ import {
   View,
   BackAndroid
 } from 'react-native';
+import PropTypes from 'prop-types';
 import Button from './../components/menu/button.native';
 import ButtonContainer from './../components/menu/button-container.native';
 import { GALLERY_SCREEN, GAME_SCREEN, LEVEL_SCREEN } from '../router/navigation';
@@ -43,5 +44,11 @@ class Menu extends PureComponent {
     );
   }
 }
+
+Menu.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  })
+};
 
 export default Menu;

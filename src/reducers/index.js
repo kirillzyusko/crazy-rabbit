@@ -1,4 +1,3 @@
-import { addBlock } from './ambient/add-block';
 import { checkCollisions } from './game/check-collisions';
 import { jump } from './hero/jump';
 import { clearAction } from './hero/clear-action';
@@ -46,9 +45,6 @@ const initialState = {
 function reducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case ADD_BLOCK: {
-      return addBlock(state);
-    }
     case JUMP: {
       return jump(state, payload);
     }

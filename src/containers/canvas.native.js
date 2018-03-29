@@ -5,8 +5,6 @@ import Svg, { G, Image } from 'react-native-svg';
 import { isEqual } from 'lodash';
 import { generate as UID } from 'shortid';
 import Hero from '../components/models/heroes/hero.native';
-import Sky from '../components/models/environment/ambient/background/components/sky.native';
-import Ground from '../components/models/environment/ambient/background/components/ground.native';
 import { height, width } from '../engine/constants/engine';
 import BlockFacility from '../components/models/environment/ambient/blocks/block-facility.native';
 import EndGame from '../components/models/environment/game/end-game.native';
@@ -32,7 +30,16 @@ class Canvas extends Component {
           {!canPlay && <EndGame />}
           <Score score={score} />
         </Svg>
-        {blocks.map(block => <BlockFacility speed={block.speed} height={block.height} appearanceAt={block.appearance} key={block.id} />)}
+        {
+          blocks.map(block =>
+            (<BlockFacility
+              speed={block.speed}
+              height={block.height}
+              appearanceAt={block.appearance}
+              key={block.id}
+            />)
+          )
+        }
         <Hero nextPosition={nextPositionHero} type={heroType} action={action} />
       </View>
     );

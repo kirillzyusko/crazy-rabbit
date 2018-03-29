@@ -69,7 +69,10 @@ class Levels extends Component {
 }
 
 Levels.propTypes = {
-  selectLevel: PropTypes.func.isRequired
+  selectLevel: PropTypes.func.isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
+  })
 };
 
 const mapDispatchToProps = dispatch => ({
