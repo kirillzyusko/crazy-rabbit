@@ -32,7 +32,7 @@ class Canvas extends Component {
           {!canPlay && <EndGame />}
           <Score score={score} />
         </Svg>
-        {blocks.map(block => <BlockFacility height={block.height} appearanceAt={block.appearance} key={block.id} />)}
+        {blocks.map(block => <BlockFacility speed={block.speed} height={block.height} appearanceAt={block.appearance} key={block.id} />)}
         <Hero nextPosition={nextPositionHero} type={heroType} action={action} />
       </View>
     );

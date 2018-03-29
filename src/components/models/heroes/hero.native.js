@@ -18,7 +18,7 @@ import {
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
-import { LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
+import {COLLISION, LONG_JUMP, SHORT_JUMP} from '../../../engine/constants/hero';
 
 /**
  * @param isJump - boolean
@@ -55,7 +55,7 @@ class Hero extends Component {
   }
 
   componentDidMount() {
-    this.animateBump();
+    //this.animateBump();
   }
 
   // todo: replace it to getDerivedStateFromProps
@@ -68,6 +68,9 @@ class Hero extends Component {
       console.log('short');
       this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP) });
       this.animateJump(nextProps.nextPosition);
+    } else if (nextProps.action === COLLISION) {
+      console.log('collision');
+      this.animateBump();
     }
   }
 

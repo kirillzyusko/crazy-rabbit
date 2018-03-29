@@ -33,7 +33,7 @@ class BlockFacility extends Component {
       this.animatedValue,
       {
         toValue: 1,
-        duration: timeOfBlockMovement, // speed
+        duration: timeOfBlockMovement / this.props.speed, // speed
         easing: Easing.linear,
         useNativeDriver: true,
         delay: this.props.appearanceAt
@@ -70,7 +70,8 @@ class BlockFacility extends Component {
 
 BlockFacility.propTypes = {
   appearanceAt: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired
+  height: PropTypes.number.isRequired,
+  speed: PropTypes.number.isRequired
 };
 
 export default BlockFacility;

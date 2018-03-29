@@ -4,11 +4,12 @@ import {
   View,
   TouchableWithoutFeedback
 } from 'react-native';
-import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
+import { debounce } from 'lodash';
+import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import { connect } from 'react-redux';
 import Canvas from './canvas.native';
-import { ADD_BLOCK, CLEAR_ACTION, JUMP, CHECK_COLLISIONS } from './../actions';
-import {LONG_JUMP, SHORT_JUMP} from "../engine/constants/hero";
+import { ADD_BLOCK, CLEAR_ACTION, JUMP, CHECK_COLLISIONS, START_GAME } from './../actions';
+import { LONG_JUMP, SHORT_JUMP } from '../engine/constants/hero';
 
 class Game extends Component {
   constructor() {
@@ -19,13 +20,15 @@ class Game extends Component {
   }
 
   componentDidMount() {
-    /* this.addBlock();
-        setInterval(() => {
-            const start = Date.now();
-            this.props.checkCollisions();
-            const end = Date.now();
-            console.log('collisions check about: %s ms', end-start);
-        }, 5);*/
+    this.props.startGame();
+    this.props.checkCollisions();
+    /* this.addBlock();*/
+    setInterval(() => {
+      //const start = Date.now();
+      this.props.checkCollisions();
+      //const end = Date.now();
+      //console.log('collisions check about: %s ms', end - start);
+    }, 100);
   }
 
   onShortJump = () => {
@@ -34,8 +37,8 @@ class Game extends Component {
   };
 
   onLongJump = () => {
-      this.props.jump(LONG_JUMP);
-      setTimeout(() => this.props.clearAction(), 100);
+    this.props.jump(LONG_JUMP);
+    setTimeout(() => this.props.clearAction(), 100);
   };
 
   /**
@@ -44,37 +47,37 @@ class Game extends Component {
   addBlock = () => {
     setTimeout(() => {
       this.props.addBlock();
-	  setTimeout(this.addBlock, (new Date()).getTime() % 1000);
+      setTimeout(this.addBlock, (new Date()).getTime() % 1000);
     }, 700);
   };
 
-    canPlay = () => {
-      console.log('lives', this.props.ambient.lives);
-      return this.props.ambient.lives > 0;
-    };
+  canPlay = () => {
+    console.log('lives', this.props.ambient.lives);
+    return this.props.ambient.lives > 0;
+  };
 
-    render() {
-      console.log('rerender game container');
-      return (
-        <View style={styles.container}>
-          <GestureRecognizer onSwipeUp={this.onLongJump}>
-            <TouchableWithoutFeedback onPress={this.onShortJump}>
-              <View>
-                <Canvas
-                  nextPositionHero={this.props.hero.nextPosition}
-                  heroType={this.props.hero.type}
-                  canPlay={this.props.game.lives > 0}
-                  action={this.props.hero.action}
-                  blocks={this.props.ambient.blocks}
-                  score={this.props.game.score}
-                  lives={this.props.game.lives}
-                />
-              </View>
-            </TouchableWithoutFeedback>
-          </GestureRecognizer>
-        </View>
-      );
-    }
+  render() {
+    console.log('rerender game container');
+    return (
+      <View style={styles.container}>
+        <GestureRecognizer onSwipeUp={this.onLongJump}>
+          <TouchableWithoutFeedback onPress={this.onShortJump}>
+            <View>
+              <Canvas
+                nextPositionHero={this.props.hero.nextPosition}
+                heroType={this.props.hero.type}
+                canPlay={this.props.game.lives > 0}
+                action={this.props.hero.action}
+                blocks={this.props.ambient.blocks}
+                score={this.props.game.score}
+                lives={this.props.game.lives}
+              />
+            </View>
+          </TouchableWithoutFeedback>
+        </GestureRecognizer>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -93,6 +96,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  startGame: () => {
+    dispatch({ type: START_GAME });
+  },
   jump: (type) => {
     dispatch({ type: JUMP, payload: type });
   },

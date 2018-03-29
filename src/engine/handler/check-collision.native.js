@@ -1,22 +1,20 @@
 import {
-  inaccuraciesTimeForCollision,
-  timeOfBlockMovement,
-  timeOfJump
+	heightOfOneBlock, heroScalability,
+	inaccuraciesTimeForCollision,
+	timeOfBlockMovement,
+	timeOfJump, width, widthOfHero
 } from '../constants/engine';
 
-export const getCollision = (blocks, lastActionAt, collidedAt) => {
-  const now = Date.now();
+export const getNextCollision = (blocks, timeInGame, lastActionAt, collidedAt) => {
   let collisionAt = null;
 
   blocks.forEach((block) => {
-    const alignmentOfBlock = now - block.createdAt;
-    const isJumping = lastActionAt + timeOfJump > now;
-    const isAlreadyCollided = collidedAt.some(timestamp => timestamp === block.createdAt);
-    const isHitFront = alignmentOfBlock < timeOfBlockMovement + inaccuraciesTimeForCollision;
-    const isHitBack = alignmentOfBlock > timeOfBlockMovement - inaccuraciesTimeForCollision;
-
-    if (isHitFront && isHitBack && !isJumping && !isAlreadyCollided) {
-      collisionAt = block.createdAt;
+    const blockDefaultAlignment = block.appearance + timeOfBlockMovement / block.speed;
+    const textureAlignment = ((heightOfOneBlock +  widthOfHero * heroScalability) / width) * (timeOfBlockMovement / block.speed);
+    const blockAlign = blockDefaultAlignment - textureAlignment;
+    if (blockAlign < timeInGame) {
+      //console.log(`You met block: ${block.id}`, timeInGame, blockAlign, widthOfHero * heroScalability, heightOfOneBlock);
+      collisionAt = true;
     }
   });
 

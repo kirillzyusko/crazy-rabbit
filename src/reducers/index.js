@@ -8,12 +8,13 @@ import {
   CHOOSE_HERO,
   CLEAR_ACTION,
   JUMP,
-  SELECT_LEVEL
+  SELECT_LEVEL, START_GAME
 } from '../actions';
 import { RABBIT } from '../engine/constants/hero';
 import { chooseHero } from './hero/choose-hero';
 import level1 from './../engine/levels/level1';
 import { selectLevel } from './game/select-level';
+import { startGame } from './game/start-game';
 
 const initialState = {
   hero: {
@@ -35,7 +36,10 @@ const initialState = {
     kills: 0,
     score: 0,
     speed: 1,
-    level: 1
+    level: 1,
+    startAt: Date.now(),
+    timeInGame: 0,
+    nextCollisionThrough: null
   }
 };
 
@@ -58,8 +62,11 @@ function reducer(state = initialState, action) {
       return chooseHero(state, payload);
     }
     case SELECT_LEVEL: {
-      console.log(state);
       return selectLevel(state, payload);
+    }
+    case START_GAME: {
+      console.log('start game redux');
+      return startGame(state);
     }
     default:
       return state;
