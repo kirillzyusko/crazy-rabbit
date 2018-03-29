@@ -9,7 +9,9 @@ import {
   distanceWithRespectToGround,
   height,
   heightOfHero,
-  heightOfJump, heroScalability,
+  heightOfJump,
+  heightOfOneBlock,
+  heroScalability,
   timeOfJump,
   upperJump,
   widthOfHero
@@ -17,10 +19,31 @@ import {
 import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
 
-// todo: currentHeight && futureHeight и логику с их автозамещением ставить в state компонента hero
+/**
+ * @param isJump - boolean
+ * @param blockCountRelativeCurrentPosition - number
+ * @return Object (contains information about path of movement)
+ * */
+const getMatrixForJump = (blockCountRelativeCurrentPosition, isJump) => (
+  isJump ?
+    {
+      inputRange: [0, upperJump, 1],
+      outputRange: [0, blockCountRelativeCurrentPosition === 0 ? -heightOfJump : -heightOfJump * blockCountRelativeCurrentPosition, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
+    }
+    :
+    {
+      inputRange: [0, 1],
+      outputRange: [0, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
+    }
+);
+
 class Hero extends Component {
   constructor() {
     super();
+
+    this.state = {
+      currentPosition: 0
+    };
     this.animatedValue = new Animated.Value(0);
     this.opacity = new Animated.Value(1);
   }
@@ -32,12 +55,12 @@ class Hero extends Component {
   // todo: replace it to getDerivedStateFromProps
   componentWillReceiveProps(nextProps) {
     if (nextProps.action === JUMP) {
-      this.animateJump();
+      this.animateJump(this.state.currentPosition + 1);
     }
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    return false;
+    return nextState.currentPosition !== this.state.currentPosition;
   }
 
   animateBump() {
@@ -57,7 +80,7 @@ class Hero extends Component {
     });
   }
 
-  animateJump() {
+  animateJump(nextPosition) {
     if (this.animatedValue._value === 0) {
       this.animatedValue.setValue(0);
       Animated.timing(
@@ -68,24 +91,28 @@ class Hero extends Component {
           easing: Easing.linear,
           useNativeDriver: true
         }
-      ).start(() => this.animatedValue.setValue(0));
+      ).start(() => {
+        this.animatedValue.setValue(0);
+        this.setState({ currentPosition: nextPosition });
+      });
     }
   }
 
   render() {
     console.log('rerender hero');
 
+    const { currentPosition } = this.state;
+    const style = {
+      position: 'absolute',
+      top: height - 1.5 * distanceWithRespectToGround - currentPosition * heightOfOneBlock
+    };
     const top = {
       transform: [
         {
-          translateY: this.animatedValue.interpolate({
-            inputRange: [0, upperJump, 1],
-            outputRange: [0, -heightOfJump, 0]
-          })
+          translateY: this.animatedValue.interpolate(getMatrixForJump(2, true))
         }
       ]
     };
-
     const opacity = {
       opacity: this.opacity.interpolate({
         inputRange: [0, 1],
@@ -104,11 +131,6 @@ class Hero extends Component {
     );
   }
 }
-
-const style = {
-  position: 'absolute',
-  top: height - 1.5 * distanceWithRespectToGround
-};
 
 Hero.propTypes = {
   action: PropTypes.string,
