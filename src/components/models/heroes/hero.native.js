@@ -18,24 +18,28 @@ import {
 } from '../../../engine/constants/engine';
 import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
+import {LONG_JUMP, SHORT_JUMP} from "../../../engine/constants/hero";
 
 /**
  * @param isJump - boolean
  * @param blockCountRelativeCurrentPosition - number
  * @return Object (contains information about path of movement)
  * */
-const getMatrixForJump = (blockCountRelativeCurrentPosition, isJump) => (
-  isJump ?
-    {
-      inputRange: [0, upperJump, 1],
-      outputRange: [0, blockCountRelativeCurrentPosition === 0 ? -heightOfJump : -heightOfJump * blockCountRelativeCurrentPosition, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
-    }
-    :
-    {
-      inputRange: [0, 1],
-      outputRange: [0, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
-    }
-);
+//todo: для -1, true не работает
+    //высота подъёма должна задавать не как следующая позиция (blockCount...), а как отдельный параметр
+const getMatrixForJump = (blockCountRelativeCurrentPosition, isJump, jumpBlockHeight) => {
+    console.log('matrix for: ', blockCountRelativeCurrentPosition);
+    return isJump ?
+        {
+            inputRange: [0, upperJump, 1],
+            outputRange: [0, blockCountRelativeCurrentPosition === 0 ? -heightOfJump : -heightOfJump * Math.abs(blockCountRelativeCurrentPosition), blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
+        }
+        :
+        {
+            inputRange: [0, 1],
+            outputRange: [0, blockCountRelativeCurrentPosition * (-heightOfOneBlock)]
+        }
+  };
 
 class Hero extends Component {
   constructor() {
@@ -54,8 +58,14 @@ class Hero extends Component {
 
   // todo: replace it to getDerivedStateFromProps
   componentWillReceiveProps(nextProps) {
-    if (nextProps.action === JUMP) {
-      this.animateJump(this.state.currentPosition + 1);
+    if (nextProps.action === LONG_JUMP) {
+      console.log('long');
+      this.setState({type: LONG_JUMP});
+      this.animateJump(nextProps.nextPosition);
+    } else if (nextProps.action === SHORT_JUMP) {
+      console.log('short');
+      this.setState({type: SHORT_JUMP});
+      this.animateJump(nextProps.nextPosition);
     }
   }
 
@@ -109,7 +119,7 @@ class Hero extends Component {
     const top = {
       transform: [
         {
-          translateY: this.animatedValue.interpolate(getMatrixForJump(2, true))
+          translateY: this.animatedValue.interpolate(getMatrixForJump(-2, true))
         }
       ]
     };
@@ -134,7 +144,8 @@ class Hero extends Component {
 
 Hero.propTypes = {
   action: PropTypes.string,
-  type: PropTypes.string.isRequired
+  type: PropTypes.string.isRequired,
+  nextPosition: PropTypes.number.isRequired
 };
 
 export default Hero;

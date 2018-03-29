@@ -4,9 +4,11 @@ import {
   View,
   TouchableWithoutFeedback
 } from 'react-native';
+import GestureRecognizer, {swipeDirections} from 'react-native-swipe-gestures';
 import { connect } from 'react-redux';
 import Canvas from './canvas.native';
 import { ADD_BLOCK, CLEAR_ACTION, JUMP, CHECK_COLLISIONS } from './../actions';
+import {LONG_JUMP, SHORT_JUMP} from "../engine/constants/hero";
 
 class Game extends Component {
   constructor() {
@@ -26,10 +28,14 @@ class Game extends Component {
         }, 5);*/
   }
 
-  onClick = () => {
-    console.log(this.props.hero.type);
-    this.props.jump();
+  onShortJump = () => {
+    this.props.jump(SHORT_JUMP);
     setTimeout(() => this.props.clearAction(), 100);
+  };
+
+  onLongJump = () => {
+      this.props.jump(LONG_JUMP);
+      setTimeout(() => this.props.clearAction(), 100);
   };
 
   /**
@@ -51,18 +57,21 @@ class Game extends Component {
       console.log('rerender game container');
       return (
         <View style={styles.container}>
-          <TouchableWithoutFeedback onPress={this.onClick}>
-            <View>
-              <Canvas
-                heroType={this.props.hero.type}
-                canPlay={this.props.game.lives > 0}
-                action={this.props.hero.action}
-                blocks={this.props.ambient.blocks}
-                score={this.props.game.score}
-                lives={this.props.game.lives}
-              />
-            </View>
-          </TouchableWithoutFeedback>
+          <GestureRecognizer onSwipeUp={this.onLongJump}>
+            <TouchableWithoutFeedback onPress={this.onShortJump}>
+              <View>
+                <Canvas
+                  nextPositionHero={this.props.hero.nextPosition}
+                  heroType={this.props.hero.type}
+                  canPlay={this.props.game.lives > 0}
+                  action={this.props.hero.action}
+                  blocks={this.props.ambient.blocks}
+                  score={this.props.game.score}
+                  lives={this.props.game.lives}
+                />
+              </View>
+            </TouchableWithoutFeedback>
+          </GestureRecognizer>
         </View>
       );
     }
@@ -84,8 +93,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  jump: () => {
-    dispatch({ type: JUMP });
+  jump: (type) => {
+    dispatch({ type: JUMP, payload: type });
   },
   clearAction: () => {
     dispatch({ type: CLEAR_ACTION });

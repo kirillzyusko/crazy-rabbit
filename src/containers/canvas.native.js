@@ -23,7 +23,7 @@ class Canvas extends Component {
 
   render() {
     console.log('rerender canvas');
-    const { score, canPlay, heroType, action, blocks, lives } = this.props;
+    const { score, canPlay, heroType, action, blocks, lives, nextPositionHero } = this.props;
     return (
       <View>
         <BackgroundForest />
@@ -33,7 +33,7 @@ class Canvas extends Component {
           <Score score={score} />
         </Svg>
         {blocks.map(block => <BlockFacility height={block.height} appearanceAt={block.appearance} key={block.id} />)}
-        <Hero type={heroType} action={action} />
+        <Hero nextPosition={nextPositionHero} type={heroType} action={action} />
       </View>
     );
   }
@@ -48,7 +48,8 @@ Canvas.propTypes = {
   blocks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     appearance: PropTypes.number.isRequired
-  }))
+  })),
+  nextPositionHero: PropTypes.number.isRequired
 };
 
 export default Canvas;

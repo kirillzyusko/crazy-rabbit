@@ -17,6 +17,7 @@ import { selectLevel } from './game/select-level';
 
 const initialState = {
   hero: {
+    nextPosition: 0,
     action: null,
     lastActionAt: Date.now(),
     type: RABBIT
@@ -45,7 +46,7 @@ function reducer(state = initialState, action) {
       return addBlock(state);
     }
     case JUMP: {
-      return jump(state);
+      return jump(state, payload);
     }
     case CLEAR_ACTION: {
       return clearAction(state);
