@@ -15,7 +15,7 @@ const level1 = {
     {
       id: UID(),
       appearance: 4000,
-      height: 1
+      height: 3
     },
     {
       id: UID(),

@@ -8,7 +8,7 @@ import Hero from '../components/models/heroes/hero.native';
 import Sky from '../components/models/environment/ambient/background/components/sky.native';
 import Ground from '../components/models/environment/ambient/background/components/ground.native';
 import { height, width } from '../engine/constants/engine';
-import Block from '../components/models/environment/ambient/blocks/block.native';
+import BlockFacility from '../components/models/environment/ambient/blocks/block-facility.native';
 import EndGame from '../components/models/environment/game/end-game.native';
 import Score from '../components/models/environment/game/score.native';
 import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
@@ -32,7 +32,7 @@ class Canvas extends Component {
           {!canPlay && <EndGame />}
           <Score score={score} />
         </Svg>
-        {blocks.map(block => <Block appearanceAt={block.appearance} key={block.id} />)}
+        {blocks.map(block => <BlockFacility height={block.height} appearanceAt={block.appearance} key={block.id} />)}
         <Hero type={heroType} action={action} />
       </View>
     );
