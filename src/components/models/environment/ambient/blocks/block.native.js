@@ -33,9 +33,10 @@ class Block extends Component {
       this.animatedValue,
       {
         toValue: 1,
-        duration: timeOfBlockMovement * (this.props.appearanceAt / width), // speed
+        duration: timeOfBlockMovement, // speed
         easing: Easing.linear,
-        useNativeDriver: true
+        useNativeDriver: true,
+        delay: this.props.appearanceAt
       }
     ).start();
   }
@@ -45,7 +46,7 @@ class Block extends Component {
     const style = {
       position: 'absolute',
       top: height - distanceWithRespectToGround,
-      right: -heightOfOneBlock - this.props.appearanceAt
+      right: -heightOfOneBlock
     };
 
     const right = {
@@ -53,7 +54,7 @@ class Block extends Component {
         {
           translateX: this.animatedValue.interpolate({
             inputRange: [0, 1],
-            outputRange: [0, -(width + heightOfOneBlock + this.props.appearanceAt)]
+            outputRange: [0, -(width + heightOfOneBlock)]
           })
         }
       ]
