@@ -26,8 +26,8 @@ const initialState = {
     blocks: [
       ...level1.blocks
     ],
-    collidedAt: [],
-    lastObjectCreatedAt: null
+    completedBlocks: [],
+    blocksMap: [] // sorted blocks by alignment
   },
   game: {
     lives: 3,

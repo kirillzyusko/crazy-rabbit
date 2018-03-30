@@ -2,18 +2,27 @@ import { getNextCollision } from '../../engine/handler/check-collision.native';
 import { COLLISION } from '../../engine/constants/hero';
 
 export const checkCollisions = (state) => {
-  const collisionAt = getNextCollision(state.ambient.blocks, Date.now() - state.game.startAt, state.hero.lastActionAt, state.ambient.collidedAt);
-  if (collisionAt !== null) {
+  const { nextCollisionTime, blockId } = getNextCollision(state.ambient.blocksMap, Date.now() - state.game.startAt, state.hero.lastActionAt, state.ambient.completedBlocks);
+  if (nextCollisionTime !== null) {
     return {
       ...state,
+      ambient: {
+        ...state.ambient,
+        completedBlocks: [
+          ...state.ambient.completedBlocks,
+          { id: blockId }
+        ]
+      },
       hero: {
         ...state.hero,
         action: COLLISION,
         lastActionAt: Date.now()
+      },
+      game: {
+        ...state.game,
+        nextCollisionThrough: nextCollisionTime
       }
     };
   }
-  return state;
-
-
+  return state; // is level complete?
 };
