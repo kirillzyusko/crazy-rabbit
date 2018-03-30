@@ -10,11 +10,15 @@ import { connect } from 'react-redux';
 import Canvas from './canvas.native';
 import {
   CLEAR_ACTION,
-  JUMP,
+  ACTION,
   CHECK_COLLISIONS,
   START_GAME
 } from './../actions';
-import { LONG_JUMP, SHORT_JUMP } from '../engine/constants/hero';
+import {
+  COLLISION,
+  LONG_JUMP,
+  SHORT_JUMP
+} from '../engine/constants/hero';
 
 class Game extends Component {
   constructor() {
@@ -22,31 +26,32 @@ class Game extends Component {
     this.state = {
       action: null
     };
+    this.emitCollision = null;
   }
 
   componentDidMount() {
     this.props.startGame();
     this.props.checkCollisions();
-    setInterval(() => {
-      // const start = Date.now();
-      this.props.checkCollisions();
-      // const end = Date.now();
-      // console.log('collisions check about: %s ms', end - start);
-    }, 100);
+    console.log('timeout through: ', this.props.game.nextCollisionThrough);
+  }
+
+  componentDidUpdate() {
+    console.log('timeout through: ', this.props.game.nextCollisionThrough);
+    this.emitCollision = setTimeout(() => this.props.actionEmit(COLLISION), this.props.game.nextCollisionThrough);
   }
 
   onShortJump = () => {
-    this.props.jump(SHORT_JUMP);
+    this.props.actionEmit(SHORT_JUMP);
     setTimeout(() => this.props.clearAction(), 100);
   };
 
   onLongJump = () => {
-    this.props.jump(LONG_JUMP);
+    this.props.actionEmit(LONG_JUMP);
     setTimeout(() => this.props.clearAction(), 100);
   };
 
   render() {
-    console.log('rerender game container');
+    console.log('rerender game container', this.props.game.nextCollisionThrough);
     return (
       <View style={styles.container}>
         <GestureRecognizer onSwipeUp={this.onLongJump}>
@@ -94,12 +99,13 @@ Game.propTypes = {
   }).isRequired,
   game: PropTypes.shape({
     lives: PropTypes.number.isRequired,
-    score: PropTypes.number.isRequired
+    score: PropTypes.number.isRequired,
+    nextCollisionThrough: PropTypes.number.isRequired
   }).isRequired,
   clearAction: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
   checkCollisions: PropTypes.func.isRequired,
-  jump: PropTypes.func.isRequired
+  actionEmit: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -112,8 +118,8 @@ const mapDispatchToProps = dispatch => ({
   startGame: () => {
     dispatch({ type: START_GAME });
   },
-  jump: (type) => {
-    dispatch({ type: JUMP, payload: type });
+  actionEmit: (type) => {
+    dispatch({ type: ACTION, payload: type });
   },
   clearAction: () => {
     dispatch({ type: CLEAR_ACTION });

@@ -1,7 +1,7 @@
 import { JUMP } from '../../actions/index';
-import {LONG_JUMP} from "../../engine/constants/hero";
+import { LONG_JUMP } from "../../engine/constants/hero";
 
-export const jump = (state, type) => ({
+export const action = (state, type) => ({
   ...state,
   hero: {
     ...state.hero,

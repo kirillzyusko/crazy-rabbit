@@ -7,18 +7,19 @@ export const getNextCollision = (mapBlocks, timeInGame, lastActionAt, completedB
     blockId: null
   };
 
-  mapBlocks.forEach((block) => {
+  for (const block of mapBlocks) {
     const { align } = block;
-    const isCollision = align < timeInGame;
+    const isBeforeBlock = timeInGame < align;
     const wasEarlier = completedBlocks.some(b => block.id === b.id);
-    const nextBlockCollisionNotDefined = nextCollisionAt.nextCollisionTime === null;
 
-    if (isCollision && !wasEarlier && nextBlockCollisionNotDefined) {
-      console.log(`You met block: ${block.id}`, timeInGame, align);
+    if (isBeforeBlock && !wasEarlier) {
+      console.log(`next collision at: ${block.id}`, timeInGame, align);
+      console.log(`timeout: ${align - timeInGame}`);
       nextCollisionAt.nextCollisionTime = align;
       nextCollisionAt.blockId = block.id;
+      return nextCollisionAt;
     }
-  });
+  }
 
   return nextCollisionAt;
 };

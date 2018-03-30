@@ -1,12 +1,11 @@
 import { checkCollisions } from './game/check-collisions';
-import { jump } from './hero/jump';
+import { action as actionEmit} from './hero/action';
 import { clearAction } from './hero/clear-action';
 import {
-  ADD_BLOCK,
+  ACTION,
   CHECK_COLLISIONS,
   CHOOSE_HERO,
   CLEAR_ACTION,
-  JUMP,
   SELECT_LEVEL, START_GAME
 } from '../actions';
 import { RABBIT } from '../engine/constants/hero';
@@ -45,8 +44,8 @@ const initialState = {
 function reducer(state = initialState, action) {
   const { type, payload } = action;
   switch (type) {
-    case JUMP: {
-      return jump(state, payload);
+    case ACTION: {
+      return actionEmit(state, payload);
     }
     case CLEAR_ACTION: {
       return clearAction(state);
