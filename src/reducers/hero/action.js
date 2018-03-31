@@ -1,4 +1,3 @@
-import { JUMP } from '../../actions/index';
 import { LONG_JUMP } from "../../engine/constants/hero";
 
 export const action = (state, type) => ({

@@ -35,33 +35,45 @@ class Game extends Component {
     console.log('timeout through: ', this.props.game.nextCollisionThrough);
   }
 
-  componentDidUpdate() {
-    console.log('timeout through: ', this.props.game.nextCollisionThrough);
-    this.emitCollision = setTimeout(() => this.props.actionEmit(COLLISION), this.props.game.nextCollisionThrough);
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
+      console.log('componentDidUpdate timeout through: ', this.props.game.nextCollisionThrough, Date.now());
+      this.delayCollisionEmit();
+    }
   }
 
   onShortJump = () => {
+    this.collisionEmitClear();
     this.props.actionEmit(SHORT_JUMP);
+    this.props.checkCollisions();
     setTimeout(() => this.props.clearAction(), 100);
   };
 
   onLongJump = () => {
+    this.collisionEmitClear();
     this.props.actionEmit(LONG_JUMP);
+    this.props.checkCollisions();
     setTimeout(() => this.props.clearAction(), 100);
   };
 
+  collisionEmitClear = () => clearInterval(this.emitCollision);
+
+  delayCollisionEmit = () => {
+    this.emitCollision = setTimeout(() => {
+      console.log(COLLISION, Date.now());
+      this.props.actionEmit(COLLISION);
+    }, this.props.game.nextCollisionThrough);
+  };
+
   render() {
-    console.log('rerender game container', this.props.game.nextCollisionThrough);
+    console.log('rerender game container', this.props.game.nextCollisionThrough, Date.now());
     return (
       <View style={styles.container}>
         <GestureRecognizer onSwipeUp={this.onLongJump}>
           <TouchableWithoutFeedback onPress={this.onShortJump}>
             <View>
               <Canvas
-                nextPositionHero={this.props.hero.nextPosition}
-                heroType={this.props.hero.type}
                 canPlay={this.props.game.lives > 0}
-                action={this.props.hero.action}
                 blocks={this.props.ambient.blocks}
                 score={this.props.game.score}
                 lives={this.props.game.lives}
@@ -84,11 +96,6 @@ const styles = StyleSheet.create({
 });
 
 Game.propTypes = {
-  hero: PropTypes.shape({
-    nextPosition: PropTypes.number.isRequired,
-    type: PropTypes.string.isRequired,
-    action: PropTypes.string
-  }).isRequired,
   ambient: PropTypes.shape({
     blocks: PropTypes.arrayOf(PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -109,7 +116,6 @@ Game.propTypes = {
 };
 
 const mapStateToProps = state => ({
-  hero: state.hero,
   ambient: state.ambient,
   game: state.game
 });

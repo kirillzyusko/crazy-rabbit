@@ -6,6 +6,7 @@ import {
   timeOfBackgroundMovement,
   width
 } from '../../../../../engine/constants/engine';
+import background from './components/forest-light-new-2.png';
 
 const style = {
   position: 'absolute',
@@ -49,12 +50,12 @@ class BackgroundForest extends PureComponent {
         }
       ]
     };
-
+    console.log(`background ${height + 0.01 * height}`);
     return (
       <Animated.View style={[style, moving]}>
         <Image
-          style={{ left: width / 2, width: width * 3, height, resizeMode: 'contain' }}
-          source={require('./components/forest-light-new-2.png')}
+          style={{ left: width / 2, width: width * 3, height: height + 0.01 * height, resizeMode: 'contain' }}
+          source={background}
         />
       </Animated.View>
     );

@@ -9,6 +9,7 @@ import Health from './health.native';
 class Lives extends PureComponent {
   render() {
     const { lives } = this.props;
+    console.log('rerender lives');
     return (
       <View style={[styles.container, styles.horizontal]}>
         {times(lives, () => <Health key={UID()} />)}

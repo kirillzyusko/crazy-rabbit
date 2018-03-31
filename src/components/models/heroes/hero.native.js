@@ -5,6 +5,7 @@ import {
 } from 'react-native';
 import Svg, { G } from 'react-native-svg';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import {
   distanceWithRespectToGround,
   height,
@@ -16,9 +17,8 @@ import {
   upperJump,
   widthOfHero
 } from '../../../engine/constants/engine';
-import { JUMP } from '../../../actions';
 import { getHeroByType } from '../../../utils/hero.native';
-import {COLLISION, LONG_JUMP, SHORT_JUMP} from '../../../engine/constants/hero';
+import { COLLISION, LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
 
 /**
  * @param isJump - boolean
@@ -41,6 +41,7 @@ const getMatrixForJump = (blockCountRelativeCurrentPosition, jumpHeight, isJump)
 };
 
 const getJumpHeight = type => (type === LONG_JUMP ? 2 : 1);
+const FLASH_COUNT = 5;
 
 class Hero extends Component {
   constructor() {
@@ -48,14 +49,15 @@ class Hero extends Component {
 
     this.state = {
       currentPosition: 0,
-      jumpHeight: 1
+      jumpHeight: 1,
+      flashCount: 0
     };
     this.animatedValue = new Animated.Value(0);
     this.opacity = new Animated.Value(1);
   }
 
   componentDidMount() {
-    //this.animateBump();
+    // this.animateBump();
   }
 
   // todo: replace it to getDerivedStateFromProps
@@ -92,7 +94,12 @@ class Hero extends Component {
         useNativeDriver: true
       })
     ]).start(() => {
-      this.animateBump();
+      if (this.state.flashCount < FLASH_COUNT) {
+        this.setState({ flashCount: this.state.flashCount + 1 });
+        this.animateBump();
+      } else {
+        this.setState({ flashCount: 0 });
+      }
     });
   }
 
@@ -109,7 +116,7 @@ class Hero extends Component {
         }
       ).start(() => {
         this.animatedValue.setValue(0);
-        this.setState({ currentPosition: this.state.currentPosition+nextPosition }); // todo: реальные позиции задаются через redux - это только для лесенки нужно
+        this.setState({ currentPosition: this.state.currentPosition + nextPosition }); // todo: реальные позиции задаются через redux - это только для лесенки нужно
       });
     }
   }
@@ -154,4 +161,10 @@ Hero.propTypes = {
   nextPosition: PropTypes.number.isRequired
 };
 
-export default Hero;
+const mapStateToProps = state => ({
+  action: state.hero.action,
+  type: state.hero.type,
+  nextPosition: state.hero.nextPosition
+});
+
+export default connect(mapStateToProps, null)(Hero);

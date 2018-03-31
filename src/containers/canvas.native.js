@@ -21,7 +21,7 @@ class Canvas extends Component {
 
   render() {
     console.log('rerender canvas');
-    const { score, canPlay, heroType, action, blocks, lives, nextPositionHero } = this.props;
+    const { score, canPlay, blocks, lives } = this.props;
     return (
       <View>
         <BackgroundForest />
@@ -40,7 +40,7 @@ class Canvas extends Component {
             />)
           )
         }
-        <Hero nextPosition={nextPositionHero} type={heroType} action={action} />
+        <Hero />
       </View>
     );
   }
