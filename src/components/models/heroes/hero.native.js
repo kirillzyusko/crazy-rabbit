@@ -19,6 +19,7 @@ import {
 } from '../../../engine/constants/engine';
 import { getHeroByType } from '../../../utils/hero.native';
 import { COLLISION, LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
+import { CLEAR_ACTION } from '../../../actions';
 
 /**
  * @param isJump - boolean
@@ -27,7 +28,7 @@ import { COLLISION, LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero
  * @return Object (contains information about path of movement)
  **/
 const getMatrixForJump = (blockCountRelativeCurrentPosition, jumpHeight, isJump) => {
-  console.log('matrix for: ', blockCountRelativeCurrentPosition, jumpHeight);
+  console.log(`matrix: ${blockCountRelativeCurrentPosition} ${jumpHeight}`);
   return isJump ?
     {
       inputRange: [0, upperJump, 1],
@@ -49,7 +50,8 @@ class Hero extends Component {
 
     this.state = {
       currentPosition: 0,
-      jumpHeight: 1,
+      nextPosition: 0,
+      jumpHeight: 0,
       flashCount: 0
     };
     this.animatedValue = new Animated.Value(0);
@@ -62,23 +64,26 @@ class Hero extends Component {
 
   // todo: replace it to getDerivedStateFromProps
   componentWillReceiveProps(nextProps) {
+    const { currentPosition } = this.state;
     if (nextProps.action === LONG_JUMP) {
-      console.log('long');
-      this.setState({ jumpHeight: getJumpHeight(LONG_JUMP) });
+      console.log('long', nextProps.nextPosition);
+      this.setState({ jumpHeight: getJumpHeight(LONG_JUMP), nextPosition: nextProps.nextPosition - currentPosition });
       this.animateJump(nextProps.nextPosition);
     } else if (nextProps.action === SHORT_JUMP) {
-      console.log('short');
-      this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP) });
+      console.log('short', nextProps.nextPosition, currentPosition);
+      this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP), nextPosition: nextProps.nextPosition - currentPosition });
       this.animateJump(nextProps.nextPosition);
     } else if (nextProps.action === COLLISION) {
-      console.log('collision');
       this.animateBump();
     }
+    this.props.clearAction();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    const { currentPosition, jumpHeight } = this.state;
-    return nextState.currentPosition !== currentPosition || nextState.jumpHeight !== jumpHeight;
+    const { currentPosition, jumpHeight, nextPosition } = this.state;
+    return nextState.nextPosition !== nextPosition ||
+      nextState.currentPosition !== currentPosition ||
+      nextState.jumpHeight !== jumpHeight;
   }
 
   animateBump() {
@@ -116,14 +121,12 @@ class Hero extends Component {
         }
       ).start(() => {
         this.animatedValue.setValue(0);
-        this.setState({ currentPosition: this.state.currentPosition + nextPosition }); // todo: реальные позиции задаются через redux - это только для лесенки нужно
+        this.setState({ currentPosition: nextPosition });
       });
     }
   }
 
   render() {
-    console.log('rerender hero', this.props.nextPosition, this.state.jumpHeight);
-
     const { currentPosition } = this.state;
     const style = {
       position: 'absolute',
@@ -132,7 +135,7 @@ class Hero extends Component {
     const top = {
       transform: [
         {
-          translateY: this.animatedValue.interpolate(getMatrixForJump(this.props.nextPosition, this.state.jumpHeight, true))
+          translateY: this.animatedValue.interpolate(getMatrixForJump(this.state.nextPosition, this.state.jumpHeight, true))
         }
       ]
     };
@@ -158,7 +161,8 @@ class Hero extends Component {
 Hero.propTypes = {
   action: PropTypes.string,
   type: PropTypes.string.isRequired,
-  nextPosition: PropTypes.number.isRequired
+  nextPosition: PropTypes.number.isRequired,
+  clearAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -167,4 +171,10 @@ const mapStateToProps = state => ({
   nextPosition: state.hero.nextPosition
 });
 
-export default connect(mapStateToProps, null)(Hero);
+const mapDispatchToProps = dispatch => ({
+  clearAction: () => {
+    dispatch({ type: CLEAR_ACTION });
+  }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Hero);

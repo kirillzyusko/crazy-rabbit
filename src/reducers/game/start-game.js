@@ -13,7 +13,7 @@ export const startGame = state => ({
   hero: {
     ...state.hero,
     action: null,
-    lastActionAt: Date.now()
+    lastActionAt: 0
   },
   ambient: {
     ...state.ambient,

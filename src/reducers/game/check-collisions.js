@@ -5,7 +5,6 @@ export const checkCollisions = (state) => {
   const timeInGame = Date.now() - state.game.startAt;
   const { nextCollisionTime, blockId } = getNextCollision(state.ambient.blocksMap, timeInGame, state.hero.lastActionAt, state.ambient.completedBlocks);
   if (nextCollisionTime !== null) {
-    console.log('timeout from redux: ', nextCollisionTime - timeInGame);
     return {
       ...state,
       ambient: {

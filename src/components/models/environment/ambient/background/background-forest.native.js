@@ -37,7 +37,6 @@ class BackgroundForest extends PureComponent {
   };
 
   render() {
-    console.log('rerender background');
     const moving = {
       transform: [
         {
@@ -50,7 +49,7 @@ class BackgroundForest extends PureComponent {
         }
       ]
     };
-    console.log(`background ${height + 0.01 * height}`);
+
     return (
       <Animated.View style={[style, moving]}>
         <Image

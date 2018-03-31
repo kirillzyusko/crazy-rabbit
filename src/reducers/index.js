@@ -60,7 +60,6 @@ function reducer(state = initialState, action) {
       return selectLevel(state, payload);
     }
     case START_GAME: {
-      console.log('start game redux');
       return startGame(state);
     }
     default:

@@ -9,7 +9,6 @@ import {
 
 class Score extends PureComponent {
   render() {
-    console.log('score: ', this.props.score);
     return (
       <G>
         <Text

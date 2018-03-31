@@ -4,7 +4,6 @@ import { height, width } from '../../../../../../engine/constants/engine';
 
 class Sky extends PureComponent {
   render() {
-    console.log('rerender sky');
     return (
       <Rect
         x={0}

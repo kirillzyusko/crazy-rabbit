@@ -20,7 +20,6 @@ class Canvas extends Component {
   isTheSameProps = nextProps => isEqual(nextProps, this.props);
 
   render() {
-    console.log('rerender canvas');
     const { score, canPlay, blocks, lives } = this.props;
     return (
       <View>
@@ -47,16 +46,13 @@ class Canvas extends Component {
 }
 
 Canvas.propTypes = {
-  action: PropTypes.string,
   score: PropTypes.number.isRequired,
-  heroType: PropTypes.string.isRequired,
   lives: PropTypes.number.isRequired,
   canPlay: PropTypes.bool.isRequired,
   blocks: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     appearance: PropTypes.number.isRequired
-  })),
-  nextPositionHero: PropTypes.number.isRequired
+  }))
 };
 
 export default Canvas;

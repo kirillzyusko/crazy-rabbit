@@ -23,21 +23,17 @@ import {
 class Game extends Component {
   constructor() {
     super();
-    this.state = {
-      action: null
-    };
+
     this.emitCollision = null;
   }
 
   componentDidMount() {
     this.props.startGame();
     this.props.checkCollisions();
-    console.log('timeout through: ', this.props.game.nextCollisionThrough);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
-      console.log('componentDidUpdate timeout through: ', this.props.game.nextCollisionThrough, Date.now());
       this.delayCollisionEmit();
     }
   }
@@ -46,27 +42,24 @@ class Game extends Component {
     this.collisionEmitClear();
     this.props.actionEmit(SHORT_JUMP);
     this.props.checkCollisions();
-    setTimeout(() => this.props.clearAction(), 100);
   };
 
   onLongJump = () => {
     this.collisionEmitClear();
     this.props.actionEmit(LONG_JUMP);
     this.props.checkCollisions();
-    setTimeout(() => this.props.clearAction(), 100);
   };
 
   collisionEmitClear = () => clearInterval(this.emitCollision);
 
   delayCollisionEmit = () => {
     this.emitCollision = setTimeout(() => {
-      console.log(COLLISION, Date.now());
       this.props.actionEmit(COLLISION);
+      this.props.checkCollisions();
     }, this.props.game.nextCollisionThrough);
   };
 
   render() {
-    console.log('rerender game container', this.props.game.nextCollisionThrough, Date.now());
     return (
       <View style={styles.container}>
         <GestureRecognizer onSwipeUp={this.onLongJump}>

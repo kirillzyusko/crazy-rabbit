@@ -32,7 +32,7 @@ export const downJump = 0.65;
 
 // characteristics of environment
 export const timeOfBackgroundMovement = 2000;
-export const timeOfBlockMovement = 3000; // ms
+export const timeOfBlockMovement = 4000; // ms
 export const inaccuraciesTime = 500; // latency before removing of block from redux state
 export const inaccuraciesTimeForCollision = 50;
 
@@ -54,7 +54,6 @@ export const levelBlockHeight = levelButtonHeight + starHeight;
 export const levelBlockWidth = levelBlockHeight;
 export const borderBlockWidth = 3;
 const heightBlockWithBorder = levelBlockHeight + borderBlockWidth * 2;
-console.log('574', levelBlockWidth, levelBlockHeight);
 export const levelButtonMarginSide = Math.floor(levelButtonHeight / 1.5);
 export const levelButtonMarginUpside = Math.floor(levelButtonHeight / 3);
 export const leftMarginLevelButton = (width - (levelBlockWidth * levelColumnPerPage + levelButtonMarginSide * (levelColumnPerPage - 1))) / 2;

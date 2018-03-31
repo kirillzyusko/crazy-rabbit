@@ -4,7 +4,6 @@ import { groundHeight, height, width } from '../../../../../../engine/constants/
 
 class Ground extends PureComponent {
   render() {
-    console.log('rerender ground');
     return (
       <G id="ground">
         <Rect

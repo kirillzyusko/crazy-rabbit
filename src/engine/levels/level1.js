@@ -11,7 +11,7 @@ const level1 = {
     {
       id: 2,
       appearance: 3000,
-      speed: 1.2,
+      speed: 1,
       height: 2
     },
     {
@@ -23,7 +23,7 @@ const level1 = {
     {
       id: 4,
       appearance: 5000,
-      speed: 1.2,
+      speed: 1,
       height: 1
     },
     {
@@ -35,7 +35,7 @@ const level1 = {
     {
       id: 6,
       appearance: 7000,
-      speed: 1.5,
+      speed: 1,
       height: 1
     }
   ]
