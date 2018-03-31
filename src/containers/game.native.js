@@ -61,7 +61,7 @@ class Game extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View renderToHardwareTextureAndroid style={styles.container}>
         <GestureRecognizer onSwipeUp={this.onLongJump}>
           <TouchableWithoutFeedback onPress={this.onShortJump}>
             <View>
