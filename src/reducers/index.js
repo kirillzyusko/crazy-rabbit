@@ -18,7 +18,7 @@ const initialState = {
   hero: {
     nextPosition: 0,
     fall: {
-      time: 0,
+      time: null,
       position: 0
     },
     action: null,

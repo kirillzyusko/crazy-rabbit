@@ -7,7 +7,7 @@ import Svg, { G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  distanceWithRespectToGround,
+  distanceWithRespectToGround, downJump,
   height,
   heightOfHero,
   heightOfJump,
@@ -63,21 +63,32 @@ class Hero extends Component {
   }
 
   // todo: replace it to getDerivedStateFromProps
+  // todo: !important!: после "спрыгивания" с блока эмить событие, которое "подчищает" текущую позицию персонажа, а то получается
+  // когда перед двумя блоками спрыгиваешь с одного, а потом SMALL_JUMP, то на экране ты проходишь через двойные блоки и при этом не мигаешь
   componentWillReceiveProps(nextProps) {
     const { currentPosition } = this.state;
     if (nextProps.action === LONG_JUMP) {
       console.log('long', nextProps.nextPosition);
       this.setState({ jumpHeight: getJumpHeight(LONG_JUMP), nextPosition: nextProps.nextPosition - currentPosition, isJump: true });
-      this.animateJump(nextProps.nextPosition);
+      if (nextProps.fallThrough !== null) {
+        setTimeout(() => {
+          console.log('fall fall fall', currentPosition);
+          this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
+          this.animateJump(nextProps.fallPosition, false);
+        }, nextProps.fallThrough);
+      }
+      this.animateJump(nextProps.nextPosition, true);
     } else if (nextProps.action === SHORT_JUMP) {
       console.log('short', nextProps.nextPosition, currentPosition, nextProps.fallThrough);
       this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP), nextPosition: nextProps.nextPosition - currentPosition, isJump: true });
-      setTimeout(() => {
+      if (nextProps.fallThrough !== null) {
+        setTimeout(() => {
           console.log('fall fall fall', currentPosition);
-		  this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
-		  this.animateJump(nextProps.fallPosition);
-      }, nextProps.fallThrough);
-      this.animateJump(nextProps.nextPosition);
+          this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
+          this.animateJump(nextProps.fallPosition, false);
+        }, nextProps.fallThrough);
+      }
+      this.animateJump(nextProps.nextPosition, true);
     } else if (nextProps.action === COLLISION) {
       this.animateBump();
     }
@@ -113,14 +124,15 @@ class Hero extends Component {
     });
   }
 
-  animateJump(nextPosition) {
+  animateJump(nextPosition, isJump = true) {
+    console.log('animate', isJump);
     if (this.animatedValue._value === 0) {
       this.animatedValue.setValue(0);
       Animated.timing(
         this.animatedValue,
         {
           toValue: 1,
-          duration: timeOfJump,
+          duration: isJump ? timeOfJump : timeOfJump * downJump / 2,
           easing: Easing.linear,
           useNativeDriver: true
         }
