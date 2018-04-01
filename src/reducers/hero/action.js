@@ -1,12 +1,30 @@
-import {COLLISION, LONG_JUMP} from '../../engine/constants/hero';
+import { COLLISION, LONG_JUMP } from '../../engine/constants/hero';
 import { getNextPosition } from '../../engine/handler/position-calculate.native';
-//todo: simplify parametrs of getNextPosition
-export const action = (state, type) => ({
-  ...state,
-  hero: {
-    ...state.hero,
-    nextPosition: type !== COLLISION ? getNextPosition(state.ambient.blocksMap, Date.now() - state.game.startAt, state.ambient.blocks, state.hero.nextPosition, type === LONG_JUMP ? 2 : 1) : state.hero.nextPosition,
-    action: type,
-    lastActionAt: Date.now()
+import { getJumpHeight } from '../../utils/hero.native';
+
+export const action = (state, type) => {
+  let alignment = null;
+
+  if (type !== COLLISION) { // type is JUMP
+    const { blocksMap, blocks } = state.ambient;
+    const prevPosition = state.hero.nextPosition;
+    const jumpHeight = getJumpHeight(type);
+    const timeInGame = Date.now() - state.game.startAt;
+    const params = { mapBlocks: blocksMap, timeInGame, blocks, prevPosition, jumpHeight };
+    alignment = getNextPosition(params);
   }
-});
+
+  return {
+    ...state,
+    hero: {
+      ...state.hero,
+      nextPosition: type !== COLLISION ? alignment.nextPosition : state.hero.nextPosition,
+      fall: {
+        time: type !== COLLISION ? alignment.fall.time : state.hero.fall.time,
+        position: type !== COLLISION ? alignment.fall.position : state.hero.fall.position
+      },
+      action: type,
+      lastActionAt: Date.now()
+    }
+  };
+};

@@ -17,7 +17,7 @@ import {
   upperJump,
   widthOfHero
 } from '../../../engine/constants/engine';
-import { getHeroByType } from '../../../utils/hero.native';
+import { getHeroByType, getJumpHeight } from '../../../utils/hero.native';
 import { COLLISION, LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
 import { CLEAR_ACTION } from '../../../actions';
 
@@ -41,7 +41,6 @@ const getMatrixForJump = (blockCountRelativeCurrentPosition, jumpHeight, isJump)
     };
 };
 
-const getJumpHeight = type => (type === LONG_JUMP ? 2 : 1);
 const FLASH_COUNT = 5;
 
 class Hero extends Component {
@@ -52,7 +51,8 @@ class Hero extends Component {
       currentPosition: 0,
       nextPosition: 0,
       jumpHeight: 0,
-      flashCount: 0
+      flashCount: 0,
+      isJump: true
     };
     this.animatedValue = new Animated.Value(0);
     this.opacity = new Animated.Value(1);
@@ -67,11 +67,16 @@ class Hero extends Component {
     const { currentPosition } = this.state;
     if (nextProps.action === LONG_JUMP) {
       console.log('long', nextProps.nextPosition);
-      this.setState({ jumpHeight: getJumpHeight(LONG_JUMP), nextPosition: nextProps.nextPosition - currentPosition });
+      this.setState({ jumpHeight: getJumpHeight(LONG_JUMP), nextPosition: nextProps.nextPosition - currentPosition, isJump: true });
       this.animateJump(nextProps.nextPosition);
     } else if (nextProps.action === SHORT_JUMP) {
-      console.log('short', nextProps.nextPosition, currentPosition);
-      this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP), nextPosition: nextProps.nextPosition - currentPosition });
+      console.log('short', nextProps.nextPosition, currentPosition, nextProps.fallThrough);
+      this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP), nextPosition: nextProps.nextPosition - currentPosition, isJump: true });
+      setTimeout(() => {
+          console.log('fall fall fall', currentPosition);
+		  this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
+		  this.animateJump(nextProps.fallPosition);
+      }, nextProps.fallThrough);
       this.animateJump(nextProps.nextPosition);
     } else if (nextProps.action === COLLISION) {
       this.animateBump();
@@ -132,10 +137,11 @@ class Hero extends Component {
       position: 'absolute',
       top: height - 1.5 * distanceWithRespectToGround - currentPosition * heightOfOneBlock
     };
+    const matrix = getMatrixForJump(this.state.nextPosition, this.state.jumpHeight, this.state.isJump);
     const top = {
       transform: [
         {
-          translateY: this.animatedValue.interpolate(getMatrixForJump(this.state.nextPosition, this.state.jumpHeight, true))
+          translateY: this.animatedValue.interpolate(matrix)
         }
       ]
     };
@@ -162,13 +168,17 @@ Hero.propTypes = {
   action: PropTypes.string,
   type: PropTypes.string.isRequired,
   nextPosition: PropTypes.number.isRequired,
+  fallThrough: PropTypes.number.isRequired,
+  fallPosition: PropTypes.number.isRequired,
   clearAction: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   action: state.hero.action,
   type: state.hero.type,
-  nextPosition: state.hero.nextPosition
+  nextPosition: state.hero.nextPosition,
+  fallThrough: state.hero.fall.time,
+  fallPosition: state.hero.fall.position
 });
 
 const mapDispatchToProps = dispatch => ({

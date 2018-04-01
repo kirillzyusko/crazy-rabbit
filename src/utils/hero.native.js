@@ -1,5 +1,10 @@
 import React from 'react';
-import { BEAR, BIRD, RABBIT } from '../engine/constants/hero';
+import {
+  BEAR,
+  BIRD,
+  LONG_JUMP,
+  RABBIT
+} from '../engine/constants/hero';
 import Rabbit from './../components/models/heroes/catalog/rabbit.native';
 import Bear from './../components/models/heroes/catalog/bear.native';
 import Bird from './../components/models/heroes/catalog/bird.native';
@@ -17,4 +22,6 @@ const getHeroByType = (type) => {
   }
 };
 
-export { getHeroByType };
+const getJumpHeight = jumpType => (jumpType === LONG_JUMP ? 2 : 1);
+
+export { getHeroByType, getJumpHeight };

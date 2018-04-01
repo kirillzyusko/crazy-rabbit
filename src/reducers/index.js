@@ -1,5 +1,5 @@
 import { checkCollisions } from './game/check-collisions';
-import { action as actionEmit} from './hero/action';
+import { action as actionEmit } from './hero/action';
 import { clearAction } from './hero/clear-action';
 import {
   ACTION,
@@ -17,6 +17,10 @@ import { startGame } from './game/start-game';
 const initialState = {
   hero: {
     nextPosition: 0,
+    fall: {
+      time: 0,
+      position: 0
+    },
     action: null,
     lastActionAt: Date.now(),
     type: RABBIT
