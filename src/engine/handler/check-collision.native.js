@@ -4,7 +4,7 @@ import { timeOfJump } from '../constants/engine';
  * @return Object {nextCollisionTime, blockId}
  * */
     // todo: height logic implement!
-export const getNextCollision = (mapBlocks, timeInGame, lastActionAt, completedBlocks) => {
+export const getNextCollision = ({ mapBlocks, timeInGame, lastActionAt, jumpHeight }) => {
   const nextCollisionAt = {
     nextCollisionTime: null,
     blockId: null
@@ -12,12 +12,14 @@ export const getNextCollision = (mapBlocks, timeInGame, lastActionAt, completedB
 
   const isJump = (Date.now() - lastActionAt) < timeOfJump;
   for (const block of mapBlocks) {
-    const { align } = block;
-
+    const { align, height } = block;
+//todo: почему здесь не калькулируется высота и столкновение с двойным блоком?
+      // скорее всего из-за isBeforeBlock? он false
     const isBeforeBlock = isJump ? timeInGame + timeOfJump < align : timeInGame < align;
-    // const wasEarlier = completedBlocks.some(b => block.id === b.id);
+    const canJumpOverBlock = jumpHeight >= height;
+    const isCollision = isBeforeBlock && !canJumpOverBlock;
 
-    if (isBeforeBlock /* && !wasEarlier*/) {
+    if (isCollision) {
       nextCollisionAt.nextCollisionTime = align;
       nextCollisionAt.blockId = block.id;
       return nextCollisionAt;

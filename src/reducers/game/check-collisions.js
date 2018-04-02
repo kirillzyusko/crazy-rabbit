@@ -1,9 +1,12 @@
 import { getNextCollision } from '../../engine/handler/check-collision.native';
-import { COLLISION } from '../../engine/constants/hero';
 
 export const checkCollisions = (state) => {
   const timeInGame = Date.now() - state.game.startAt;
-  const { nextCollisionTime, blockId } = getNextCollision(state.ambient.blocksMap, timeInGame, state.hero.lastActionAt, state.ambient.completedBlocks);
+  const { blocksMap } = state.ambient;
+  const { lastActionAt, nextPosition } = state.hero;
+  const options = { mapBlocks: blocksMap, timeInGame, lastActionAt, jumpHeight: nextPosition };
+  const { nextCollisionTime, blockId } = getNextCollision(options);
+
   if (nextCollisionTime !== null) {
     return {
       ...state,
@@ -14,11 +17,6 @@ export const checkCollisions = (state) => {
           { id: blockId }
         ]
       },
-      /*hero: {
-        ...state.hero,
-        action: COLLISION,
-        lastActionAt: Date.now()
-      },*/
       game: {
         ...state.game,
         nextCollisionThrough: nextCollisionTime - timeInGame
