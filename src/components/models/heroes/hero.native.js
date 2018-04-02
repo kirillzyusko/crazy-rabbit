@@ -7,7 +7,8 @@ import Svg, { G } from 'react-native-svg';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-  distanceWithRespectToGround, downJump,
+  distanceWithRespectToGround,
+  downJump,
   height,
   heightOfHero,
   heightOfJump,
@@ -19,8 +20,7 @@ import {
 } from '../../../engine/constants/engine';
 import { getHeroByType, getJumpHeight } from '../../../utils/hero.native';
 import { COLLISION, LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
-import { CLEAR_ACTION } from '../../../actions';
-import { UPDATE_POSITION } from '../../../actions/index';
+import { CLEAR_ACTION, UPDATE_POSITION } from '../../../actions';
 
 /**
  * @param isJump - boolean
@@ -45,8 +45,8 @@ const getMatrixForJump = (blockCountRelativeCurrentPosition, jumpHeight, isJump)
 const FLASH_COUNT = 5;
 
 class Hero extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       currentPosition: 0,
@@ -57,6 +57,7 @@ class Hero extends Component {
     };
     this.animatedValue = new Animated.Value(0);
     this.opacity = new Animated.Value(1);
+    this.hero = getHeroByType(props.type);
   }
 
   componentDidMount() {
@@ -64,8 +65,6 @@ class Hero extends Component {
   }
 
   // todo: replace it to getDerivedStateFromProps
-  // todo: !important!: после "спрыгивания" с блока эмить событие, которое "подчищает" текущую позицию персонажа, а то получается
-  // когда перед двумя блоками спрыгиваешь с одного, а потом SMALL_JUMP, то на экране ты проходишь через двойные блоки и при этом не мигаешь
   componentWillReceiveProps(nextProps) {
     const { currentPosition } = this.state;
     if (nextProps.action === LONG_JUMP) {
@@ -75,11 +74,12 @@ class Hero extends Component {
         setTimeout(() => {
           console.log('fall fall fall', currentPosition);
           this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
-          this.props.updatePosition(nextProps.fallPosition - nextProps.nextPosition);
+          this.props.updatePosition(nextProps.fallPosition);
           this.animateJump(nextProps.fallPosition, false);
         }, nextProps.fallThrough);
       }
       this.animateJump(nextProps.nextPosition, true);
+      this.props.clearAction();
     } else if (nextProps.action === SHORT_JUMP) {
       console.log('short', nextProps.nextPosition, currentPosition, nextProps.fallThrough);
       this.setState({ jumpHeight: getJumpHeight(SHORT_JUMP), nextPosition: nextProps.nextPosition - currentPosition, isJump: true });
@@ -87,15 +87,16 @@ class Hero extends Component {
         setTimeout(() => {
           console.log('fall fall fall', currentPosition);
           this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
-          this.props.updatePosition(nextProps.fallPosition - nextProps.nextPosition);
+          this.props.updatePosition(nextProps.fallPosition);
           this.animateJump(nextProps.fallPosition, false);
         }, nextProps.fallThrough);
       }
       this.animateJump(nextProps.nextPosition, true);
+      this.props.clearAction();
     } else if (nextProps.action === COLLISION) {
       this.animateBump();
+      this.props.clearAction();
     }
-    this.props.clearAction();
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -171,7 +172,7 @@ class Hero extends Component {
       <Animated.View style={[style, top, opacity]}>
         <Svg width={widthOfHero * heroScalability} height={heightOfHero * heroScalability}>
           <G transform={{ scale: heroScalability }}>
-            {getHeroByType(this.props.type)}
+            {this.hero}
           </G>
         </Svg>
       </Animated.View>

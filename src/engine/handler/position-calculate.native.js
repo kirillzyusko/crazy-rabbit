@@ -20,14 +20,16 @@ export const getNextPosition = ({ mapBlocks, timeInGame, blocks, prevPosition, j
   };
 
   for (const block of mapBlocks) {
-    const { align } = block;
-    const isOnBlock = timeInGame - align < 0 && timeInGame - align > -timeOfJump;
+    const { align, height } = block;
+    const isJumpToBlock = timeInGame - align < 0 && timeInGame - align > -timeOfJump;
+    const canJumpToBlockHeight =  prevPosition + jumpHeight >= height;
+    const isOnBlock = isJumpToBlock && canJumpToBlockHeight;
 
     if (isOnBlock) {
       console.log('REDUX', timeInGame - align, timeOfJump);
       const { height, speed } = blocks.find(b => b.id === block.id);
       result.nextPosition = prevPosition + jumpHeight >= height ? height : 0;
-      const heroAndBlockWidth = // 1.3 - we need only in foot dimension
+      const heroAndBlockWidth = // 1.3 - we need only about `foot` dimension
         ((heightOfOneBlock + widthOfHero * heroScalability) / width / 1.3) * (timeOfBlockMovement / speed);
       const distanceBeforeBlock = align - timeInGame;
       result.fall.time = distanceBeforeBlock + heroAndBlockWidth;

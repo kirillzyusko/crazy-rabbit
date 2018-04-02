@@ -14,6 +14,7 @@ export const mapBlocks = blocks => blocks.map((block) => {
 
   return {
     id: block.id,
-    align: blockAlign
+    align: blockAlign,
+    height: block.height
   };
 }).sort((a, b) => (a.align > b.align ? 1 : -1));
