@@ -34,6 +34,7 @@ class Game extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
+      console.log('delay', this.props.game.nextCollisionThrough, prevProps.game.nextCollisionThrough);
       this.delayCollisionEmit();
     }
   }
