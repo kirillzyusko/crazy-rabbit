@@ -6,17 +6,21 @@ import {
   CHECK_COLLISIONS,
   CHOOSE_HERO,
   CLEAR_ACTION,
-  SELECT_LEVEL, START_GAME
+  SELECT_LEVEL,
+  START_GAME,
+  UPDATE_POSITION
 } from '../actions';
 import { RABBIT } from '../engine/constants/hero';
 import { chooseHero } from './hero/choose-hero';
 import level1 from './../engine/levels/level1';
 import { selectLevel } from './game/select-level';
 import { startGame } from './game/start-game';
+import { updatePosition } from './hero/update-positon';
 
 const initialState = {
   hero: {
-    nextPosition: 0,
+    nextPosition: 0, // calculate before jump => when state updated at hero component
+    // it's already not nextPosition (it's currentPosition)
     fall: {
       time: null,
       position: 0
@@ -65,6 +69,9 @@ function reducer(state = initialState, action) {
     }
     case START_GAME: {
       return startGame(state);
+    }
+    case UPDATE_POSITION: {
+      return updatePosition(state, payload);
     }
     default:
       return state;

@@ -20,6 +20,7 @@ import {
 import { getHeroByType, getJumpHeight } from '../../../utils/hero.native';
 import { COLLISION, LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
 import { CLEAR_ACTION } from '../../../actions';
+import { UPDATE_POSITION } from '../../../actions/index';
 
 /**
  * @param isJump - boolean
@@ -74,6 +75,7 @@ class Hero extends Component {
         setTimeout(() => {
           console.log('fall fall fall', currentPosition);
           this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
+          this.props.updatePosition(nextProps.fallPosition - nextProps.nextPosition);
           this.animateJump(nextProps.fallPosition, false);
         }, nextProps.fallThrough);
       }
@@ -85,6 +87,7 @@ class Hero extends Component {
         setTimeout(() => {
           console.log('fall fall fall', currentPosition);
           this.setState({ nextPosition: nextProps.fallPosition - nextProps.nextPosition, isJump: false });
+          this.props.updatePosition(nextProps.fallPosition - nextProps.nextPosition);
           this.animateJump(nextProps.fallPosition, false);
         }, nextProps.fallThrough);
       }
@@ -182,7 +185,8 @@ Hero.propTypes = {
   nextPosition: PropTypes.number.isRequired,
   fallThrough: PropTypes.number.isRequired,
   fallPosition: PropTypes.number.isRequired,
-  clearAction: PropTypes.func.isRequired
+  clearAction: PropTypes.func.isRequired,
+  updatePosition: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -196,6 +200,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   clearAction: () => {
     dispatch({ type: CLEAR_ACTION });
+  },
+  updatePosition: (newPosition) => {
+    dispatch({ type: UPDATE_POSITION, payload: newPosition });
   }
 });
 

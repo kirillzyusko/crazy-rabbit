@@ -27,8 +27,8 @@ export const getNextPosition = ({ mapBlocks, timeInGame, blocks, prevPosition, j
       console.log('REDUX', timeInGame - align, timeOfJump);
       const { height, speed } = blocks.find(b => b.id === block.id);
       result.nextPosition = prevPosition + jumpHeight >= height ? height : 0;
-      const heroAndBlockWidth = // todo: позицию замеряй не по ушам зайца, а по его ножкам (примерно бери, как половина ширины персонажа, думаю это будет вполне сносно)
-        ((heightOfOneBlock + widthOfHero * heroScalability) / width) * (timeOfBlockMovement / speed);
+      const heroAndBlockWidth = // 1.3 - we need only in foot dimension
+        ((heightOfOneBlock + widthOfHero * heroScalability) / width / 1.3) * (timeOfBlockMovement / speed);
       const distanceBeforeBlock = align - timeInGame;
       result.fall.time = distanceBeforeBlock + heroAndBlockWidth;
       result.fall.position = 0; // todo: add correct calculation of position
