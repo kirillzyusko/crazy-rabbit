@@ -26,7 +26,6 @@ export const getNextPosition = ({ mapBlocks, timeInGame, blocks, prevPosition, j
     const isOnBlock = isJumpToBlock && canJumpToBlockHeight;
 
     if (isOnBlock) {
-      console.log('REDUX', timeInGame - align, timeOfJump);
       const { height, speed } = blocks.find(b => b.id === block.id);
       result.nextPosition = prevPosition + jumpHeight >= height ? height : 0;
       const heroAndBlockWidth = // 1.3 - we need only about `foot` dimension

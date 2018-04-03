@@ -35,7 +35,8 @@ class Game extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (this.props.game.level !== prevProps.game.level) { // isNextLevel/isLevelComplete
       //this.props.navigation.navigate(LEVEL_SCREEN);
-    } else if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
+    }
+    if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
       this.delayCollisionEmit();
     }
   }
@@ -63,7 +64,7 @@ class Game extends Component {
 
   render() {
     return (
-      <View renderToHardwareTextureAndroid style={styles.container}>
+      <View style={styles.container}>
         <GestureRecognizer onSwipeUp={this.onLongJump}>
           <TouchableWithoutFeedback onPress={this.onShortJump}>
             <View>

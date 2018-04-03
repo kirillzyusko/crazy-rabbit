@@ -44,7 +44,7 @@ const level1 = {
 		  speed: 1,
 		  height: 1
 	  },
-   /* {
+    /*{
       id: 1,
       appearance: 2000,
       speed: 1,
@@ -58,7 +58,7 @@ const level1 = {
     },
     {
       id: 3,
-      appearance: 4000,
+      appearance: 3500,
       speed: 1,
       height: 3
     },
