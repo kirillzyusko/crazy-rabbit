@@ -2,7 +2,7 @@
 
 ![Example of 0.3.17-RELEASE version](https://media.giphy.com/media/QNkZksaaUViyV3x3Bv/giphy.gif)
 
-<img src="/resources/demo-2.gif?raw=true" width="200px">
+<img src="/resources/demo-2.gif?raw=true">
 
 ## Description
 
