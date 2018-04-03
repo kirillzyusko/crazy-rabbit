@@ -17,7 +17,7 @@ export const getNextCollision = ({ mapBlocks, timeInGame, lastActionAt, jumpHeig
     const isBeforeBlock = timeInGame < align;
     const canJumpOverBlock = isJump && jumpHeight >= height;
     const isCollision = isBeforeBlock && !canJumpOverBlock;
-
+    console.log(isBeforeBlock, canJumpOverBlock, block.id);
     if (isCollision) {
       nextCollisionAt.nextCollisionTime = align;
       nextCollisionAt.blockId = block.id;

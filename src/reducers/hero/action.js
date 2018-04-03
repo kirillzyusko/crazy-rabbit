@@ -23,8 +23,13 @@ export const action = (state, type) => {
         time: type !== COLLISION ? alignment.fall.time : state.hero.fall.time,
         position: type !== COLLISION ? alignment.fall.position : state.hero.fall.position
       },
+      lives: type === COLLISION ? state.hero.lives - 1 : state.hero.lives,
       action: type,
       lastActionAt: Date.now()
+    },
+    game: {
+      ...state.game,
+      lives: type === COLLISION ? state.game.lives - 1 : state.game.lives
     }
   };
 };

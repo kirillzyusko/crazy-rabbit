@@ -9,7 +9,6 @@ import GestureRecognizer from 'react-native-swipe-gestures';
 import { connect } from 'react-redux';
 import Canvas from './canvas.native';
 import {
-  CLEAR_ACTION,
   ACTION,
   CHECK_COLLISIONS,
   START_GAME
@@ -102,7 +101,6 @@ Game.propTypes = {
     score: PropTypes.number.isRequired,
     nextCollisionThrough: PropTypes.number.isRequired
   }).isRequired,
-  clearAction: PropTypes.func.isRequired,
   startGame: PropTypes.func.isRequired,
   checkCollisions: PropTypes.func.isRequired,
   actionEmit: PropTypes.func.isRequired
@@ -119,9 +117,6 @@ const mapDispatchToProps = dispatch => ({
   },
   actionEmit: (type) => {
     dispatch({ type: ACTION, payload: type });
-  },
-  clearAction: () => {
-    dispatch({ type: CLEAR_ACTION });
   },
   checkCollisions: () => {
     dispatch({ type: CHECK_COLLISIONS });
