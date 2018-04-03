@@ -18,6 +18,7 @@ import {
   LONG_JUMP,
   SHORT_JUMP
 } from '../engine/constants/hero';
+import { LEVEL_SCREEN } from '../router/navigation';
 
 class Game extends Component {
   constructor() {
@@ -32,7 +33,9 @@ class Game extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
+    if (this.props.game.level !== prevProps.game.level) { // isNextLevel/isLevelComplete
+      this.props.navigation.navigate(LEVEL_SCREEN);
+    } else if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
       this.delayCollisionEmit();
     }
   }
@@ -99,7 +102,11 @@ Game.propTypes = {
   game: PropTypes.shape({
     lives: PropTypes.number.isRequired,
     score: PropTypes.number.isRequired,
+    level: PropTypes.number.isrequired,
     nextCollisionThrough: PropTypes.number.isRequired
+  }).isRequired,
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired
   }).isRequired,
   startGame: PropTypes.func.isRequired,
   checkCollisions: PropTypes.func.isRequired,

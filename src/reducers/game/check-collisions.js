@@ -24,5 +24,10 @@ export const checkCollisions = (state) => {
       }
     };
   }
-  return state; // is level complete?
+  return { // is level complete?
+    ...state,
+    game: {
+      level: state.game.level + 1
+    }
+  };
 };

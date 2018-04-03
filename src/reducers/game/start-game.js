@@ -8,6 +8,7 @@ export const startGame = state => ({
     startAt: Date.now(),
     timeInGame: 0,
     score: 0,
+    lives: 3,
     nextCollisionThrough: null
   },
   hero: {
