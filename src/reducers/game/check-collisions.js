@@ -19,7 +19,8 @@ export const checkCollisions = (state) => {
       },
       game: {
         ...state.game,
-        nextCollisionThrough: nextCollisionTime - timeInGame
+        nextCollisionThrough: nextCollisionTime - timeInGame,
+        score: state.game.score + 1 // todo: make counter for real completed blocks
       }
     };
   }
