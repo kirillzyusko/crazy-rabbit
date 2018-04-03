@@ -13,5 +13,4 @@ Jump, Jump and Jump as long as you can. Whatever you do, avoid touching the cart
 
 This game written for Android and iOS by [react-native](https://github.com/facebook/react-native)
 
-####Version
 Version at 03.04.2018
