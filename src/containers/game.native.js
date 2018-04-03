@@ -34,7 +34,7 @@ class Game extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.game.level !== prevProps.game.level) { // isNextLevel/isLevelComplete
-      this.props.navigation.navigate(LEVEL_SCREEN);
+      //this.props.navigation.navigate(LEVEL_SCREEN);
     } else if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
       this.delayCollisionEmit();
     }
