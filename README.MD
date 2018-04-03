@@ -1,7 +1,5 @@
 # Crazy Rabbit
 
-![Example of 0.3.17-RELEASE version](https://media.giphy.com/media/QNkZksaaUViyV3x3Bv/giphy.gif)
-
 <img src="/resources/demo-2.gif?raw=true">
 
 ## Description
@@ -14,3 +12,6 @@ Jump, Jump and Jump as long as you can. Whatever you do, avoid touching the cart
 ## About project
 
 This game written for Android and iOS by [react-native](https://github.com/facebook/react-native)
+
+####Version
+Version at 03.04.2018
