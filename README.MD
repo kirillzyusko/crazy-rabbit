@@ -2,7 +2,8 @@
 
 ![Example of 0.3.17-RELEASE version](https://media.giphy.com/media/QNkZksaaUViyV3x3Bv/giphy.gif)
 
-![Example of 0.4.3-RELEASE version](https://media.giphy.com/media/tZNxGlMn4aajDGqFRu/giphy.gif)
+<img src="/resources/demo-2.gif?raw=true" width="200px">
+
 ## Description
 
 How long can you Jump? 
