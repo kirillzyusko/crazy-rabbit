@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GestureRecognizer from 'react-native-swipe-gestures';
 
 // todo: or better by even emitter and send it to Child props?
-const Swipeable = (Child) => {
+const swipeable = (Child) => {
   class Swipeable extends React.Component {
     render() {
       return (
@@ -21,4 +21,4 @@ const Swipeable = (Child) => {
   return Swipeable;
 };
 
-export default Swipeable;
+export default swipeable;
