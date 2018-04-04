@@ -8,7 +8,7 @@ import LEVELS from './../engine/levels';
 import Spinner from '../components/common/spinner.native';
 import GameService from '../service/state.service.native';
 import { GAME_SCREEN, MENU_SCREEN } from '../router/navigation';
-import { SELECT_LEVEL } from '../actions';
+import { SELECT_LEVEL } from '../redux/actions';
 
 const createEmptyArray = (length) => {
   const array = [];

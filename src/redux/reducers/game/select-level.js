@@ -1,4 +1,4 @@
-import LEVELS from '../../engine/levels';
+import LEVELS from '../../../engine/levels/index';
 
 export const selectLevel = (state, payload) => ({
   ...state,

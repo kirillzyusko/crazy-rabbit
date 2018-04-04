@@ -9,10 +9,10 @@ import {
   SELECT_LEVEL,
   START_GAME,
   UPDATE_POSITION
-} from '../actions';
-import { RABBIT } from '../engine/constants/hero';
+} from '../actions/index';
+import { RABBIT } from '../../engine/constants/hero';
 import { chooseHero } from './hero/choose-hero';
-import level1 from './../engine/levels/level1';
+import level1 from '../../engine/levels/level1';
 import { selectLevel } from './game/select-level';
 import { startGame } from './game/start-game';
 import { updatePosition } from './hero/update-positon';

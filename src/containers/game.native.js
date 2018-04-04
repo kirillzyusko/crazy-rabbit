@@ -6,7 +6,7 @@ import {
   ACTION,
   CHECK_COLLISIONS,
   START_GAME
-} from './../actions';
+} from '../redux/actions';
 import {
   COLLISION,
   LONG_JUMP,

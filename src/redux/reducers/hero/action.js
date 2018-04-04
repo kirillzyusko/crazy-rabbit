@@ -1,6 +1,6 @@
-import { COLLISION, LONG_JUMP } from '../../engine/constants/hero';
-import { getNextPosition } from '../../engine/handler/position-calculate.native';
-import { getJumpHeight } from '../../utils/hero.native';
+import { COLLISION, LONG_JUMP } from '../../../engine/constants/hero';
+import { getNextPosition } from '../../../engine/handler/position-calculate.native';
+import { getJumpHeight } from '../../../utils/hero.native';
 
 export const action = (state, type) => {
   let alignment = null;

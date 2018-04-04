@@ -16,7 +16,7 @@ import {
 import { listOfHero } from '../engine/constants/hero';
 import { getHeroByType } from '../utils/hero.native';
 import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
-import { CHOOSE_HERO } from '../actions/index';
+import { CHOOSE_HERO } from '../redux/actions/index';
 
 const style = {
   position: 'absolute'

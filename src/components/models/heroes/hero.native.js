@@ -20,7 +20,7 @@ import {
 } from '../../../engine/constants/engine';
 import { getHeroByType, getJumpHeight } from '../../../utils/hero.native';
 import { COLLISION, LONG_JUMP, SHORT_JUMP } from '../../../engine/constants/hero';
-import { CLEAR_ACTION, UPDATE_POSITION } from '../../../actions';
+import { CLEAR_ACTION, UPDATE_POSITION } from '../../../redux/actions';
 
 /**
  * @param isJump - boolean

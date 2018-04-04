@@ -1,4 +1,4 @@
-import { getNextCollision } from '../../engine/handler/check-collision.native';
+import { getNextCollision } from '../../../engine/handler/check-collision.native';
 
 export const checkCollisions = (state) => {
   const timeInGame = Date.now() - state.game.startAt;

@@ -1,5 +1,5 @@
 // todo: при выборе уровня идёт эмит события START_GAME?
-import { mapBlocks } from '../../engine/handler/map-block.native';
+import { mapBlocks } from '../../../engine/handler/map-block.native';
 
 export const startGame = state => ({
   ...state,
