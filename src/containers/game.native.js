@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  TouchableWithoutFeedback
-} from 'react-native';
 import PropTypes from 'prop-types';
-import GestureRecognizer from 'react-native-swipe-gestures';
 import { connect } from 'react-redux';
-import Canvas from './canvas.native';
+import GameCanvas from '../components/game/game-canvas.native';
 import {
   ACTION,
   CHECK_COLLISIONS,
@@ -34,7 +28,7 @@ class Game extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.game.level !== prevProps.game.level) { // isNextLevel/isLevelComplete
-      //this.props.navigation.navigate(LEVEL_SCREEN);
+      // this.props.navigation.navigate(LEVEL_SCREEN);
     }
     if (prevProps.game.nextCollisionThrough !== this.props.game.nextCollisionThrough) {
       this.delayCollisionEmit();
@@ -64,32 +58,16 @@ class Game extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <GestureRecognizer onSwipeUp={this.onLongJump}>
-          <TouchableWithoutFeedback onPress={this.onShortJump}>
-            <View>
-              <Canvas
-                canPlay={this.props.game.lives > 0}
-                blocks={this.props.ambient.blocks}
-                score={this.props.game.score}
-                lives={this.props.game.lives}
-              />
-            </View>
-          </TouchableWithoutFeedback>
-        </GestureRecognizer>
-      </View>
+      <GameCanvas
+        onTouch={this.onShortJump}
+        onSwipeUp={this.onLongJump}
+        score={this.props.game.score}
+        blocks={this.props.ambient.blocks}
+        lives={this.props.game.lives}
+      />
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF'
-  }
-});
 
 Game.propTypes = {
   ambient: PropTypes.shape({
@@ -128,6 +106,9 @@ const mapDispatchToProps = dispatch => ({
   },
   checkCollisions: () => {
     dispatch({ type: CHECK_COLLISIONS });
+  },
+  onSwipeUp: () => {
+    dispatch({ type: ACTION, payload: LONG_JUMP });
   }
 });
 

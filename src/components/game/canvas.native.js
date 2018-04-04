@@ -4,13 +4,13 @@ import PropTypes from 'prop-types';
 import Svg, { G, Image } from 'react-native-svg';
 import { isEqual } from 'lodash';
 import { generate as UID } from 'shortid';
-import Hero from '../components/models/heroes/hero.native';
-import { height, width } from '../engine/constants/engine';
-import BlockFacility from '../components/models/environment/ambient/blocks/block-facility.native';
-import EndGame from '../components/models/environment/game/end-game.native';
-import Score from '../components/models/environment/game/score.native';
-import BackgroundForest from '../components/models/environment/ambient/background/background-forest.native';
-import Lives from '../components/models/environment/game/lives.native';
+import Hero from '../models/heroes/hero.native';
+import { height, width } from '../../engine/constants/engine';
+import BlockFacility from '../models/environment/ambient/blocks/block-facility.native';
+import EndGame from '../models/environment/game/end-game.native';
+import Score from '../models/environment/game/score.native';
+import BackgroundForest from '../models/environment/ambient/background/background-forest.native';
+import Lives from '../models/environment/game/lives.native';
 
 class Canvas extends Component {
   shouldComponentUpdate(nextProps, nextState) {
