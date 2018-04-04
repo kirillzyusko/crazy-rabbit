@@ -12,6 +12,7 @@ import {
   LONG_JUMP,
   SHORT_JUMP
 } from '../engine/constants/hero';
+import { InjectProps } from '../core/annotations';
 import { LEVEL_SCREEN } from '../router/navigation';
 
 class Game extends Component {
@@ -56,14 +57,15 @@ class Game extends Component {
     }, this.props.game.nextCollisionThrough);
   };
 
-  render() {
+  @InjectProps
+  render({ game: { score, lives }, ambient: { blocks } }) {
     return (
       <GameCanvas
         onTouch={this.onShortJump}
         onSwipeUp={this.onLongJump}
-        score={this.props.game.score}
-        blocks={this.props.ambient.blocks}
-        lives={this.props.game.lives}
+        score={score}
+        blocks={blocks}
+        lives={lives}
       />
     );
   }
