@@ -1,6 +1,6 @@
 import Swipeable from './swipeable';
 import InjectProps from './inject-props';
+import Wizard2 from './wizard-2';
 import Wizard from './wizard';
-import WizardArray from './wizard-array';
 
-export { Swipeable, InjectProps, Wizard, WizardArray };
+export { Swipeable, InjectProps, Wizard, Wizard2 };

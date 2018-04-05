@@ -9,7 +9,7 @@ import Menu from './../containers/menu.native';
 import Game from './../containers/game.native';
 import Gallery from './../containers/gallery.native';
 import Levels from './../containers/levels.native';
-import Wizard from '../containers/wizard/wizard.native';
+import Wizard from '../containers/introduction/introduction.native';
 
 const screens = {};
 screens[MENU_SCREEN] = Menu;
