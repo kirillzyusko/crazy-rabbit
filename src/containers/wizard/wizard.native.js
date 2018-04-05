@@ -1,35 +1,40 @@
 import React, { Component } from 'react';
-import { View, StatusBar, Text } from 'react-native';
-import Swiper from 'react-native-swiper';
+import { View, Text } from 'react-native';
+import Spinner from 'react-native-spinkit';
 import styles from './styles.native';
+import { Wizard, WizardArray } from './../../core/annotations';
 
-class Wizard extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <StatusBar barStyle="light-content" />
-        <Swiper
-          style={styles.wrapper}
-          dot={<View style={{ backgroundColor: 'rgba(255,255,255,.3)', width: 13, height: 13, borderRadius: 7, marginLeft: 7, marginRight: 7 }} />}
-          activeDot={<View style={{ backgroundColor: '#fff', width: 13, height: 13, borderRadius: 7, marginLeft: 7, marginRight: 7 }} />}
-          paginationStyle={{
-            bottom: 20
-          }}
-          loop={false}
-        >
-          <View style={styles.slide}>
-            <Text>1</Text>
-          </View>
-          <View style={styles.slide}>
-            <Text>2</Text>
-          </View>
-          <View style={styles.slide}>
-            <Text>3</Text>
-          </View>
-        </Swiper>
+const views = [
+  <View style={styles.slide}>
+    <Spinner isVisible size={20} type={'Bounce'} color={'#000'} />
+  </View>,
+  <View style={styles.slide}>
+    <Text>2</Text>
+  </View>,
+  <View style={styles.slide}>
+    <Text>3</Text>
+  </View>
+];
+
+@Wizard(views)
+class Introduction extends Component {
+    @WizardArray
+    a = [
+      <View style={styles.slide}>
+        <Spinner isVisible size={20} type={'Bounce'} color={'#000'} />
+      </View>,
+      <View style={styles.slide}>
+        <Text>2</Text>
+      </View>,
+      <View style={styles.slide}>
+        <Text>3</Text>
       </View>
-    );
-  }
+    ];
+
+    render() {
+      console.log(5435432524, this.a);
+      return views;
+    }
 }
 
-export default Wizard;
+export default Introduction;
