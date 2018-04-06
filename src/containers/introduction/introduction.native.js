@@ -5,8 +5,9 @@ import styles from './styles.native';
 import { Wizard } from './../../core/annotations';
 
 class Introduction extends Component {
-    @Wizard
-    steps = [
+  @Wizard
+  render() {
+    const steps = [
       <View style={styles.slide}>
         <Spinner isVisible size={200} type={'Pulse'} color={'gray'} />
       </View>,
@@ -17,10 +18,8 @@ class Introduction extends Component {
         <Text>3</Text>
       </View>
     ];
-
-    render() {
-      return this.steps;
-    }
+    return steps;
+  }
 }
 
 export default Introduction;
